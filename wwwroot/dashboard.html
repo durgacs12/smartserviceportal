@@ -2105,39 +2105,136 @@
         </div>
       </section>
 
-      <!-- USER MASTER VIEW -->
+      <!-- USER MASTER VIEW (1. Entry Page, 2. View Table) -->
       <section id="section-users" class="section-view">
-        <div class="table-container">
-          <div class="table-header">
-            <div>
-              <h3>User Master (<span id="userCountBadge">0</span> Users)</h3>
-              <p style="font-size: 13px; color: var(--slate-400); margin-top: 4px;">System credentials, field engineer accounts, roles, and PIN codes</p>
-            </div>
-            <button class="btn-primary" onclick="openNewUserModal()">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <line x1="12" y1="5" x2="12" y2="19"></line>
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-              </svg>
-              <span>+ Add New User</span>
+        <!-- Sub Header & Tabs -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <h2 style="font-size: 22px; font-weight: 800; color: #f8fafc; margin-bottom: 4px;">User Master</h2>
+            <p style="font-size: 13px; color: var(--slate-400); margin: 0;">Create new system user accounts or view existing technician credentials</p>
+          </div>
+          <!-- User Sub-Tabs -->
+          <div class="filter-tabs" style="padding: 4px; background: rgba(255,255,255,0.05); border-radius: 10px; border: 1px solid rgba(255,255,255,0.08);">
+            <button id="tabBtnUserEntry" class="filter-tab active" onclick="switchUserTab('entry')" style="padding: 8px 16px; font-size: 13px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+              <span>User Entry Page</span>
+            </button>
+            <button id="tabBtnUserView" class="filter-tab" onclick="switchUserTab('view')" style="padding: 8px 16px; font-size: 13px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              <span>User View (<span id="userCountBadge">0</span>)</span>
             </button>
           </div>
-          <div class="table-responsive">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>User ID</th>
-                  <th>Full Name</th>
-                  <th>Username</th>
-                  <th>Role</th>
-                  <th>Zone / Branch</th>
-                  <th>Contact Info</th>
-                  <th>Login PIN</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody id="userTableBody"></tbody>
-            </table>
+        </div>
+
+        <!-- 1. FIRST: USER ENTRY PAGE (Form View) -->
+        <div id="userEntryView" style="display: block;">
+          <div class="table-container" style="max-width: 720px; margin: 0 auto; padding: 28px 32px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 22px; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.08);">
+              <div>
+                <h3 id="formTitleUser" style="font-size: 18px; font-weight: 800; color: #f8fafc; margin: 0;">Add New System User</h3>
+                <p style="font-size: 12.5px; color: var(--slate-400); margin: 3px 0 0;">Enter staff credentials, login PIN, and access role</p>
+              </div>
+              <button class="btn-secondary" onclick="switchUserTab('view')" style="display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; padding: 6px 14px;">
+                <span>View All Users (<span id="btnUserViewCount">0</span>) &rarr;</span>
+              </button>
+            </div>
+
+            <form onsubmit="handleSaveUserForm(event)">
+              <input type="hidden" id="pageUserEditId" value="" />
+
+              <div class="form-group" style="margin-bottom: 16px;">
+                <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block;">Full Name *</label>
+                <input type="text" id="pageUserFullName" placeholder="e.g. Anzar K. or Ahmed Salim" required />
+              </div>
+
+              <div class="form-group" style="margin-bottom: 16px;">
+                <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block;">Login Username *</label>
+                <input type="text" id="pageUserLoginName" placeholder="e.g. anzar_pos" required />
+              </div>
+
+              <div class="form-group" style="margin-bottom: 16px;">
+                <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block;">User Role *</label>
+                <select id="pageUserRole" required>
+                  <option value="Field Service Engineer (Technician)">Field Service Engineer (Technician)</option>
+                  <option value="Admin (Full Access)">Admin (Full Access)</option>
+                  <option value="Call Center Agent">Call Center Agent</option>
+                  <option value="Operations Manager">Operations Manager</option>
+                  <option value="Terminal Delivery Staff">Terminal Delivery Staff</option>
+                </select>
+              </div>
+
+              <div class="form-group" style="margin-bottom: 16px;">
+                <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block;">Zone / Location *</label>
+                <input type="text" id="pageUserZone" placeholder="e.g. Salalah & Dhofar, Muscat HQ" required />
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+                <div class="form-group" style="margin: 0;">
+                  <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block;">Mobile Number *</label>
+                  <input type="text" id="pageUserMobile" placeholder="+968 9XXXXXXX" required />
+                </div>
+                <div class="form-group" style="margin: 0;">
+                  <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block;">Login PIN Code *</label>
+                  <input type="text" id="pageUserPin" placeholder="6-digit PIN" maxlength="6" required />
+                </div>
+              </div>
+
+              <div class="form-group" style="margin-bottom: 16px;">
+                <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block;">Email Address</label>
+                <input type="email" id="pageUserEmail" placeholder="user@smartpos.om" />
+              </div>
+
+              <div class="form-group" style="margin-bottom: 24px;">
+                <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block;">Account Status</label>
+                <select id="pageUserStatus">
+                  <option value="Active">Active</option>
+                  <option value="Inactive">Inactive</option>
+                </select>
+              </div>
+
+              <div style="display: flex; gap: 12px; justify-content: flex-end; align-items: center; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.08);">
+                <button type="button" class="btn-secondary" onclick="resetUserForm()" style="padding: 10px 20px; font-weight: 700;">Reset Form</button>
+                <button type="submit" class="btn-primary" id="btnPageSaveUser" style="padding: 10px 26px; font-weight: 800; display: inline-flex; align-items: center; gap: 8px;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Save User</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- 2. THEN: USER VIEW PAGE (Table Grid) -->
+        <div id="userTableView" style="display: none;">
+          <div class="table-container">
+            <div class="table-header">
+              <div>
+                <h3>System Users Directory (<span id="userCountBadge2">0</span> Users)</h3>
+                <p style="font-size: 13px; color: var(--slate-400); margin-top: 4px;">System credentials, field engineer accounts, roles, and PIN codes</p>
+              </div>
+              <button class="btn-primary" onclick="switchUserTab('entry')" style="display: inline-flex; align-items: center; gap: 6px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                <span>+ Go to User Entry</span>
+              </button>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>User ID</th>
+                    <th>Full Name</th>
+                    <th>Username</th>
+                    <th>Role</th>
+                    <th>Zone / Location</th>
+                    <th>Mobile</th>
+                    <th>Login PIN</th>
+                    <th>Email</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="userTableBody"></tbody>
+              </table>
+            </div>
           </div>
         </div>
       </section>
@@ -2462,66 +2559,7 @@
     </div>
   </div>
 
-  <!-- User Entry / Edit Modal -->
-  <div id="userModal" class="modal-overlay">
-    <div class="modal-card">
-      <div class="modal-header">
-        <h3 id="userModalTitle">Add New System User</h3>
-        <button class="modal-close" onclick="closeUserModal()">&times;</button>
-      </div>
-      <form onsubmit="handleSaveUser(event)">
-        <input type="hidden" id="userEditId" value="" />
-        <div class="modal-body">
-          <div class="form-group">
-            <label>Full Name</label>
-            <input type="text" id="userFullName" placeholder="e.g. Anzar K. or Ahmed Salim" required />
-          </div>
-          <div class="form-group">
-            <label>Login Username</label>
-            <input type="text" id="userLoginName" placeholder="e.g. anzar_pos" required />
-          </div>
-          <div class="form-group">
-            <label>User Role</label>
-            <select id="userRole" required>
-              <option value="Admin">Admin (Full Access)</option>
-              <option value="Field Service Engineer">Field Service Engineer (Technician)</option>
-              <option value="Call Center Agent">Call Center / Support Agent</option>
-              <option value="Operations Manager">Operations Manager</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Zone / Location</label>
-            <input type="text" id="userZone" placeholder="e.g. Salalah & Dhofar" required />
-          </div>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
-            <div class="form-group">
-              <label>Mobile Number</label>
-              <input type="text" id="userMobile" placeholder="+968 9XXXXXXX" required />
-            </div>
-            <div class="form-group">
-              <label>Login PIN Code</label>
-              <input type="text" id="userPin" placeholder="6-digit PIN" maxlength="6" required />
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Email Address</label>
-            <input type="email" id="userEmail" placeholder="user@smartpos.om" />
-          </div>
-          <div class="form-group">
-            <label>Account Status</label>
-            <select id="userStatus">
-              <option value="Active">Active</option>
-              <option value="Inactive">Inactive</option>
-            </select>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn-secondary" onclick="closeUserModal()">Cancel</button>
-          <button type="submit" class="btn-primary" id="btnSaveUserText">Save User</button>
-        </div>
-      </form>
-    </div>
-  </div>
+  
 
 
   <script>
@@ -3203,113 +3241,65 @@
     }
 
     // ==========================================
-    // USER MASTER FUNCTIONS
+    // USER MASTER FUNCTIONS (1. Entry Page, 2. View Table)
     // ==========================================
-    function renderUsersTable() {
-      const tbody = document.getElementById('userTableBody');
-      if (!tbody) return;
-      tbody.innerHTML = '';
+    function switchUserTab(tab) {
+      const entryView = document.getElementById('userEntryView');
+      const tableView = document.getElementById('userTableView');
+      const tabEntry = document.getElementById('tabBtnUserEntry');
+      const tabView = document.getElementById('tabBtnUserView');
 
-      let list = users;
-      if (searchQuery) {
-        const q = searchQuery.toLowerCase();
-        list = list.filter(u =>
-          (u.name && u.name.toLowerCase().includes(q)) ||
-          (u.username && u.username.toLowerCase().includes(q)) ||
-          (u.role && u.role.toLowerCase().includes(q)) ||
-          (u.zone && u.zone.toLowerCase().includes(q))
-        );
+      if (tab === 'entry') {
+        if (entryView) entryView.style.display = 'block';
+        if (tableView) tableView.style.display = 'none';
+        if (tabEntry) tabEntry.classList.add('active');
+        if (tabView) tabView.classList.remove('active');
+      } else {
+        if (entryView) entryView.style.display = 'none';
+        if (tableView) tableView.style.display = 'block';
+        if (tabEntry) tabEntry.classList.remove('active');
+        if (tabView) tabView.classList.add('active');
+        renderUsersTable();
       }
-
-      const countBadge = document.getElementById('userCountBadge');
-      if (countBadge) countBadge.textContent = list.length;
-      const navBadge = document.getElementById('navCountUsers');
-      if (navBadge) navBadge.textContent = users.length;
-
-      if (list.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; padding: 28px; color: #94a3b8;">No users found.</td></tr>';
-        return;
-      }
-
-      list.forEach(u => {
-        const tr = document.createElement('tr');
-        let roleBadge = 'status-progress';
-        if (u.role === 'Admin') roleBadge = 'status-pending';
-        else if (u.role && u.role.includes('Engineer')) roleBadge = 'status-solved';
-
-        const statusBadge = u.status === 'Active'
-          ? '<span class="status-badge status-active">Active</span>'
-          : '<span class="status-badge status-replaced">Inactive</span>';
-
-        tr.innerHTML = `
-          <td><strong><span class="tag-tid">${u.id}</span></strong></td>
-          <td><strong style="color: #f8fafc;">${u.name}</strong></td>
-          <td><code style="font-weight:700; color:#38bdf8;">@${u.username}</code></td>
-          <td><span class="status-badge ${roleBadge}">${u.role}</span></td>
-          <td>${u.zone}</td>
-          <td><div>${u.mobile}</div><div style="font-size:12px; color:#94a3b8;">${u.email || '-'}</div></td>
-          <td><code style="background:rgba(255,255,255,0.06); padding:2px 6px; border-radius:4px; font-weight:700; color:#a3e635;">${u.pincode || '******'}</code></td>
-          <td>${statusBadge}</td>
-          <td>
-            <div style="display:flex; gap:6px;">
-              <button class="btn-secondary" style="padding:5px 10px; font-size:12px;" onclick="openEditUserModal('${u.id}')">Edit</button>
-              <button class="btn-secondary" style="padding:5px 10px; font-size:12px; color:#dc2626; border-color:#fee2e2;" onclick="deleteUser('${u.id}')">Delete</button>
-            </div>
-          </td>
-        `;
-        tbody.appendChild(tr);
-      });
     }
 
-    function openNewUserModal() {
-      document.getElementById('userModalTitle').textContent = 'Add New System User';
-      document.getElementById('btnSaveUserText').textContent = 'Save User';
-      document.getElementById('userEditId').value = '';
-      document.getElementById('userFullName').value = '';
-      document.getElementById('userLoginName').value = '';
-      document.getElementById('userRole').value = 'Field Service Engineer';
-      document.getElementById('userZone').value = 'Salalah & Dhofar';
-      document.getElementById('userMobile').value = '';
-      document.getElementById('userPin').value = '';
-      document.getElementById('userEmail').value = '';
-      document.getElementById('userStatus').value = 'Active';
-      document.getElementById('userModal').style.display = 'flex';
-      document.getElementById('userFullName').focus();
+    function resetUserForm() {
+      const title = document.getElementById('formTitleUser');
+      if (title) title.textContent = 'Add New System User';
+      const btn = document.getElementById('btnPageSaveUser');
+      if (btn) btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Save User</span>';
+      
+      const editId = document.getElementById('pageUserEditId');
+      if (editId) editId.value = '';
+      const name = document.getElementById('pageUserFullName');
+      if (name) name.value = '';
+      const uName = document.getElementById('pageUserLoginName');
+      if (uName) uName.value = '';
+      const role = document.getElementById('pageUserRole');
+      if (role) role.value = 'Field Service Engineer (Technician)';
+      const zone = document.getElementById('pageUserZone');
+      if (zone) zone.value = 'Salalah & Dhofar';
+      const mob = document.getElementById('pageUserMobile');
+      if (mob) mob.value = '';
+      const pin = document.getElementById('pageUserPin');
+      if (pin) pin.value = '';
+      const email = document.getElementById('pageUserEmail');
+      if (email) email.value = '';
+      const st = document.getElementById('pageUserStatus');
+      if (st) st.value = 'Active';
     }
 
-    function openEditUserModal(id) {
-      const u = users.find(x => x.id === id);
-      if (!u) return;
-
-      document.getElementById('userModalTitle').textContent = 'Edit System User (' + u.id + ')';
-      document.getElementById('btnSaveUserText').textContent = 'Update User';
-      document.getElementById('userEditId').value = u.id;
-      document.getElementById('userFullName').value = u.name;
-      document.getElementById('userLoginName').value = u.username;
-      document.getElementById('userRole').value = u.role;
-      document.getElementById('userZone').value = u.zone;
-      document.getElementById('userMobile').value = u.mobile;
-      document.getElementById('userPin').value = u.pincode || '';
-      document.getElementById('userEmail').value = u.email || '';
-      document.getElementById('userStatus').value = u.status || 'Active';
-      document.getElementById('userModal').style.display = 'flex';
-    }
-
-    function closeUserModal() {
-      document.getElementById('userModal').style.display = 'none';
-    }
-
-    function handleSaveUser(e) {
+    function handleSaveUserForm(e) {
       e.preventDefault();
-      const editId = document.getElementById('userEditId').value;
-      const name = document.getElementById('userFullName').value.trim();
-      const username = document.getElementById('userLoginName').value.trim();
-      const role = document.getElementById('userRole').value;
-      const zone = document.getElementById('userZone').value.trim();
-      const mobile = document.getElementById('userMobile').value.trim();
-      const pin = document.getElementById('userPin').value.trim();
-      const email = document.getElementById('userEmail').value.trim();
-      const status = document.getElementById('userStatus').value;
+      const editId = document.getElementById('pageUserEditId').value;
+      const name = document.getElementById('pageUserFullName').value.trim();
+      const username = document.getElementById('pageUserLoginName').value.trim();
+      const role = document.getElementById('pageUserRole').value;
+      const zone = document.getElementById('pageUserZone').value.trim();
+      const mobile = document.getElementById('pageUserMobile').value.trim();
+      const pin = document.getElementById('pageUserPin').value.trim();
+      const email = document.getElementById('pageUserEmail').value.trim();
+      const status = document.getElementById('pageUserStatus').value;
 
       if (editId) {
         const u = users.find(x => x.id === editId);
@@ -3342,9 +3332,95 @@
         localStorage.setItem('smart_portal_users', JSON.stringify(users));
       } catch(err) {}
 
-      closeUserModal();
+      showToast(editId ? 'User updated successfully!' : 'User saved successfully!');
+      resetUserForm();
       renderUsersTable();
-      showToast('User Master updated successfully!');
+      switchUserTab('view');
+    }
+
+    function renderUsersTable() {
+      const tbody = document.getElementById('userTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      let list = users;
+      if (searchQuery) {
+        const q = searchQuery.toLowerCase();
+        list = list.filter(u =>
+          (u.name && u.name.toLowerCase().includes(q)) ||
+          (u.username && u.username.toLowerCase().includes(q)) ||
+          (u.role && u.role.toLowerCase().includes(q)) ||
+          (u.zone && u.zone.toLowerCase().includes(q)) ||
+          (u.mobile && u.mobile.toLowerCase().includes(q)) ||
+          (u.email && u.email.toLowerCase().includes(q))
+        );
+      }
+
+      const countBadge = document.getElementById('userCountBadge');
+      if (countBadge) countBadge.textContent = list.length;
+      const countBadge2 = document.getElementById('userCountBadge2');
+      if (countBadge2) countBadge2.textContent = list.length;
+      const navBadge = document.getElementById('navCountUsers');
+      if (navBadge) navBadge.textContent = users.length;
+      const btnCount = document.getElementById('btnUserViewCount');
+      if (btnCount) btnCount.textContent = users.length;
+
+      if (list.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="10" style="text-align:center; padding: 28px; color: #94a3b8;">No users found.</td></tr>';
+        return;
+      }
+
+      list.forEach((u, idx) => {
+        const tr = document.createElement('tr');
+        let roleBadge = 'status-progress';
+        if (u.role && u.role.includes('Admin')) roleBadge = 'status-pending';
+        else if (u.role && (u.role.includes('Engineer') || u.role.includes('Technician'))) roleBadge = 'status-solved';
+
+        const statusBadge = u.status === 'Active'
+          ? '<span class="status-badge status-active">Active</span>'
+          : '<span class="status-badge status-replaced">Inactive</span>';
+
+        tr.innerHTML = `
+          <td><strong><span class="tag-tid">${u.id}</span></strong></td>
+          <td><strong style="color: #f8fafc;">${u.name}</strong></td>
+          <td><code style="font-weight:700; color:#38bdf8;">@${u.username}</code></td>
+          <td><span class="status-badge ${roleBadge}">${u.role}</span></td>
+          <td>${u.zone || '-'}</td>
+          <td>${u.mobile || '-'}</td>
+          <td><code style="background:rgba(255,255,255,0.06); padding:2px 6px; border-radius:4px; font-weight:700; color:#a3e635;">${u.pincode || '******'}</code></td>
+          <td><span style="font-size:12px; color:#94a3b8;">${u.email || '-'}</span></td>
+          <td>${statusBadge}</td>
+          <td>
+            <div style="display:flex; gap:6px;">
+              <button class="btn-secondary" style="padding:5px 10px; font-size:12px;" onclick="openEditUserModal('${u.id}')">Edit</button>
+              <button class="btn-secondary" style="padding:5px 10px; font-size:12px; color:#dc2626; border-color:#fee2e2;" onclick="deleteUser('${u.id}')">Delete</button>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function openEditUserModal(id) {
+      const u = users.find(x => x.id === id);
+      if (!u) return;
+      switchUserTab('entry');
+      const title = document.getElementById('formTitleUser');
+      if (title) title.textContent = 'Edit System User (' + u.id + ')';
+      const btn = document.getElementById('btnPageSaveUser');
+      if (btn) btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Update User</span>';
+
+      document.getElementById('pageUserEditId').value = u.id;
+      document.getElementById('pageUserFullName').value = u.name || '';
+      document.getElementById('pageUserLoginName').value = u.username || '';
+      document.getElementById('pageUserRole').value = u.role || 'Field Service Engineer (Technician)';
+      document.getElementById('pageUserZone').value = u.zone || '';
+      document.getElementById('pageUserMobile').value = u.mobile || '';
+      document.getElementById('pageUserPin').value = u.pincode || '';
+      document.getElementById('pageUserEmail').value = u.email || '';
+      document.getElementById('pageUserStatus').value = u.status || 'Active';
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function deleteUser(id) {
@@ -3682,7 +3758,10 @@
         renderMerchantsTable();
       }
       if (sectionId === 'location') renderLocationsTable();
-      if (sectionId === 'users') renderUsersTable();
+      if (sectionId === 'users') {
+        switchUserTab('entry');
+        renderUsersTable();
+      }
       if (sectionId === 'dashboard') renderComplaintsTable();
     }
 
