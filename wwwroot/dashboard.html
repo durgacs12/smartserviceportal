@@ -2414,8 +2414,7 @@
   <script>
     // Initialize Data from portal_data.js
     let complaints = PORTAL_DATA.complaints || [];
-    let merchants = PORTAL_DATA.merchants || [];
-    let terminals = PORTAL_DATA.terminals || [];
+        let terminals = PORTAL_DATA.terminals || [];
     let replacements = PORTAL_DATA.replacements || [];
     let categories = PORTAL_DATA.categories || [];
     let technicians = PORTAL_DATA.technicians || [];
@@ -3530,15 +3529,6 @@
     renderMerchantsTable();
     renderLocationsTable();
     renderUsersTable();
-      if (sectionId === 'dashboard') renderComplaintsTable();
-    }
-
-    // Init
-    updateStatsUI();
-    renderComplaintsTable();
-    renderIssuesTable();
-    renderActionsTable();
-    renderLocationsTable();
 
     // ==========================================
     // CSV & EXCEL IMPORT SYSTEM
