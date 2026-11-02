@@ -1932,40 +1932,142 @@
         </div>
       </section>
 
-      <!-- MERCHANT MASTER VIEW -->
+      <!-- MERCHANT MASTER VIEW (1. Entry Page, 2. View Table) -->
       <section id="section-merchants" class="section-view">
-        <div class="table-container">
-          <div class="table-header">
-            <div>
-              <h3>Merchant Master (<span id="merchantCountBadge">0</span> Records)</h3>
-              <p style="font-size: 13px; color: var(--slate-400); margin-top: 4px;">MID, Merchant Name, Location, Mobile, Type, TID, Status, Action Taken, and Remarks from Excel</p>
-            </div>
-            <button class="btn-primary" onclick="openNewMerchantModal()">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <line x1="12" y1="5" x2="12" y2="19"></line>
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-              </svg>
-              <span>+ Add Merchant</span>
+        <!-- Sub Header & Tabs -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <h2 style="font-size: 22px; font-weight: 800; color: #f8fafc; margin-bottom: 4px;">Merchant Master</h2>
+            <p style="font-size: 13px; color: var(--slate-400); margin: 0;">Create new merchant entries or view all registered merchant POS records</p>
+          </div>
+          <!-- Merchant Sub-Tabs -->
+          <div class="filter-tabs" style="padding: 4px; background: rgba(255,255,255,0.05); border-radius: 10px; border: 1px solid rgba(255,255,255,0.08);">
+            <button id="tabBtnMerchantEntry" class="filter-tab active" onclick="switchMerchantTab('entry')" style="padding: 8px 16px; font-size: 13px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+              <span>Merchant Entry Page</span>
+            </button>
+            <button id="tabBtnMerchantView" class="filter-tab" onclick="switchMerchantTab('view')" style="padding: 8px 16px; font-size: 13px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+              <span>Merchant View (<span id="merchantCountBadge">0</span>)</span>
             </button>
           </div>
-          <div class="table-responsive">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>MID</th>
-                  <th>Merchant Name</th>
-                  <th>Location</th>
-                  <th>Mobile</th>
-                  <th>Type</th>
-                  <th>TID</th>
-                  <th>Status</th>
-                  <th>Action Taken</th>
-                  <th>Remarks</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody id="merchantTableBody"></tbody>
-            </table>
+        </div>
+
+        <!-- 1. FIRST: MERCHANT ENTRY PAGE (Form View) -->
+        <div id="merchantEntryView" style="display: block;">
+          <div class="table-container" style="max-width: 900px; margin: 0 auto; padding: 28px 32px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 22px; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.08);">
+              <div>
+                <h3 id="formTitleMerchant" style="font-size: 18px; font-weight: 800; color: #f8fafc; margin: 0;">Add New Merchant</h3>
+                <p style="font-size: 12.5px; color: var(--slate-400); margin: 3px 0 0;">Enter merchant details and terminal configuration below</p>
+              </div>
+              <button class="btn-secondary" onclick="switchMerchantTab('view')" style="display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; padding: 6px 14px;">
+                <span>View All Merchants (<span id="btnViewCount">0</span>) &rarr;</span>
+              </button>
+            </div>
+
+            <form onsubmit="handleSaveMerchantForm(event)">
+              <input type="hidden" id="pageMerchantEditIndex" value="" />
+              
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 16px;">
+                <div class="form-group" style="margin: 0;">
+                  <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block;">MID (Merchant ID) *</label>
+                  <input type="text" id="pageMerchantMid" placeholder="e.g. 104951720186" required />
+                </div>
+                <div class="form-group" style="margin: 0;">
+                  <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block;">TID (Terminal ID) *</label>
+                  <input type="text" id="pageMerchantTid" placeholder="e.g. POS10736" required />
+                </div>
+              </div>
+
+              <div class="form-group" style="margin-bottom: 16px;">
+                <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block;">Merchant Name *</label>
+                <input type="text" id="pageMerchantName" placeholder="e.g. AL MAHA 600, LULU CENTER" required />
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 16px;">
+                <div class="form-group" style="margin: 0;">
+                  <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block;">Location *</label>
+                  <input type="text" id="pageMerchantLocation" placeholder="e.g. SAADA, SALALAH, TAQA" required />
+                </div>
+                <div class="form-group" style="margin: 0;">
+                  <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block;">Mobile Number</label>
+                  <input type="text" id="pageMerchantMobile" placeholder="e.g. 92751955" />
+                </div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 16px;">
+                <div class="form-group" style="margin: 0;">
+                  <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block;">Type / Channel</label>
+                  <select id="pageMerchantType">
+                    <option value="CALL CENTER">CALL CENTER</option>
+                    <option value="E MAIL">E MAIL</option>
+                    <option value="PORTAL">PORTAL</option>
+                    <option value="WALK-IN">WALK-IN</option>
+                  </select>
+                </div>
+                <div class="form-group" style="margin: 0;">
+                  <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block;">Status</label>
+                  <select id="pageMerchantStatus">
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group" style="margin-bottom: 16px;">
+                <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block;">Action Taken</label>
+                <input type="text" id="pageMerchantActionTaken" placeholder="e.g. ROLLS DELIVERED, CHARGER REPLACED, NEW INSTALLATION" />
+              </div>
+
+              <div class="form-group" style="margin-bottom: 24px;">
+                <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block;">Remarks</label>
+                <input type="text" id="pageMerchantRemarks" placeholder="e.g. FOR SMART REPLACEMENT, TAMPERED, APP RE INSTALLED" />
+              </div>
+
+              <div style="display: flex; gap: 12px; justify-content: flex-end; align-items: center; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.08);">
+                <button type="button" class="btn-secondary" onclick="resetMerchantForm()" style="padding: 10px 20px; font-weight: 700;">Reset Form</button>
+                <button type="submit" class="btn-primary" id="btnPageSaveMerchant" style="padding: 10px 26px; font-weight: 800; display: inline-flex; align-items: center; gap: 8px;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Save Merchant</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- 2. THEN: MERCHANT VIEW PAGE (Table Grid) -->
+        <div id="merchantTableView" style="display: none;">
+          <div class="table-container">
+            <div class="table-header">
+              <div>
+                <h3>Merchant Directory & View (<span id="merchantCountBadge2">0</span> Records)</h3>
+                <p style="font-size: 13px; color: var(--slate-400); margin-top: 4px;">Search, view, and manage all merchant POS records from Excel</p>
+              </div>
+              <button class="btn-primary" onclick="switchMerchantTab('entry')" style="display: inline-flex; align-items: center; gap: 6px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                <span>+ Go to Merchant Entry</span>
+              </button>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>MID</th>
+                    <th>Merchant Name</th>
+                    <th>Location</th>
+                    <th>Mobile</th>
+                    <th>Type</th>
+                    <th>TID</th>
+                    <th>Status</th>
+                    <th>Action Taken</th>
+                    <th>Remarks</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="merchantTableBody"></tbody>
+              </table>
+            </div>
           </div>
         </div>
       </section>
@@ -2905,8 +3007,100 @@
     }
 
     // ==========================================
-    // MERCHANT MASTER FUNCTIONS (Excel Fields: mid, merchantname, location, mobile, type, tid, status, actiontaken, remarks)
+    // MERCHANT MASTER FUNCTIONS (1. Entry Page, 2. View Table)
     // ==========================================
+    function switchMerchantTab(tab) {
+      const entryView = document.getElementById('merchantEntryView');
+      const tableView = document.getElementById('merchantTableView');
+      const tabEntry = document.getElementById('tabBtnMerchantEntry');
+      const tabView = document.getElementById('tabBtnMerchantView');
+
+      if (tab === 'entry') {
+        if (entryView) entryView.style.display = 'block';
+        if (tableView) tableView.style.display = 'none';
+        if (tabEntry) tabEntry.classList.add('active');
+        if (tabView) tabView.classList.remove('active');
+      } else {
+        if (entryView) entryView.style.display = 'none';
+        if (tableView) tableView.style.display = 'block';
+        if (tabEntry) tabEntry.classList.remove('active');
+        if (tabView) tabView.classList.add('active');
+        renderMerchantsTable();
+      }
+    }
+
+    function resetMerchantForm() {
+      const title = document.getElementById('formTitleMerchant');
+      if (title) title.textContent = 'Add New Merchant';
+      const btn = document.getElementById('btnPageSaveMerchant');
+      if (btn) btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Save Merchant</span>';
+      
+      const editIdx = document.getElementById('pageMerchantEditIndex');
+      if (editIdx) editIdx.value = '';
+      const mid = document.getElementById('pageMerchantMid');
+      if (mid) mid.value = '10' + Math.floor(1000000000 + Math.random()*9000000000);
+      const tid = document.getElementById('pageMerchantTid');
+      if (tid) tid.value = 'POS' + Math.floor(10000 + Math.random()*90000);
+      const name = document.getElementById('pageMerchantName');
+      if (name) name.value = '';
+      const loc = document.getElementById('pageMerchantLocation');
+      if (loc) loc.value = 'SALALAH';
+      const mob = document.getElementById('pageMerchantMobile');
+      if (mob) mob.value = '';
+      const type = document.getElementById('pageMerchantType');
+      if (type) type.value = 'CALL CENTER';
+      const st = document.getElementById('pageMerchantStatus');
+      if (st) st.value = 'Active';
+      const act = document.getElementById('pageMerchantActionTaken');
+      if (act) act.value = '';
+      const rem = document.getElementById('pageMerchantRemarks');
+      if (rem) rem.value = '';
+    }
+
+    function handleSaveMerchantForm(e) {
+      e.preventDefault();
+      const editIdx = document.getElementById('pageMerchantEditIndex').value;
+      const mid = document.getElementById('pageMerchantMid').value.trim();
+      const tid = document.getElementById('pageMerchantTid').value.trim().toUpperCase();
+      const name = document.getElementById('pageMerchantName').value.trim().toUpperCase();
+      const location = document.getElementById('pageMerchantLocation').value.trim().toUpperCase();
+      const mobile = document.getElementById('pageMerchantMobile').value.trim();
+      const type = document.getElementById('pageMerchantType').value;
+      const status = document.getElementById('pageMerchantStatus').value;
+      const actiontaken = document.getElementById('pageMerchantActionTaken').value.trim().toUpperCase();
+      const remarks = document.getElementById('pageMerchantRemarks').value.trim();
+
+      const item = {
+        mid: mid,
+        merchantname: name,
+        location: location,
+        mobile: mobile || '-',
+        type: type,
+        tid: tid,
+        status: status,
+        actiontaken: actiontaken || '-',
+        remarks: remarks || '-'
+      };
+
+      if (editIdx !== '') {
+        const idx = parseInt(editIdx);
+        if (idx >= 0 && idx < merchants.length) {
+          merchants[idx] = item;
+        }
+      } else {
+        merchants.unshift(item);
+      }
+
+      try {
+        localStorage.setItem('smart_portal_merchants', JSON.stringify(merchants));
+      } catch(err) {}
+
+      showToast(editIdx !== '' ? 'Merchant updated successfully!' : 'Merchant saved successfully!');
+      resetMerchantForm();
+      renderMerchantsTable();
+      switchMerchantTab('view');
+    }
+
     function renderMerchantsTable() {
       const tbody = document.getElementById('merchantTableBody');
       if (!tbody) return;
@@ -2930,8 +3124,12 @@
 
       const countBadge = document.getElementById('merchantCountBadge');
       if (countBadge) countBadge.textContent = list.length;
+      const countBadge2 = document.getElementById('merchantCountBadge2');
+      if (countBadge2) countBadge2.textContent = list.length;
       const navBadge = document.getElementById('navCountMerchants');
       if (navBadge) navBadge.textContent = merchants.length;
+      const btnCount = document.getElementById('btnViewCount');
+      if (btnCount) btnCount.textContent = merchants.length;
 
       if (list.length === 0) {
         tbody.innerHTML = '<tr><td colspan="10" style="text-align:center; padding: 28px; color: #94a3b8;">No merchants found.</td></tr>';
@@ -2971,86 +3169,27 @@
       });
     }
 
-    function openNewMerchantModal() {
-      document.getElementById('merchantModalTitle').textContent = 'Add New Merchant';
-      document.getElementById('btnSaveMerchantText').textContent = 'Save Merchant';
-      document.getElementById('merchantEditIndex').value = '';
-      document.getElementById('merchantMidInput').value = '10' + Math.floor(1000000000 + Math.random()*9000000000);
-      document.getElementById('merchantTidInput').value = 'POS' + Math.floor(10000 + Math.random()*90000);
-      document.getElementById('merchantNameInput').value = '';
-      document.getElementById('merchantLocationInput').value = 'SALALAH';
-      document.getElementById('merchantMobileInput').value = '';
-      document.getElementById('merchantTypeInput').value = 'CALL CENTER';
-      document.getElementById('merchantStatusInput').value = 'Active';
-      document.getElementById('merchantActionTakenInput').value = '';
-      document.getElementById('merchantRemarksInput').value = '';
-      document.getElementById('merchantModal').style.display = 'flex';
-      document.getElementById('merchantNameInput').focus();
-    }
-
     function openEditMerchantModal(idx) {
       const m = merchants[idx];
       if (!m) return;
-      document.getElementById('merchantModalTitle').textContent = 'Edit Merchant (' + m.mid + ')';
-      document.getElementById('btnSaveMerchantText').textContent = 'Update Merchant';
-      document.getElementById('merchantEditIndex').value = idx;
-      document.getElementById('merchantMidInput').value = m.mid || '';
-      document.getElementById('merchantTidInput').value = m.tid || '';
-      document.getElementById('merchantNameInput').value = m.merchantname || m.name || '';
-      document.getElementById('merchantLocationInput').value = m.location || '';
-      document.getElementById('merchantMobileInput').value = m.mobile && m.mobile !== '-' ? m.mobile : '';
-      document.getElementById('merchantTypeInput').value = m.type || 'CALL CENTER';
-      document.getElementById('merchantStatusInput').value = m.status || 'Active';
-      document.getElementById('merchantActionTakenInput').value = m.actiontaken && m.actiontaken !== '-' ? m.actiontaken : '';
-      document.getElementById('merchantRemarksInput').value = m.remarks && m.remarks !== '-' ? m.remarks : '';
-      document.getElementById('merchantModal').style.display = 'flex';
-    }
+      switchMerchantTab('entry');
+      const title = document.getElementById('formTitleMerchant');
+      if (title) title.textContent = 'Edit Merchant (' + (m.mid || '') + ')';
+      const btn = document.getElementById('btnPageSaveMerchant');
+      if (btn) btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Update Merchant</span>';
+      
+      document.getElementById('pageMerchantEditIndex').value = idx;
+      document.getElementById('pageMerchantMid').value = m.mid || '';
+      document.getElementById('pageMerchantTid').value = m.tid || '';
+      document.getElementById('pageMerchantName').value = m.merchantname || m.name || '';
+      document.getElementById('pageMerchantLocation').value = m.location || '';
+      document.getElementById('pageMerchantMobile').value = m.mobile && m.mobile !== '-' ? m.mobile : '';
+      document.getElementById('pageMerchantType').value = m.type || 'CALL CENTER';
+      document.getElementById('pageMerchantStatus').value = m.status || 'Active';
+      document.getElementById('pageMerchantActionTaken').value = m.actiontaken && m.actiontaken !== '-' ? m.actiontaken : '';
+      document.getElementById('pageMerchantRemarks').value = m.remarks && m.remarks !== '-' ? m.remarks : '';
 
-    function closeMerchantModal() {
-      document.getElementById('merchantModal').style.display = 'none';
-    }
-
-    function handleSaveMerchant(e) {
-      e.preventDefault();
-      const editIdx = document.getElementById('merchantEditIndex').value;
-      const mid = document.getElementById('merchantMidInput').value.trim();
-      const tid = document.getElementById('merchantTidInput').value.trim().toUpperCase();
-      const name = document.getElementById('merchantNameInput').value.trim().toUpperCase();
-      const location = document.getElementById('merchantLocationInput').value.trim().toUpperCase();
-      const mobile = document.getElementById('merchantMobileInput').value.trim();
-      const type = document.getElementById('merchantTypeInput').value;
-      const status = document.getElementById('merchantStatusInput').value;
-      const actiontaken = document.getElementById('merchantActionTakenInput').value.trim().toUpperCase();
-      const remarks = document.getElementById('merchantRemarksInput').value.trim();
-
-      const item = {
-        mid: mid,
-        merchantname: name,
-        location: location,
-        mobile: mobile || '-',
-        type: type,
-        tid: tid,
-        status: status,
-        actiontaken: actiontaken || '-',
-        remarks: remarks || '-'
-      };
-
-      if (editIdx !== '') {
-        const idx = parseInt(editIdx);
-        if (idx >= 0 && idx < merchants.length) {
-          merchants[idx] = item;
-        }
-      } else {
-        merchants.unshift(item);
-      }
-
-      try {
-        localStorage.setItem('smart_portal_merchants', JSON.stringify(merchants));
-      } catch(err) {}
-
-      closeMerchantModal();
-      renderMerchantsTable();
-      showToast('Merchant Master updated successfully!');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function deleteMerchant(idx) {
@@ -3539,7 +3678,10 @@
       // Re-render target
       if (sectionId === 'issues') renderIssuesTable();
       if (sectionId === 'actions') renderActionsTable();
-      if (sectionId === 'merchants') renderMerchantsTable();
+      if (sectionId === 'merchants') {
+        switchMerchantTab('entry');
+        renderMerchantsTable();
+      }
       if (sectionId === 'location') renderLocationsTable();
       if (sectionId === 'users') renderUsersTable();
       if (sectionId === 'dashboard') renderComplaintsTable();
