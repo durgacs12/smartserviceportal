@@ -2571,6 +2571,8 @@
     let actionsTaken = PORTAL_DATA.actions_taken || [];
     let merchants = PORTAL_DATA.merchants || [];
     let users = PORTAL_DATA.users || [];
+    var currentLoadedWorkbook = null;
+    var parsedImportData = [];
 
     try {
       const savedIssues = localStorage.getItem('smart_portal_issues');
@@ -3436,7 +3438,8 @@
       document.getElementById('legendSolved').textContent = stats.solved;
       document.getElementById('legendPending').textContent = stats.pending;
 
-      document.getElementById('navCountComplaints').textContent = stats.total;
+      const navComp = document.getElementById('navCountComplaints');
+      if (navComp) navComp.textContent = stats.total;
       document.getElementById('navCountLocations').textContent = locations.length;
       document.getElementById('navCountUsers').textContent = users.length;
     }
@@ -3521,7 +3524,8 @@
         list = list.filter(t => t.tid.toLowerCase().includes(q) || t.serial.toLowerCase().includes(q) || t.merchant.toLowerCase().includes(q));
       }
 
-      document.getElementById('terminalCountBadge').textContent = list.length;
+      const termBadge = document.getElementById('terminalCountBadge');
+      if (termBadge) termBadge.textContent = list.length;
 
       list.slice(0, 100).forEach(t => {
         const tr = document.createElement('tr');
@@ -3744,8 +3748,8 @@
     // ==========================================
     // CSV & EXCEL IMPORT SYSTEM
     // ==========================================
-    let currentLoadedWorkbook = null;
-    let parsedImportData = [];
+    var currentLoadedWorkbook = null;
+    var parsedImportData = [];
 
     // Check localStorage for saved complaints
     try {
