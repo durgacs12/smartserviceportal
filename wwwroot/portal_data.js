@@ -16,7 +16,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "500",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -36,7 +35,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "HARD WARE ISSUE",
       "actionTaken": "CHARGER REPLACED",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -56,7 +54,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "50",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -76,7 +73,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -96,7 +92,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "50",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -116,7 +111,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -136,7 +130,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -156,7 +149,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "200",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -176,7 +168,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -196,7 +187,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -216,7 +206,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "HARD WARE ISSUE",
       "actionTaken": "CHARGER REPLACED",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -236,7 +225,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "50",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -256,7 +244,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "PICK TERMINAL FOR REPLACEMENT",
       "actionTaken": "PICK TERMINAL FOR REPLACEMENT",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -276,7 +263,6 @@ const PORTAL_DATA = {
       "model": "OM-A485 V10",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -296,7 +282,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "50",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -316,7 +301,6 @@ const PORTAL_DATA = {
       "model": "OM-A485 V10",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -336,7 +320,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "PICK TERMINAL FOR REPLACEMENT",
       "actionTaken": "PICK TERMINAL FOR REPLACEMENT",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -356,7 +339,6 @@ const PORTAL_DATA = {
       "model": "OM-A485 V10",
       "issue": "REPLACEMENT",
       "actionTaken": "REPLACED",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -376,7 +358,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "CONNECTION ISSUE",
       "actionTaken": "SIM CARD REPLACED",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -396,7 +377,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "50",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -416,7 +396,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "50",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -436,7 +415,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "50",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -456,7 +434,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -476,7 +453,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "200",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -496,7 +472,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "ZERO SALES PICK TERMINAL",
       "actionTaken": "ZERO SALES REMOVAL",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -516,7 +491,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "ZERO SALES PICK TERMINAL",
       "actionTaken": "ZERO SALES REMOVAL",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -536,7 +510,6 @@ const PORTAL_DATA = {
       "model": "OM-A485 V10",
       "issue": "ZERO SALES PICK TERMINAL",
       "actionTaken": "ZERO SALES REMOVAL",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -556,7 +529,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "ZERO SALES PICK TERMINAL",
       "actionTaken": "ZERO SALES REMOVAL",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -576,7 +548,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "ZERO SALES PICK TERMINAL",
       "actionTaken": "ZERO SALES REMOVAL",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -596,7 +567,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "ZERO SALES PICK TERMINAL",
       "actionTaken": "ZERO SALES REMOVAL",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -616,7 +586,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "150",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -636,7 +605,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "50",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -656,7 +624,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "50",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -676,7 +643,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "50",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -696,7 +662,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "50",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -716,7 +681,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "50",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -736,7 +700,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -756,7 +719,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "50",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -776,7 +738,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "50",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -796,7 +757,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "50",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -816,7 +776,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "50",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -836,7 +795,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "50",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -856,7 +814,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "50",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -876,7 +833,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "200",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -896,7 +852,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -916,7 +871,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -936,7 +890,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "500",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -956,7 +909,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -976,7 +928,6 @@ const PORTAL_DATA = {
       "model": "OM-A485 V10",
       "issue": "ZERO SALES PICK TERMINAL",
       "actionTaken": "ZERO SALES REMOVAL",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -996,7 +947,6 @@ const PORTAL_DATA = {
       "model": "OM-A485 V10",
       "issue": "ZERO SALES PICK TERMINAL",
       "actionTaken": "ZERO SALES REMOVAL",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1016,7 +966,6 @@ const PORTAL_DATA = {
       "model": "OM-A485 V10",
       "issue": "ZERO SALES PICK TERMINAL",
       "actionTaken": "ZERO SALES REMOVAL",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1036,7 +985,6 @@ const PORTAL_DATA = {
       "model": "OM-A485 V10",
       "issue": "ZERO SALES PICK TERMINAL",
       "actionTaken": "ZERO SALES REMOVAL",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1056,7 +1004,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "ZERO SALES PICK TERMINAL",
       "actionTaken": "ZERO SALES REMOVAL",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1076,7 +1023,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "ZERO SALES PICK TERMINAL",
       "actionTaken": "ZERO SALES REMOVAL",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1096,7 +1042,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "ZERO SALES PICK TERMINAL",
       "actionTaken": "ZERO SALES REMOVAL",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1116,7 +1061,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "ZERO SALES PICK TERMINAL",
       "actionTaken": "ZERO SALES REMOVAL",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1136,7 +1080,6 @@ const PORTAL_DATA = {
       "model": "OM-A485 V10",
       "issue": "PICK TERMINAL FOR REPLACEMENT",
       "actionTaken": "PICK TERMINAL FOR REPLACEMENT",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "FOR SMART REPLACEMENT",
       "status": "Active"
@@ -1156,7 +1099,6 @@ const PORTAL_DATA = {
       "model": "OM-A485 V10",
       "issue": "PICK TERMINAL FOR REPLACEMENT",
       "actionTaken": "PICK TERMINAL FOR REPLACEMENT",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "FOR SMART REPLACEMENT",
       "status": "Active"
@@ -1176,7 +1118,6 @@ const PORTAL_DATA = {
       "model": "OM-A485 V10",
       "issue": "ZERO SALES PICK TERMINAL",
       "actionTaken": "ZERO SALES REMOVAL",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1196,7 +1137,6 @@ const PORTAL_DATA = {
       "model": "MOVE 3500",
       "issue": "PICK TERMINAL FOR REPLACEMENT",
       "actionTaken": "PICK TERMINAL FOR REPLACEMENT",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1216,7 +1156,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "REPLACEMENT",
       "actionTaken": "REPLACED",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1236,7 +1175,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "REPLACEMENT",
       "actionTaken": "REPLACED",
-      "rollsQty": "50",
       "doneBy": "ANZAR",
       "remarks": "FOR SMART REPLACEMENT",
       "status": "Active"
@@ -1256,7 +1194,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "REPLACEMENT",
       "actionTaken": "REPLACED",
-      "rollsQty": "50",
       "doneBy": "ANZAR",
       "remarks": "FOR SMART REPLACEMENT",
       "status": "Active"
@@ -1276,7 +1213,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "REPLACEMENT",
       "actionTaken": "REPLACED",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1296,7 +1232,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "200",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1316,7 +1251,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "REPLACEMENT",
       "actionTaken": "REPLACED",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1336,7 +1270,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1356,7 +1289,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "REPLACEMENT",
       "actionTaken": "REPLACED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1376,7 +1308,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "GENERAL CHECKUP",
       "actionTaken": "GENERAL CHECKUP",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1396,7 +1327,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "400",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1416,7 +1346,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1436,7 +1365,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "150",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1456,7 +1384,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "50",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1476,7 +1403,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "SIM REPLACED",
       "status": "Active"
@@ -1496,7 +1422,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "REPLACEMENT",
       "actionTaken": "REPLACED",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1516,7 +1441,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "REPLACEMENT",
       "actionTaken": "REPLACED",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1536,7 +1460,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1556,7 +1479,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "REPLACEMENT",
       "actionTaken": "REPLACED",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1576,7 +1498,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "50",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1596,7 +1517,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "PICK TERMINAL FOR REPLACEMENT",
       "actionTaken": "PICK TERMINAL FOR REPLACEMENT",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1616,7 +1536,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1636,7 +1555,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "PICK TERMINAL FOR REPLACEMENT",
       "actionTaken": "PICK TERMINAL FOR REPLACEMENT",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1656,7 +1574,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "50",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1676,7 +1593,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1696,7 +1612,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "50",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1716,7 +1631,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "50",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1736,7 +1650,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "PICK TERMINAL FOR REPLACEMENT",
       "actionTaken": "PICK TERMINAL FOR REPLACEMENT",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1756,7 +1669,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "50",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1776,7 +1688,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "200",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1796,7 +1707,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "HARD WARE ISSUE",
       "actionTaken": "BATTERY REPLACED",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1816,7 +1726,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1836,7 +1745,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "200",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1856,7 +1764,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1876,7 +1783,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "200",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1896,7 +1802,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "REPLACEMENT",
       "actionTaken": "REPLACED",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1916,7 +1821,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "PICK TERMINAL FOR REPLACEMENT",
       "actionTaken": "PICK TERMINAL FOR REPLACEMENT",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "TAMPERED",
       "status": "Active"
@@ -1936,7 +1840,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "PICK TERMINAL FOR REPLACEMENT",
       "actionTaken": "PICK TERMINAL FOR REPLACEMENT",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1956,7 +1859,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "200",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1976,7 +1878,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -1996,7 +1897,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "700",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2016,7 +1916,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2036,7 +1935,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2056,7 +1954,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "GENERAL CHECKUP",
       "actionTaken": "GENERAL CHECKUP",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2076,7 +1973,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2096,7 +1992,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "HARD WARE ISSUE",
       "actionTaken": "BATTERY REPLACED",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2116,7 +2011,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2136,7 +2030,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "600",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2156,7 +2049,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "200",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2176,7 +2068,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "HARD WARE ISSUE",
       "actionTaken": "CHARGER REPLACED",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "BASE CHARGER DELIVERED",
       "status": "Active"
@@ -2196,7 +2087,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2216,7 +2106,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2236,7 +2125,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "50",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2256,7 +2144,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "50",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2276,7 +2163,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "50",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2296,7 +2182,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "50",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2316,7 +2201,6 @@ const PORTAL_DATA = {
       "model": "OM-A485 V10",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2336,7 +2220,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "200",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2356,7 +2239,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "PICK TERMINAL FOR REPLACEMENT",
       "actionTaken": "PICK TERMINAL FOR REPLACEMENT",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2376,7 +2258,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "REPLACEMENT",
       "actionTaken": "REPLACED",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2396,7 +2277,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "200",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2416,7 +2296,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "ZERO SALES PICK TERMINAL",
       "actionTaken": "ZERO SALES REMOVAL",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2436,7 +2315,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2456,7 +2334,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "CONNECTION ISSUE",
       "actionTaken": "SIM CARD REPLACED",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2476,7 +2353,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "500",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2496,7 +2372,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "PICK TERMINAL FOR REPLACEMENT",
       "actionTaken": "PICK TERMINAL FOR REPLACEMENT",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2516,7 +2391,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "REPLACEMENT",
       "actionTaken": "REPLACED",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2536,7 +2410,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "REPLACEMENT",
       "actionTaken": "REPLACED",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2556,7 +2429,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2576,7 +2448,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2596,7 +2467,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "HARD WARE ISSUE",
       "actionTaken": "BATTERY REPLACED",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2616,7 +2486,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "1250",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2636,7 +2505,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "CONNECTION ISSUE",
       "actionTaken": "TRAINING GIVEN",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2656,7 +2524,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "150",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2676,7 +2543,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "500",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2696,7 +2562,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "ZERO SALES PICK TERMINAL",
       "actionTaken": "ZERO SALES REMOVAL",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2716,7 +2581,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "HARD WARE ISSUE",
       "actionTaken": "BACK COVER REPLACED",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2736,7 +2600,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2756,7 +2619,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "200",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2776,7 +2638,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "HARD WARE ISSUE",
       "actionTaken": "BATTERY REPLACED",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2796,7 +2657,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2816,7 +2676,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2836,7 +2695,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "HARD WARE ISSUE",
       "actionTaken": "BATTERY REPLACED",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2856,7 +2714,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2876,7 +2733,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "REPLACEMENT",
       "actionTaken": "REPLACED",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2896,7 +2752,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "REPLACEMENT",
       "actionTaken": "REPLACED",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2916,7 +2771,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2936,7 +2790,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2956,7 +2809,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2976,7 +2828,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "TRAINING",
       "actionTaken": "SOFTWARE UPDATED",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -2996,7 +2847,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "PICK TERMINAL FOR REPLACEMENT",
       "actionTaken": "PICK TERMINAL FOR REPLACEMENT",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3016,7 +2866,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "REPLACEMENT",
       "actionTaken": "REPLACED",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3036,7 +2885,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "GENERAL CHECKUP",
       "actionTaken": "GENERAL CHECKUP",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3056,7 +2904,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3076,7 +2923,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "HARD WARE ISSUE",
       "actionTaken": "CHARGER REPLACED",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "04 CHARGER AND ONE BASE CHARGER REPLACED",
       "status": "Active"
@@ -3096,7 +2942,6 @@ const PORTAL_DATA = {
       "model": "OM-A485 V10",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3116,7 +2961,6 @@ const PORTAL_DATA = {
       "model": "OM-A485 V10",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3136,7 +2980,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3156,7 +2999,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3176,7 +3018,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3196,7 +3037,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3216,7 +3056,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3236,7 +3075,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "REPLACEMENT",
       "actionTaken": "REPLACED",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3256,7 +3094,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "50",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3276,7 +3113,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3296,7 +3132,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3316,7 +3151,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3336,7 +3170,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3356,7 +3189,6 @@ const PORTAL_DATA = {
       "model": "OM-A485 V10",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3376,7 +3208,6 @@ const PORTAL_DATA = {
       "model": "OM-A485 V10",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3396,7 +3227,6 @@ const PORTAL_DATA = {
       "model": "OM-A485 V10",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3416,7 +3246,6 @@ const PORTAL_DATA = {
       "model": "OM-A485 V10",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3436,7 +3265,6 @@ const PORTAL_DATA = {
       "model": "OM-A485 V10",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3456,7 +3284,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3476,7 +3303,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3496,7 +3322,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3516,7 +3341,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3536,7 +3360,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3556,7 +3379,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "SOFTWARE UPDATES",
       "actionTaken": "SOFTWARE UPDATED",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "APP RE INSTALLED",
       "status": "Active"
@@ -3576,7 +3398,6 @@ const PORTAL_DATA = {
       "model": "DESK 3500",
       "issue": "PICK TERMINAL FOR REPLACEMENT",
       "actionTaken": "PICK TERMINAL FOR REPLACEMENT",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3596,7 +3417,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "PICK TERMINAL FOR REPLACEMENT",
       "actionTaken": "PICK TERMINAL FOR REPLACEMENT",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3616,7 +3436,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "PICK TERMINAL FOR REPLACEMENT",
       "actionTaken": "PICK TERMINAL FOR REPLACEMENT",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3636,7 +3455,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "PICK TERMINAL FOR REPLACEMENT",
       "actionTaken": "PICK TERMINAL FOR REPLACEMENT",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3656,7 +3474,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3676,7 +3493,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "750",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3696,7 +3512,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3716,7 +3531,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3736,7 +3550,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "200",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3756,7 +3569,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3776,7 +3588,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "PICK TERMINAL FOR REPLACEMENT",
       "actionTaken": "PICK TERMINAL FOR REPLACEMENT",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3796,7 +3607,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "PICK TERMINAL FOR REPLACEMENT",
       "actionTaken": "PICK TERMINAL FOR REPLACEMENT",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3816,7 +3626,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3836,7 +3645,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3856,7 +3664,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3876,7 +3683,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3896,7 +3702,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3916,7 +3721,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "150",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3936,7 +3740,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "HARD WARE ISSUE",
       "actionTaken": "BATTERY REPLACED",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3956,7 +3759,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "REPLACEMENT",
       "actionTaken": "REPLACED",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3976,7 +3778,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -3996,7 +3797,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -4016,7 +3816,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "200",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -4036,7 +3835,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "PICK TERMINAL FOR REPLACEMENT",
       "actionTaken": "PICK TERMINAL FOR REPLACEMENT",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -4056,7 +3854,6 @@ const PORTAL_DATA = {
       "model": "SMART POS, OM-A485 V10",
       "issue": "REPLACEMENT",
       "actionTaken": "REPLACED",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -4076,7 +3873,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "50",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -4096,7 +3892,6 @@ const PORTAL_DATA = {
       "model": "OM-A485 V10",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -4116,7 +3911,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "CONNECTION ISSUE",
       "actionTaken": "SIM CARD REPLACED",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -4136,7 +3930,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -4156,7 +3949,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "150",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -4176,7 +3968,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -4196,7 +3987,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -4216,7 +4006,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "HARD WARE ISSUE",
       "actionTaken": "BATTERY REPLACED",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -4236,7 +4025,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "PICK TERMINAL FOR REPLACEMENT",
       "actionTaken": "PICK TERMINAL FOR REPLACEMENT",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -4256,7 +4044,6 @@ const PORTAL_DATA = {
       "model": "OM-A485 V10",
       "issue": "REPLACEMENT",
       "actionTaken": "REPLACED",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -4276,7 +4063,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -4296,7 +4082,6 @@ const PORTAL_DATA = {
       "model": "OM-A485 V10",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -4316,7 +4101,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "100",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -4336,7 +4120,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "50",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -4356,7 +4139,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "50",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -4376,7 +4158,6 @@ const PORTAL_DATA = {
       "model": "OM-A485 V10",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -4396,7 +4177,6 @@ const PORTAL_DATA = {
       "model": "OM-A485 V10",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -4416,7 +4196,6 @@ const PORTAL_DATA = {
       "model": "OM-A485 V10",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -4436,7 +4215,6 @@ const PORTAL_DATA = {
       "model": "OM-A485 V10",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -4456,7 +4234,6 @@ const PORTAL_DATA = {
       "model": "OM-A485 V10",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -4476,7 +4253,6 @@ const PORTAL_DATA = {
       "model": "OM-A485 V10",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -4496,7 +4272,6 @@ const PORTAL_DATA = {
       "model": "OM-A485 V10",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -4516,7 +4291,6 @@ const PORTAL_DATA = {
       "model": "SMART POS",
       "issue": "STATIONARY DELIVERY",
       "actionTaken": "ROLLS DELIVERED",
-      "rollsQty": "50",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"
@@ -4536,7 +4310,6 @@ const PORTAL_DATA = {
       "model": "OM-A485 V10",
       "issue": "NEW INSTALLATION",
       "actionTaken": "NEW INSTALLATION",
-      "rollsQty": "",
       "doneBy": "ANZAR",
       "remarks": "",
       "status": "Active"

@@ -33,7 +33,6 @@ public class Merchant
     public string Model { get; set; } = "SMART POS";
     public string Issue { get; set; } = string.Empty;
     public string ActionTaken { get; set; } = string.Empty;
-    public string RollsQty { get; set; } = string.Empty;
     public string DoneBy { get; set; } = string.Empty;
     public string Remarks { get; set; } = string.Empty;
     public string Status { get; set; } = "Active";
