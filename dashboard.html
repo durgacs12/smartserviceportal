@@ -1938,7 +1938,7 @@
           <div class="table-header">
             <div>
               <h3>Merchant Master (<span id="merchantCountBadge">0</span> Merchants)</h3>
-              <p style="font-size: 13px; color: var(--slate-400); margin-top: 4px;">Merchant customer profiles, MID identifiers, locations, and terminal assignments</p>
+              <p style="font-size: 13px; color: var(--slate-400); margin-top: 4px;">Merchant profiles, MIDs, operational zones, mobile contacts, and POS terminals from Excel</p>
             </div>
             <button class="btn-primary" onclick="openNewMerchantModal()">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -1954,9 +1954,10 @@
                 <tr>
                   <th>MID</th>
                   <th>Merchant Name</th>
-                  <th>Location / City</th>
-                  <th>Contact Phone</th>
-                  <th>Active Terminals</th>
+                  <th>Location</th>
+                  <th>Mobile Number</th>
+                  <th>Channel / Type</th>
+                  <th>Assigned TID(s)</th>
                   <th>Status</th>
                   <th>Actions</th>
                 </tr>
@@ -2267,30 +2268,43 @@
         <div class="modal-body">
           <div class="form-group">
             <label>Merchant Name</label>
-            <input type="text" id="merchantNameInput" placeholder="e.g. LULU HYPERMARKET" required />
+            <input type="text" id="merchantNameInput" placeholder="e.g. AL MAHA 600" required />
           </div>
           <div class="form-group">
             <label>Merchant ID (MID)</label>
-            <input type="text" id="merchantMidInput" placeholder="e.g. 104951720250" required />
+            <input type="text" id="merchantMidInput" placeholder="e.g. 104951720186" required />
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group">
+              <label>Location</label>
+              <input type="text" id="merchantLocationInput" placeholder="e.g. SAADA, SALALAH" required />
+            </div>
+            <div class="form-group">
+              <label>Mobile Number</label>
+              <input type="text" id="merchantMobileInput" placeholder="e.g. 92751955" />
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group">
+              <label>Channel / Type</label>
+              <select id="merchantTypeInput">
+                <option value="CALL CENTER">CALL CENTER</option>
+                <option value="E MAIL">E MAIL</option>
+                <option value="PORTAL">PORTAL</option>
+                <option value="WALK-IN">WALK-IN</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Status</label>
+              <select id="merchantStatusInput">
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+              </select>
+            </div>
           </div>
           <div class="form-group">
-            <label>Location / City</label>
-            <input type="text" id="merchantLocationInput" placeholder="e.g. SALALAH, MUSCAT" required />
-          </div>
-          <div class="form-group">
-            <label>Contact Phone</label>
-            <input type="text" id="merchantContactInput" placeholder="+968 9XXXXXXX" />
-          </div>
-          <div class="form-group">
-            <label>Active Terminals</label>
-            <input type="number" id="merchantTerminalsInput" value="1" min="1" max="50" />
-          </div>
-          <div class="form-group">
-            <label>Status</label>
-            <select id="merchantStatusInput">
-              <option value="Active">Active</option>
-              <option value="Inactive">Inactive</option>
-            </select>
+            <label>Assigned TID(s)</label>
+            <input type="text" id="merchantTidsInput" placeholder="e.g. POS10736, POS23567" />
           </div>
         </div>
         <div class="modal-footer">
@@ -2893,7 +2907,9 @@
         list = list.filter(m =>
           (m.name && m.name.toLowerCase().includes(q)) ||
           (m.mid && m.mid.toLowerCase().includes(q)) ||
-          (m.location && m.location.toLowerCase().includes(q))
+          (m.location && m.location.toLowerCase().includes(q)) ||
+          (m.mobile && m.mobile.toLowerCase().includes(q)) ||
+          (m.tids && m.tids.toLowerCase().includes(q))
         );
       }
 
@@ -2903,7 +2919,7 @@
       if (navBadge) navBadge.textContent = merchants.length;
 
       if (list.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 28px; color: #94a3b8;">No merchants found.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding: 28px; color: #94a3b8;">No merchants found.</td></tr>';
         return;
       }
 
@@ -2913,12 +2929,16 @@
           ? '<span class="status-badge status-active">Active</span>'
           : '<span class="status-badge status-replaced">Inactive</span>';
 
+        const tidDisplay = m.tids ? m.tids : (m.tid ? m.tid : (m.terminals_count ? m.terminals_count + ' Terminal(s)' : '-'));
+        const phoneDisplay = m.mobile && m.mobile !== '-' ? m.mobile : (m.contact ? m.contact : '-');
+
         tr.innerHTML = `
           <td><strong><span class="tag-tid">${m.mid}</span></strong></td>
           <td><strong style="color: #f8fafc;">${m.name}</strong></td>
           <td>${m.location || '-'}</td>
-          <td>${m.contact || '-'}</td>
-          <td><strong style="color: var(--blue);">${m.terminals_count || 1} Terminals</strong></td>
+          <td><strong style="color: #94a3b8;">${phoneDisplay}</strong></td>
+          <td><span class="status-badge status-progress">${m.type || 'CALL CENTER'}</span></td>
+          <td><code style="font-weight:700; color:#38bdf8; font-size:12.5px;">${tidDisplay}</code></td>
           <td>${statusBadge}</td>
           <td>
             <div style="display:flex; gap:6px;">
@@ -2936,10 +2956,11 @@
       document.getElementById('btnSaveMerchantText').textContent = 'Save Merchant';
       document.getElementById('merchantEditMid').value = '';
       document.getElementById('merchantNameInput').value = '';
-      document.getElementById('merchantMidInput').value = '10495172' + Math.floor(1000 + Math.random()*9000);
+      document.getElementById('merchantMidInput').value = '10' + Math.floor(1000000000 + Math.random()*9000000000);
       document.getElementById('merchantLocationInput').value = 'SALALAH';
-      document.getElementById('merchantContactInput').value = '';
-      document.getElementById('merchantTerminalsInput').value = '1';
+      document.getElementById('merchantMobileInput').value = '';
+      document.getElementById('merchantTypeInput').value = 'CALL CENTER';
+      document.getElementById('merchantTidsInput').value = '';
       document.getElementById('merchantStatusInput').value = 'Active';
       document.getElementById('merchantModal').style.display = 'flex';
       document.getElementById('merchantNameInput').focus();
@@ -2954,8 +2975,9 @@
       document.getElementById('merchantNameInput').value = m.name;
       document.getElementById('merchantMidInput').value = m.mid;
       document.getElementById('merchantLocationInput').value = m.location || '';
-      document.getElementById('merchantContactInput').value = m.contact || '';
-      document.getElementById('merchantTerminalsInput').value = m.terminals_count || 1;
+      document.getElementById('merchantMobileInput').value = m.mobile && m.mobile !== '-' ? m.mobile : (m.contact || '');
+      document.getElementById('merchantTypeInput').value = m.type || 'CALL CENTER';
+      document.getElementById('merchantTidsInput').value = m.tids || (m.tid || '');
       document.getElementById('merchantStatusInput').value = m.status || 'Active';
       document.getElementById('merchantModal').style.display = 'flex';
     }
@@ -2970,8 +2992,9 @@
       const name = document.getElementById('merchantNameInput').value.trim().toUpperCase();
       const mid = document.getElementById('merchantMidInput').value.trim();
       const location = document.getElementById('merchantLocationInput').value.trim().toUpperCase();
-      const contact = document.getElementById('merchantContactInput').value.trim();
-      const terms = parseInt(document.getElementById('merchantTerminalsInput').value) || 1;
+      const mobile = document.getElementById('merchantMobileInput').value.trim();
+      const type = document.getElementById('merchantTypeInput').value;
+      const tids = document.getElementById('merchantTidsInput').value.trim();
       const status = document.getElementById('merchantStatusInput').value;
 
       if (editMid) {
@@ -2980,17 +3003,20 @@
           m.name = name;
           m.mid = mid;
           m.location = location;
-          m.contact = contact;
-          m.terminals_count = terms;
+          m.mobile = mobile;
+          m.type = type;
+          m.tids = tids;
           m.status = status;
         }
       } else {
-        merchants.push({
+        merchants.unshift({
           mid: mid,
           name: name,
           location: location,
-          contact: contact,
-          terminals_count: terms,
+          mobile: mobile,
+          type: type,
+          tids: tids,
+          terminals_count: tids ? tids.split(',').length : 1,
           status: status
         });
       }
@@ -3278,33 +3304,7 @@
       });
     }
 
-    // Render Merchants Table
-    function renderMerchantsTable() {
-      const tbody = document.getElementById('merchantTableBody');
-      tbody.innerHTML = '';
-      
-      let list = merchants;
-      if (searchQuery) {
-        const q = searchQuery.toLowerCase();
-        list = list.filter(m => m.name.toLowerCase().includes(q) || m.mid.toLowerCase().includes(q) || m.location.toLowerCase().includes(q));
-      }
-
-      document.getElementById('merchantCountBadge').textContent = list.length;
-
-      list.slice(0, 100).forEach(m => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td><span class="tag-tid">${m.mid || 'N/A'}</span></td>
-          <td><strong>${m.name}</strong></td>
-          <td>${m.location || 'OMAN'}</td>
-          <td>${m.mobile || '-'}</td>
-          <td><span class="tag-tid">${m.tid || '-'}</span></td>
-          <td><span class="tag-model">${m.model || 'SMART POS'}</span></td>
-          <td><span class="status-badge status-active">Active</span></td>
-        `;
-        tbody.appendChild(tr);
-      });
-    }
+    // Duplicate renderMerchantsTable removed
 
     // Render Terminals Table
     function renderTerminalsTable() {
