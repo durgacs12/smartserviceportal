@@ -19,15 +19,24 @@ public class Complaint
 
 public class Merchant
 {
-    public string Mid { get; set; } = string.Empty;
+    public int SlNo { get; set; }
+    public string ReceivingDate { get; set; } = string.Empty;
+    public string ServiceDate { get; set; } = string.Empty;
+    public string Sla { get; set; } = string.Empty;
     public string MerchantName { get; set; } = string.Empty;
+    public string Mid { get; set; } = string.Empty;
+    public string Tid { get; set; } = string.Empty;
+    public string SerialNumber { get; set; } = string.Empty;
+    public string Type { get; set; } = "CALL CENTER";
     public string Location { get; set; } = string.Empty;
     public string Mobile { get; set; } = string.Empty;
-    public string Type { get; set; } = "CALL CENTER";
-    public string Tid { get; set; } = string.Empty;
-    public string Status { get; set; } = "Active";
+    public string Model { get; set; } = "SMART POS";
+    public string Issue { get; set; } = string.Empty;
     public string ActionTaken { get; set; } = string.Empty;
+    public string RollsQty { get; set; } = string.Empty;
+    public string DoneBy { get; set; } = string.Empty;
     public string Remarks { get; set; } = string.Empty;
+    public string Status { get; set; } = "Active";
 }
 
 public class Terminal
