@@ -2153,43 +2153,19 @@
               </div>
 
               <div class="form-group" style="margin-bottom: 16px;">
-                <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block;">User Role *</label>
-                <select id="pageUserRole" required>
-                  <option value="Field Service Engineer (Technician)">Field Service Engineer (Technician)</option>
-                  <option value="Admin (Full Access)">Admin (Full Access)</option>
-                  <option value="Call Center Agent">Call Center Agent</option>
-                  <option value="Operations Manager">Operations Manager</option>
-                  <option value="Terminal Delivery Staff">Terminal Delivery Staff</option>
-                </select>
+                <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block;">Location *</label>
+                <input type="text" id="pageUserZone" placeholder="e.g. Salalah, Muscat" required />
               </div>
 
-              <div class="form-group" style="margin-bottom: 16px;">
-                <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block;">Zone / Location *</label>
-                <input type="text" id="pageUserZone" placeholder="e.g. Salalah & Dhofar, Muscat HQ" required />
-              </div>
-
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;">
                 <div class="form-group" style="margin: 0;">
                   <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block;">Mobile Number *</label>
                   <input type="text" id="pageUserMobile" placeholder="+968 9XXXXXXX" required />
                 </div>
                 <div class="form-group" style="margin: 0;">
-                  <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block;">Login PIN Code *</label>
+                  <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block;">Login PIN *</label>
                   <input type="text" id="pageUserPin" placeholder="6-digit PIN" maxlength="6" required />
                 </div>
-              </div>
-
-              <div class="form-group" style="margin-bottom: 16px;">
-                <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block;">Email Address</label>
-                <input type="email" id="pageUserEmail" placeholder="user@smartpos.om" />
-              </div>
-
-              <div class="form-group" style="margin-bottom: 24px;">
-                <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block;">Account Status</label>
-                <select id="pageUserStatus">
-                  <option value="Active">Active</option>
-                  <option value="Inactive">Inactive</option>
-                </select>
               </div>
 
               <div style="display: flex; gap: 12px; justify-content: flex-end; align-items: center; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.08);">
@@ -2223,12 +2199,9 @@
                     <th>User ID</th>
                     <th>Full Name</th>
                     <th>Username</th>
-                    <th>Role</th>
-                    <th>Zone / Location</th>
-                    <th>Mobile</th>
+                    <th>Location</th>
+                    <th>Mobile Number</th>
                     <th>Login PIN</th>
-                    <th>Email</th>
-                    <th>Status</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
@@ -3242,7 +3215,6 @@
 
     // ==========================================
     // USER MASTER FUNCTIONS (1. Entry Page, 2. View Table)
-    // ==========================================
     function switchUserTab(tab) {
       const entryView = document.getElementById('userEntryView');
       const tableView = document.getElementById('userTableView');
@@ -3275,18 +3247,12 @@
       if (name) name.value = '';
       const uName = document.getElementById('pageUserLoginName');
       if (uName) uName.value = '';
-      const role = document.getElementById('pageUserRole');
-      if (role) role.value = 'Field Service Engineer (Technician)';
       const zone = document.getElementById('pageUserZone');
-      if (zone) zone.value = 'Salalah & Dhofar';
+      if (zone) zone.value = '';
       const mob = document.getElementById('pageUserMobile');
       if (mob) mob.value = '';
       const pin = document.getElementById('pageUserPin');
       if (pin) pin.value = '';
-      const email = document.getElementById('pageUserEmail');
-      if (email) email.value = '';
-      const st = document.getElementById('pageUserStatus');
-      if (st) st.value = 'Active';
     }
 
     function handleSaveUserForm(e) {
@@ -3294,24 +3260,18 @@
       const editId = document.getElementById('pageUserEditId').value;
       const name = document.getElementById('pageUserFullName').value.trim();
       const username = document.getElementById('pageUserLoginName').value.trim();
-      const role = document.getElementById('pageUserRole').value;
       const zone = document.getElementById('pageUserZone').value.trim();
       const mobile = document.getElementById('pageUserMobile').value.trim();
       const pin = document.getElementById('pageUserPin').value.trim();
-      const email = document.getElementById('pageUserEmail').value.trim();
-      const status = document.getElementById('pageUserStatus').value;
 
       if (editId) {
         const u = users.find(x => x.id === editId);
         if (u) {
           u.name = name;
           u.username = username;
-          u.role = role;
           u.zone = zone;
           u.mobile = mobile;
           u.pincode = pin;
-          u.email = email;
-          u.status = status;
         }
       } else {
         const newId = `USR-${users.length + 101}`;
@@ -3319,12 +3279,11 @@
           id: newId,
           name: name,
           username: username,
-          role: role,
+          role: 'Technician',
           zone: zone,
           mobile: mobile,
           pincode: pin,
-          email: email,
-          status: status
+          status: 'Active'
         });
       }
 
@@ -3349,10 +3308,8 @@
         list = list.filter(u =>
           (u.name && u.name.toLowerCase().includes(q)) ||
           (u.username && u.username.toLowerCase().includes(q)) ||
-          (u.role && u.role.toLowerCase().includes(q)) ||
           (u.zone && u.zone.toLowerCase().includes(q)) ||
-          (u.mobile && u.mobile.toLowerCase().includes(q)) ||
-          (u.email && u.email.toLowerCase().includes(q))
+          (u.mobile && u.mobile.toLowerCase().includes(q))
         );
       }
 
@@ -3366,30 +3323,19 @@
       if (btnCount) btnCount.textContent = users.length;
 
       if (list.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="10" style="text-align:center; padding: 28px; color: #94a3b8;">No users found.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 28px; color: #94a3b8;">No users found.</td></tr>';
         return;
       }
 
       list.forEach((u, idx) => {
         const tr = document.createElement('tr');
-        let roleBadge = 'status-progress';
-        if (u.role && u.role.includes('Admin')) roleBadge = 'status-pending';
-        else if (u.role && (u.role.includes('Engineer') || u.role.includes('Technician'))) roleBadge = 'status-solved';
-
-        const statusBadge = u.status === 'Active'
-          ? '<span class="status-badge status-active">Active</span>'
-          : '<span class="status-badge status-replaced">Inactive</span>';
-
         tr.innerHTML = `
           <td><strong><span class="tag-tid">${u.id}</span></strong></td>
           <td><strong style="color: #f8fafc;">${u.name}</strong></td>
           <td><code style="font-weight:700; color:#38bdf8;">@${u.username}</code></td>
-          <td><span class="status-badge ${roleBadge}">${u.role}</span></td>
           <td>${u.zone || '-'}</td>
           <td>${u.mobile || '-'}</td>
           <td><code style="background:rgba(255,255,255,0.06); padding:2px 6px; border-radius:4px; font-weight:700; color:#a3e635;">${u.pincode || '******'}</code></td>
-          <td><span style="font-size:12px; color:#94a3b8;">${u.email || '-'}</span></td>
-          <td>${statusBadge}</td>
           <td>
             <div style="display:flex; gap:6px;">
               <button class="btn-secondary" style="padding:5px 10px; font-size:12px;" onclick="openEditUserModal('${u.id}')">Edit</button>
@@ -3413,12 +3359,9 @@
       document.getElementById('pageUserEditId').value = u.id;
       document.getElementById('pageUserFullName').value = u.name || '';
       document.getElementById('pageUserLoginName').value = u.username || '';
-      document.getElementById('pageUserRole').value = u.role || 'Field Service Engineer (Technician)';
       document.getElementById('pageUserZone').value = u.zone || '';
       document.getElementById('pageUserMobile').value = u.mobile || '';
       document.getElementById('pageUserPin').value = u.pincode || '';
-      document.getElementById('pageUserEmail').value = u.email || '';
-      document.getElementById('pageUserStatus').value = u.status || 'Active';
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
