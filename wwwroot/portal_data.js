@@ -1,6 +1,55 @@
 const PORTAL_DATA = {
   "complaints": [],
-  "merchants": [],
+  "merchants": [
+    {
+      "mid": "104951720199",
+      "name": "AL MAHA HYPERMARKET",
+      "location": "SALALAH",
+      "contact": "+968 9123 4567",
+      "terminals_count": 3,
+      "status": "Active"
+    },
+    {
+      "mid": "104951720200",
+      "name": "CITY FLOWER SALALAH",
+      "location": "SAADA",
+      "contact": "+968 9765 4321",
+      "terminals_count": 2,
+      "status": "Active"
+    },
+    {
+      "mid": "104951720201",
+      "name": "LULU CENTER DHOFAR",
+      "location": "SALALAH",
+      "contact": "+968 9888 7766",
+      "terminals_count": 5,
+      "status": "Active"
+    },
+    {
+      "mid": "104951720202",
+      "name": "OMAN OIL PETROL PUMP",
+      "location": "TAQAH",
+      "contact": "+968 9444 3322",
+      "terminals_count": 1,
+      "status": "Active"
+    },
+    {
+      "mid": "104951720203",
+      "name": "CARREFOUR SALALAH",
+      "location": "SALALAH",
+      "contact": "+968 9333 2211",
+      "terminals_count": 4,
+      "status": "Active"
+    },
+    {
+      "mid": "104951720204",
+      "name": "GRAND MALL MUSCAT",
+      "location": "MUSCAT HQ",
+      "contact": "+968 2455 1100",
+      "terminals_count": 6,
+      "status": "Active"
+    }
+  ],
   "terminals": [],
   "replacements": [],
   "issues": [
@@ -248,7 +297,52 @@ const PORTAL_DATA = {
       "status": "Active"
     }
   ],
-  "users": [],
+  "users": [
+    {
+      "id": "USR-101",
+      "name": "Administrator",
+      "username": "admin",
+      "role": "Admin",
+      "zone": "Muscat HQ",
+      "mobile": "+968 9200 0001",
+      "pincode": "123456",
+      "email": "admin@smartpos.om",
+      "status": "Active"
+    },
+    {
+      "id": "USR-102",
+      "name": "Anzar K.",
+      "username": "anzar_pos",
+      "role": "Field Service Engineer",
+      "zone": "Salalah & Dhofar",
+      "mobile": "+968 9275 1955",
+      "pincode": "112233",
+      "email": "anzar@smartpos.om",
+      "status": "Active"
+    },
+    {
+      "id": "USR-103",
+      "name": "OMA Operations",
+      "username": "oma_ops",
+      "role": "Operations Manager",
+      "zone": "Muscat HQ",
+      "mobile": "+968 2456 7890",
+      "pincode": "445566",
+      "email": "ops@smartpos.om",
+      "status": "Active"
+    },
+    {
+      "id": "USR-104",
+      "name": "Salim Al-Balushi",
+      "username": "salim_tech",
+      "role": "Field Service Engineer",
+      "zone": "Al Batinah / Sohar",
+      "mobile": "+968 9802 0354",
+      "pincode": "778899",
+      "email": "salim@smartpos.om",
+      "status": "Active"
+    }
+  ],
   "locations": [
     {
       "code": "LOC-01",

@@ -1628,6 +1628,17 @@
         <span class="nav-count" id="navCountActions">0</span>
       </a>
 
+      <a class="nav-item" onclick="switchSection('merchants', this)">
+        <div class="nav-item-left">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+          <span>Merchant Master</span>
+        </div>
+        <span class="nav-count" id="navCountMerchants">0</span>
+      </a>
+
       <a class="nav-item" onclick="switchSection('location', this)">
         <div class="nav-item-left">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -1637,6 +1648,19 @@
           <span>Location Master</span>
         </div>
         <span class="nav-count" id="navCountLocations">0</span>
+      </a>
+
+      <div class="nav-label">Access Control</div>
+
+      <a class="nav-item" onclick="switchSection('users', this)">
+        <div class="nav-item-left">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          <span>User Master</span>
+        </div>
+        <span class="nav-count" id="navCountUsers">0</span>
       </a>
     </nav>
 
@@ -1911,7 +1935,42 @@
         </div>
       </section>
 
-      <!-- 8. LOCATION MASTER VIEW -->
+      <!-- MERCHANT MASTER VIEW -->
+      <section id="section-merchants" class="section-view">
+        <div class="table-container">
+          <div class="table-header">
+            <div>
+              <h3>Merchant Master (<span id="merchantCountBadge">0</span> Merchants)</h3>
+              <p style="font-size: 13px; color: var(--slate-400); margin-top: 4px;">Merchant customer profiles, MID identifiers, locations, and terminal assignments</p>
+            </div>
+            <button class="btn-primary" onclick="openNewMerchantModal()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              <span>+ Add Merchant</span>
+            </button>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>MID</th>
+                  <th>Merchant Name</th>
+                  <th>Location / City</th>
+                  <th>Contact Phone</th>
+                  <th>Active Terminals</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="merchantTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- LOCATION MASTER VIEW -->
       <section id="section-location" class="section-view">
         <div class="table-container">
           <div class="table-header">
@@ -1940,6 +1999,43 @@
                 </tr>
               </thead>
               <tbody id="locationTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- USER MASTER VIEW -->
+      <section id="section-users" class="section-view">
+        <div class="table-container">
+          <div class="table-header">
+            <div>
+              <h3>User Master & Access Control (<span id="userCountBadge">0</span> Users)</h3>
+              <p style="font-size: 13px; color: var(--slate-400); margin-top: 4px;">System credentials, field engineer accounts, roles, and PIN codes</p>
+            </div>
+            <button class="btn-primary" onclick="openNewUserModal()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              <span>+ Add New User</span>
+            </button>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>User ID</th>
+                  <th>Full Name</th>
+                  <th>Username</th>
+                  <th>Role</th>
+                  <th>Zone / Branch</th>
+                  <th>Contact Info</th>
+                  <th>Login PIN</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="userTableBody"></tbody>
             </table>
           </div>
         </div>
@@ -2162,6 +2258,52 @@
     </div>
   </div>
 
+  <!-- Merchant Entry / Edit Modal -->
+  <div id="merchantModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="merchantModalTitle">Add New Merchant</h3>
+        <button class="modal-close" onclick="closeMerchantModal()">&times;</button>
+      </div>
+      <form onsubmit="handleSaveMerchant(event)">
+        <input type="hidden" id="merchantEditMid" value="" />
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Merchant Name</label>
+            <input type="text" id="merchantNameInput" placeholder="e.g. LULU HYPERMARKET" required />
+          </div>
+          <div class="form-group">
+            <label>Merchant ID (MID)</label>
+            <input type="text" id="merchantMidInput" placeholder="e.g. 104951720250" required />
+          </div>
+          <div class="form-group">
+            <label>Location / City</label>
+            <input type="text" id="merchantLocationInput" placeholder="e.g. SALALAH, MUSCAT" required />
+          </div>
+          <div class="form-group">
+            <label>Contact Phone</label>
+            <input type="text" id="merchantContactInput" placeholder="+968 9XXXXXXX" />
+          </div>
+          <div class="form-group">
+            <label>Active Terminals</label>
+            <input type="number" id="merchantTerminalsInput" value="1" min="1" max="50" />
+          </div>
+          <div class="form-group">
+            <label>Status</label>
+            <select id="merchantStatusInput">
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeMerchantModal()">Cancel</button>
+          <button type="submit" class="btn-primary" id="btnSaveMerchantText">Save Merchant</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- Location Entry / Edit Modal -->
   <div id="locationModal" class="modal-overlay">
     <div class="modal-card">
@@ -2196,6 +2338,67 @@
     </div>
   </div>
 
+  <!-- User Entry / Edit Modal -->
+  <div id="userModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="userModalTitle">Add New System User</h3>
+        <button class="modal-close" onclick="closeUserModal()">&times;</button>
+      </div>
+      <form onsubmit="handleSaveUser(event)">
+        <input type="hidden" id="userEditId" value="" />
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" id="userFullName" placeholder="e.g. Anzar K. or Ahmed Salim" required />
+          </div>
+          <div class="form-group">
+            <label>Login Username</label>
+            <input type="text" id="userLoginName" placeholder="e.g. anzar_pos" required />
+          </div>
+          <div class="form-group">
+            <label>User Role</label>
+            <select id="userRole" required>
+              <option value="Admin">Admin (Full Access)</option>
+              <option value="Field Service Engineer">Field Service Engineer (Technician)</option>
+              <option value="Call Center Agent">Call Center / Support Agent</option>
+              <option value="Operations Manager">Operations Manager</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Zone / Location</label>
+            <input type="text" id="userZone" placeholder="e.g. Salalah & Dhofar" required />
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group">
+              <label>Mobile Number</label>
+              <input type="text" id="userMobile" placeholder="+968 9XXXXXXX" required />
+            </div>
+            <div class="form-group">
+              <label>Login PIN Code</label>
+              <input type="text" id="userPin" placeholder="6-digit PIN" maxlength="6" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" id="userEmail" placeholder="user@smartpos.om" />
+          </div>
+          <div class="form-group">
+            <label>Account Status</label>
+            <select id="userStatus">
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeUserModal()">Cancel</button>
+          <button type="submit" class="btn-primary" id="btnSaveUserText">Save User</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
 
   <script>
     // Initialize Data from portal_data.js
@@ -2208,12 +2411,46 @@
     let locations = PORTAL_DATA.locations || [];
     let issues = PORTAL_DATA.issues || [];
     let actionsTaken = PORTAL_DATA.actions_taken || [];
+    let merchants = PORTAL_DATA.merchants || [];
+    let users = PORTAL_DATA.users || [];
 
     try {
       const savedIssues = localStorage.getItem('smart_portal_issues');
       if (savedIssues) {
         const p = JSON.parse(savedIssues);
         if (Array.isArray(p) && p.length > 0) issues = p;
+      }
+    } catch(e) {}
+
+    try {
+      const savedActions = localStorage.getItem('smart_portal_actions');
+      if (savedActions) {
+        const p = JSON.parse(savedActions);
+        if (Array.isArray(p) && p.length > 0) actionsTaken = p;
+      }
+    } catch(e) {}
+
+    try {
+      const savedLocs = localStorage.getItem('smart_portal_locations');
+      if (savedLocs) {
+        const p = JSON.parse(savedLocs);
+        if (Array.isArray(p) && p.length > 0) locations = p;
+      }
+    } catch(e) {}
+
+    try {
+      const savedMerchants = localStorage.getItem('smart_portal_merchants');
+      if (savedMerchants) {
+        const p = JSON.parse(savedMerchants);
+        if (Array.isArray(p) && p.length > 0) merchants = p;
+      }
+    } catch(e) {}
+
+    try {
+      const savedUsers = localStorage.getItem('smart_portal_users');
+      if (savedUsers) {
+        const p = JSON.parse(savedUsers);
+        if (Array.isArray(p) && p.length > 0) users = p;
       }
     } catch(e) {}
 
@@ -2645,6 +2882,298 @@
       }
     }
 
+    // ==========================================
+    // MERCHANT MASTER FUNCTIONS
+    // ==========================================
+    function renderMerchantsTable() {
+      const tbody = document.getElementById('merchantTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      let list = merchants;
+      if (searchQuery) {
+        const q = searchQuery.toLowerCase();
+        list = list.filter(m =>
+          (m.name && m.name.toLowerCase().includes(q)) ||
+          (m.mid && m.mid.toLowerCase().includes(q)) ||
+          (m.location && m.location.toLowerCase().includes(q))
+        );
+      }
+
+      const countBadge = document.getElementById('merchantCountBadge');
+      if (countBadge) countBadge.textContent = list.length;
+      const navBadge = document.getElementById('navCountMerchants');
+      if (navBadge) navBadge.textContent = merchants.length;
+
+      if (list.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 28px; color: #94a3b8;">No merchants found.</td></tr>';
+        return;
+      }
+
+      list.forEach(m => {
+        const tr = document.createElement('tr');
+        const statusBadge = m.status === 'Active'
+          ? '<span class="status-badge status-active">Active</span>'
+          : '<span class="status-badge status-replaced">Inactive</span>';
+
+        tr.innerHTML = `
+          <td><strong><span class="tag-tid">${m.mid}</span></strong></td>
+          <td><strong style="color: #f8fafc;">${m.name}</strong></td>
+          <td>${m.location || '-'}</td>
+          <td>${m.contact || '-'}</td>
+          <td><strong style="color: var(--blue);">${m.terminals_count || 1} Terminals</strong></td>
+          <td>${statusBadge}</td>
+          <td>
+            <div style="display:flex; gap:6px;">
+              <button class="btn-secondary" style="padding:5px 10px; font-size:12px;" onclick="openEditMerchantModal('${m.mid}')">Edit</button>
+              <button class="btn-secondary" style="padding:5px 10px; font-size:12px; color:#dc2626; border-color:#fee2e2;" onclick="deleteMerchant('${m.mid}')">Delete</button>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function openNewMerchantModal() {
+      document.getElementById('merchantModalTitle').textContent = 'Add New Merchant';
+      document.getElementById('btnSaveMerchantText').textContent = 'Save Merchant';
+      document.getElementById('merchantEditMid').value = '';
+      document.getElementById('merchantNameInput').value = '';
+      document.getElementById('merchantMidInput').value = '10495172' + Math.floor(1000 + Math.random()*9000);
+      document.getElementById('merchantLocationInput').value = 'SALALAH';
+      document.getElementById('merchantContactInput').value = '';
+      document.getElementById('merchantTerminalsInput').value = '1';
+      document.getElementById('merchantStatusInput').value = 'Active';
+      document.getElementById('merchantModal').style.display = 'flex';
+      document.getElementById('merchantNameInput').focus();
+    }
+
+    function openEditMerchantModal(mid) {
+      const m = merchants.find(x => x.mid === mid);
+      if (!m) return;
+      document.getElementById('merchantModalTitle').textContent = 'Edit Merchant (' + m.mid + ')';
+      document.getElementById('btnSaveMerchantText').textContent = 'Update Merchant';
+      document.getElementById('merchantEditMid').value = m.mid;
+      document.getElementById('merchantNameInput').value = m.name;
+      document.getElementById('merchantMidInput').value = m.mid;
+      document.getElementById('merchantLocationInput').value = m.location || '';
+      document.getElementById('merchantContactInput').value = m.contact || '';
+      document.getElementById('merchantTerminalsInput').value = m.terminals_count || 1;
+      document.getElementById('merchantStatusInput').value = m.status || 'Active';
+      document.getElementById('merchantModal').style.display = 'flex';
+    }
+
+    function closeMerchantModal() {
+      document.getElementById('merchantModal').style.display = 'none';
+    }
+
+    function handleSaveMerchant(e) {
+      e.preventDefault();
+      const editMid = document.getElementById('merchantEditMid').value;
+      const name = document.getElementById('merchantNameInput').value.trim().toUpperCase();
+      const mid = document.getElementById('merchantMidInput').value.trim();
+      const location = document.getElementById('merchantLocationInput').value.trim().toUpperCase();
+      const contact = document.getElementById('merchantContactInput').value.trim();
+      const terms = parseInt(document.getElementById('merchantTerminalsInput').value) || 1;
+      const status = document.getElementById('merchantStatusInput').value;
+
+      if (editMid) {
+        const m = merchants.find(x => x.mid === editMid);
+        if (m) {
+          m.name = name;
+          m.mid = mid;
+          m.location = location;
+          m.contact = contact;
+          m.terminals_count = terms;
+          m.status = status;
+        }
+      } else {
+        merchants.push({
+          mid: mid,
+          name: name,
+          location: location,
+          contact: contact,
+          terminals_count: terms,
+          status: status
+        });
+      }
+
+      try {
+        localStorage.setItem('smart_portal_merchants', JSON.stringify(merchants));
+      } catch(err) {}
+
+      closeMerchantModal();
+      renderMerchantsTable();
+      showToast('Merchant Master updated successfully!');
+    }
+
+    function deleteMerchant(mid) {
+      if (confirm('Delete merchant ' + mid + '?')) {
+        merchants = merchants.filter(m => m.mid !== mid);
+        try {
+          localStorage.setItem('smart_portal_merchants', JSON.stringify(merchants));
+        } catch(err) {}
+        renderMerchantsTable();
+        showToast('Merchant deleted.');
+      }
+    }
+
+    // ==========================================
+    // USER MASTER FUNCTIONS
+    // ==========================================
+    function renderUsersTable() {
+      const tbody = document.getElementById('userTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      let list = users;
+      if (searchQuery) {
+        const q = searchQuery.toLowerCase();
+        list = list.filter(u =>
+          (u.name && u.name.toLowerCase().includes(q)) ||
+          (u.username && u.username.toLowerCase().includes(q)) ||
+          (u.role && u.role.toLowerCase().includes(q)) ||
+          (u.zone && u.zone.toLowerCase().includes(q))
+        );
+      }
+
+      const countBadge = document.getElementById('userCountBadge');
+      if (countBadge) countBadge.textContent = list.length;
+      const navBadge = document.getElementById('navCountUsers');
+      if (navBadge) navBadge.textContent = users.length;
+
+      if (list.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; padding: 28px; color: #94a3b8;">No users found.</td></tr>';
+        return;
+      }
+
+      list.forEach(u => {
+        const tr = document.createElement('tr');
+        let roleBadge = 'status-progress';
+        if (u.role === 'Admin') roleBadge = 'status-pending';
+        else if (u.role && u.role.includes('Engineer')) roleBadge = 'status-solved';
+
+        const statusBadge = u.status === 'Active'
+          ? '<span class="status-badge status-active">Active</span>'
+          : '<span class="status-badge status-replaced">Inactive</span>';
+
+        tr.innerHTML = `
+          <td><strong><span class="tag-tid">${u.id}</span></strong></td>
+          <td><strong style="color: #f8fafc;">${u.name}</strong></td>
+          <td><code style="font-weight:700; color:#38bdf8;">@${u.username}</code></td>
+          <td><span class="status-badge ${roleBadge}">${u.role}</span></td>
+          <td>${u.zone}</td>
+          <td><div>${u.mobile}</div><div style="font-size:12px; color:#94a3b8;">${u.email || '-'}</div></td>
+          <td><code style="background:rgba(255,255,255,0.06); padding:2px 6px; border-radius:4px; font-weight:700; color:#a3e635;">${u.pincode || '******'}</code></td>
+          <td>${statusBadge}</td>
+          <td>
+            <div style="display:flex; gap:6px;">
+              <button class="btn-secondary" style="padding:5px 10px; font-size:12px;" onclick="openEditUserModal('${u.id}')">Edit</button>
+              <button class="btn-secondary" style="padding:5px 10px; font-size:12px; color:#dc2626; border-color:#fee2e2;" onclick="deleteUser('${u.id}')">Delete</button>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function openNewUserModal() {
+      document.getElementById('userModalTitle').textContent = 'Add New System User';
+      document.getElementById('btnSaveUserText').textContent = 'Save User';
+      document.getElementById('userEditId').value = '';
+      document.getElementById('userFullName').value = '';
+      document.getElementById('userLoginName').value = '';
+      document.getElementById('userRole').value = 'Field Service Engineer';
+      document.getElementById('userZone').value = 'Salalah & Dhofar';
+      document.getElementById('userMobile').value = '';
+      document.getElementById('userPin').value = '';
+      document.getElementById('userEmail').value = '';
+      document.getElementById('userStatus').value = 'Active';
+      document.getElementById('userModal').style.display = 'flex';
+      document.getElementById('userFullName').focus();
+    }
+
+    function openEditUserModal(id) {
+      const u = users.find(x => x.id === id);
+      if (!u) return;
+
+      document.getElementById('userModalTitle').textContent = 'Edit System User (' + u.id + ')';
+      document.getElementById('btnSaveUserText').textContent = 'Update User';
+      document.getElementById('userEditId').value = u.id;
+      document.getElementById('userFullName').value = u.name;
+      document.getElementById('userLoginName').value = u.username;
+      document.getElementById('userRole').value = u.role;
+      document.getElementById('userZone').value = u.zone;
+      document.getElementById('userMobile').value = u.mobile;
+      document.getElementById('userPin').value = u.pincode || '';
+      document.getElementById('userEmail').value = u.email || '';
+      document.getElementById('userStatus').value = u.status || 'Active';
+      document.getElementById('userModal').style.display = 'flex';
+    }
+
+    function closeUserModal() {
+      document.getElementById('userModal').style.display = 'none';
+    }
+
+    function handleSaveUser(e) {
+      e.preventDefault();
+      const editId = document.getElementById('userEditId').value;
+      const name = document.getElementById('userFullName').value.trim();
+      const username = document.getElementById('userLoginName').value.trim();
+      const role = document.getElementById('userRole').value;
+      const zone = document.getElementById('userZone').value.trim();
+      const mobile = document.getElementById('userMobile').value.trim();
+      const pin = document.getElementById('userPin').value.trim();
+      const email = document.getElementById('userEmail').value.trim();
+      const status = document.getElementById('userStatus').value;
+
+      if (editId) {
+        const u = users.find(x => x.id === editId);
+        if (u) {
+          u.name = name;
+          u.username = username;
+          u.role = role;
+          u.zone = zone;
+          u.mobile = mobile;
+          u.pincode = pin;
+          u.email = email;
+          u.status = status;
+        }
+      } else {
+        const newId = `USR-${users.length + 101}`;
+        users.push({
+          id: newId,
+          name: name,
+          username: username,
+          role: role,
+          zone: zone,
+          mobile: mobile,
+          pincode: pin,
+          email: email,
+          status: status
+        });
+      }
+
+      try {
+        localStorage.setItem('smart_portal_users', JSON.stringify(users));
+      } catch(err) {}
+
+      closeUserModal();
+      renderUsersTable();
+      showToast('User Master updated successfully!');
+    }
+
+    function deleteUser(id) {
+      if (confirm('Delete user ' + id + '?')) {
+        users = users.filter(x => x.id !== id);
+        try {
+          localStorage.setItem('smart_portal_users', JSON.stringify(users));
+        } catch(err) {}
+        renderUsersTable();
+        showToast('User deleted.');
+      }
+    }
+
 
     let currentFilter = 'all';
     let searchQuery = '';
@@ -2889,7 +3418,9 @@
       renderComplaintsTable();
       renderIssuesTable();
       renderActionsTable();
+      renderMerchantsTable();
       renderLocationsTable();
+      renderUsersTable();
     }
 
     function markAsSolved(id) {
@@ -2978,7 +3509,9 @@
         'dashboard': 'Dashboard Overview',
         'issues': 'Issue Master (Fault Types & SLA)',
         'actions': 'Action Taken Master (Resolutions)',
-        'location': 'Location Master (Operational Zones)'
+        'merchants': 'Merchant Master (Customers & MIDs)',
+        'location': 'Location Master (Operational Zones)',
+        'users': 'User Master & Access Control'
       };
 
       document.getElementById('topbarTitle').textContent = titles[sectionId] || 'Smart Service Portal';
@@ -2986,7 +3519,20 @@
       // Re-render target
       if (sectionId === 'issues') renderIssuesTable();
       if (sectionId === 'actions') renderActionsTable();
+      if (sectionId === 'merchants') renderMerchantsTable();
       if (sectionId === 'location') renderLocationsTable();
+      if (sectionId === 'users') renderUsersTable();
+      if (sectionId === 'dashboard') renderComplaintsTable();
+    }
+
+    // Init
+    updateStatsUI();
+    renderComplaintsTable();
+    renderIssuesTable();
+    renderActionsTable();
+    renderMerchantsTable();
+    renderLocationsTable();
+    renderUsersTable();
       if (sectionId === 'dashboard') renderComplaintsTable();
     }
 
@@ -3288,7 +3834,7 @@
         complaints = [...complaints, ...parsedImportData];
       }
 
-      // Also automatically synchronize issues, actions, and locations
+      // Also automatically synchronize issues, actions, locations, and merchants
       parsedImportData.forEach(c => {
         if (c.issue && c.issue.trim()) {
           const issName = c.issue.trim().toUpperCase();
@@ -3326,12 +3872,26 @@
             });
           }
         }
+        if (c.merchant && c.merchant.trim()) {
+          const mName = c.merchant.trim().toUpperCase();
+          if (!merchants.some(m => m.name.toUpperCase() === mName)) {
+            merchants.push({
+              mid: c.mid || ('10495172' + Math.floor(1000 + Math.random()*9000)),
+              name: mName,
+              location: c.location || 'SALALAH',
+              contact: c.mobile || '',
+              terminals_count: 1,
+              status: 'Active'
+            });
+          }
+        }
       });
 
       try {
         localStorage.setItem('smart_portal_issues', JSON.stringify(issues));
         localStorage.setItem('smart_portal_actions', JSON.stringify(actionsTaken));
         localStorage.setItem('smart_portal_locations', JSON.stringify(locations));
+        localStorage.setItem('smart_portal_merchants', JSON.stringify(merchants));
       } catch(e) {}
 
       // Update all dashboard tables and counters
@@ -3339,7 +3899,9 @@
       renderComplaintsTable();
       renderIssuesTable();
       renderActionsTable();
+      renderMerchantsTable();
       renderLocationsTable();
+      renderUsersTable();
       if (typeof renderMerchantsTable === 'function') renderMerchantsTable();
       if (typeof renderTerminalsTable === 'function') renderTerminalsTable();
 
