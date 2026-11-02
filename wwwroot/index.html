@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Smart Service Portal - Login</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green-brand: #22c55e;
+      --green-glow: rgba(34, 197, 94, 0.45);
+      --green-title: #4ade80;
+      --screen-bg: #070c18;
+      --card-bg: rgba(13, 22, 41, 0.76);
+      --card-border: rgba(74, 222, 128, 0.22);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      width: 100vw;
+      background: radial-gradient(circle at 50% 25%, #0e172a 0%, #080d1a 50%, #03060d 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 12px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Ambient Futuristic Tech Grid Overlay */
+    .dark-grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        radial-gradient(circle, rgba(34, 197, 94, 0.08) 1.2px, transparent 1.2px),
+        linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+      background-size: 32px 32px, 32px 32px, 32px 32px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Luminous Ambient Green Aura behind the Display */
+    body::before {
+      content: '';
+      position: absolute;
+      width: 620px;
+      height: 420px;
+      background: radial-gradient(circle, rgba(34, 197, 94, 0.22) 0%, rgba(16, 185, 129, 0.08) 45%, transparent 70%);
+      top: 48%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      filter: blur(100px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Computer Workspace */
+    .computer-workspace {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 860px;
+      animation: popIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes popIn {
+      from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.97);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Studio Display / Modern Titanium Computer Monitor */
+    .monitor-bezel {
+      width: min(860px, 94vw);
+      aspect-ratio: 16 / 10.2;
+      background: linear-gradient(180deg, #1e293b 0%, #111827 35%, #0b0f19 100%);
+      border-radius: clamp(16px, 3.2vw, 24px);
+      padding: clamp(6px, 1.3vw, 11px) clamp(6px, 1.3vw, 11px) clamp(8px, 1.8vw, 14px);
+      box-shadow: 
+        0 40px 90px -15px rgba(0, 0, 0, 0.85),
+        0 0 0 1px rgba(255, 255, 255, 0.12),
+        inset 0 1px 1px rgba(255, 255, 255, 0.2),
+        0 0 40px rgba(34, 197, 94, 0.12);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Precision Camera Dot with Optical Blue Lens */
+    .camera-dot {
+      width: 6px;
+      height: 6px;
+      background: #020617;
+      border-radius: 50%;
+      margin: 0 auto clamp(2px, 0.6vw, 5px);
+      box-shadow: 
+        0 0 0 1px rgba(255, 255, 255, 0.18),
+        inset 0 0 2px #38bdf8,
+        0 0 4px rgba(56, 189, 248, 0.4);
+    }
+
+    /* Inner OLED Display Canvas */
+    .computer-screen {
+      flex: 1;
+      background: var(--screen-bg);
+      border-radius: clamp(9px, 2vw, 14px);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(10px, 2.2vw, 20px);
+      box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.7);
+    }
+
+    /* Fluid Green Corner Waves with Neon Gradient Overlays */
+    .corner-decor {
+      position: absolute;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .top-left-decor {
+      top: 0;
+      left: 0;
+      width: clamp(140px, 35vw, 290px);
+      height: clamp(140px, 35vw, 290px);
+      filter: drop-shadow(0 0 25px rgba(34, 197, 94, 0.35));
+    }
+
+    .bottom-right-decor {
+      bottom: 0;
+      right: 0;
+      width: clamp(150px, 37vw, 310px);
+      height: clamp(150px, 37vw, 310px);
+      filter: drop-shadow(0 0 25px rgba(34, 197, 94, 0.35));
+    }
+
+    /* Brushed Aluminum Stand & Weighted Base */
+    .stand-neck {
+      width: clamp(75px, 16vw, 130px);
+      height: clamp(32px, 6.5vw, 54px);
+      background: linear-gradient(180deg, #1e293b 0%, #334155 45%, #0f172a 100%);
+      clip-path: polygon(14% 0%, 86% 0%, 100% 100%, 0% 100%);
+      margin: -1px auto 0;
+      box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2);
+    }
+
+    .stand-base {
+      width: clamp(150px, 32vw, 250px);
+      height: clamp(6px, 1.2vw, 9px);
+      background: linear-gradient(180deg, #475569 0%, #1e293b 100%);
+      border-radius: 5px;
+      margin: 0 auto;
+      box-shadow: 
+        0 18px 34px rgba(0, 0, 0, 0.7),
+        0 0 0 1px rgba(255, 255, 255, 0.12);
+    }
+
+    .desk-shadow {
+      width: clamp(260px, 62vw, 580px);
+      height: 12px;
+      background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.55) 0%, transparent 70%);
+      margin-top: -3px;
+      pointer-events: none;
+    }
+
+    /* Modern Frosted Acrylic Glass Login Card */
+    .login-box-card {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 375px;
+      background: var(--card-bg);
+      border-radius: clamp(18px, 3.4vw, 26px);
+      padding: clamp(16px, 3vw, 26px) clamp(18px, 3.8vw, 32px);
+      box-shadow: 
+        0 30px 65px -12px rgba(0, 0, 0, 0.75),
+        0 0 0 1px var(--card-border),
+        inset 0 1px 1px rgba(255, 255, 255, 0.15),
+        0 0 45px -10px rgba(34, 197, 94, 0.18);
+      backdrop-filter: blur(28px) saturate(180%);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    /* Seamless Transparent Logo Container (No White Box!) */
+    .logo-container {
+      margin-bottom: clamp(8px, 2vw, 14px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      width: 100%;
+    }
+
+    /* Soft ambient emerald backlight behind the logo */
+    .logo-container::before {
+      content: '';
+      position: absolute;
+      width: 130px;
+      height: 50px;
+      background: radial-gradient(circle, rgba(34, 197, 94, 0.32) 0%, transparent 70%);
+      filter: blur(16px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .logo-img {
+      position: relative;
+      z-index: 1;
+      max-width: clamp(150px, 30vw, 220px);
+      max-height: clamp(54px, 11vw, 80px);
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto;
+      filter: drop-shadow(0 4px 14px rgba(34, 197, 94, 0.28)) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.7));
+      transition: transform 0.3s ease;
+    }
+
+    .logo-container:hover .logo-img {
+      transform: scale(1.03);
+    }
+
+    /* Portal Name Badge */
+    .portal-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(34, 197, 94, 0.12);
+      border: 1px solid rgba(74, 222, 128, 0.28);
+      padding: 4px 13px;
+      border-radius: 20px;
+      font-size: clamp(10.5px, 2.1vw, 12px);
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      color: #4ade80;
+      text-transform: uppercase;
+      margin-bottom: clamp(6px, 1.4vw, 10px);
+      box-shadow: 0 0 14px rgba(34, 197, 94, 0.15);
+    }
+
+    .pulse-indicator {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 8px #22c55e;
+      animation: pulseDot 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    /* Modern Typography */
+    .title-h1 {
+      font-size: clamp(22px, 4.6vw, 29px);
+      font-weight: 800;
+      color: var(--green-title);
+      letter-spacing: -0.5px;
+      margin-bottom: 2px;
+      text-shadow: 0 0 20px rgba(74, 222, 128, 0.35);
+    }
+
+    .subtitle-p {
+      font-size: clamp(11.5px, 2.3vw, 13.5px);
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-bottom: clamp(12px, 2.6vw, 18px);
+    }
+
+    .pin-form {
+      width: 100%;
+    }
+
+    /* Modern Fintech 6-Digit PIN Boxes */
+    .pin-group {
+      display: flex;
+      justify-content: center;
+      gap: clamp(6px, 1.4vw, 9px);
+      margin-bottom: clamp(14px, 2.8vw, 18px);
+    }
+
+    .pin-input {
+      width: clamp(36px, 7.2vw, 44px);
+      height: clamp(40px, 8.2vw, 48px);
+      background: rgba(15, 23, 42, 0.85);
+      border: 1.5px solid rgba(51, 65, 85, 0.7);
+      border-radius: clamp(9px, 2vw, 12px);
+      font-size: clamp(22px, 4.8vw, 28px);
+      font-weight: 700;
+      color: #4ade80;
+      text-align: center;
+      outline: none;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      caret-color: transparent;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4), 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .pin-input:focus {
+      background: rgba(15, 28, 48, 0.95);
+      border-color: #22c55e;
+      box-shadow: 
+        0 0 0 3px rgba(34, 197, 94, 0.35),
+        0 0 18px rgba(34, 197, 94, 0.3),
+        inset 0 1px 2px rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .pin-input.filled {
+      border-color: #34d399;
+      background: rgba(16, 36, 42, 0.9);
+      color: #34d399;
+      box-shadow: 0 0 12px rgba(52, 211, 153, 0.25);
+    }
+
+    .error-msg {
+      color: #ef4444;
+      font-size: 11.5px;
+      font-weight: 600;
+      margin-top: -8px;
+      margin-bottom: 10px;
+      display: none;
+    }
+
+    /* Electric Emerald Pill Button */
+    .btn-login {
+      width: 100%;
+      height: clamp(42px, 8.2vw, 48px);
+      background: linear-gradient(135deg, #22c55e 0%, #16a34a 60%, #15803d 100%);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 30px;
+      font-size: clamp(14px, 3.2vw, 16px);
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      box-shadow: 
+        0 10px 28px -4px rgba(34, 197, 94, 0.5),
+        inset 0 1px 1px rgba(255, 255, 255, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-login::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .btn-login:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 34px -2px rgba(34, 197, 94, 0.65);
+      filter: brightness(1.08);
+    }
+
+    .btn-login:hover::before {
+      left: 100%;
+    }
+
+    .btn-login:active {
+      transform: translateY(0);
+    }
+
+    .spinner {
+      display: none;
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255, 255, 255, 0.35);
+      border-top-color: #ffffff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  
+    /* ==========================================================
+       MOBILE RESPONSIVE VIEW (iOS / Android / Tablets)
+       ========================================================== */
+    
+    /* ==========================================================
+       MOBILE RESPONSIVE VIEW (Exact Computer Monitor Aesthetic)
+       ========================================================== */
+    @media (max-width: 768px) {
+      body {
+        padding: 12px 10px;
+        justify-content: center;
+        min-height: 100dvh;
+        overflow-x: hidden;
+      }
+
+      body::before {
+        width: 280px;
+        height: 280px;
+        filter: blur(60px);
+      }
+
+      .computer-workspace {
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .monitor-bezel {
+        width: 96vw;
+        max-width: 440px;
+        aspect-ratio: 16 / 11;
+        min-height: auto;
+        padding: 6px 6px 8px;
+        border-radius: 16px;
+        box-shadow: 
+          0 25px 50px rgba(0, 0, 0, 0.85),
+          0 0 0 1px rgba(255, 255, 255, 0.12),
+          0 0 30px rgba(34, 197, 94, 0.15);
+      }
+
+      .camera-dot {
+        width: 5px;
+        height: 5px;
+        margin-bottom: 4px;
+      }
+
+      .computer-screen {
+        padding: 10px 8px !important;
+        border-radius: 12px;
+      }
+
+      .top-left-decor {
+        width: 120px;
+        height: 120px;
+      }
+
+      .bottom-right-decor {
+        width: 130px;
+        height: 130px;
+      }
+
+      /* Keep the floating glassmorphic card exactly like desktop */
+      .login-box-card {
+        width: 88%;
+        max-width: 290px;
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 16px;
+        padding: 12px 14px;
+        box-shadow: 
+          0 15px 35px -8px rgba(0, 0, 0, 0.75),
+          0 0 0 1px var(--card-border),
+          inset 0 1px 1px rgba(255, 255, 255, 0.12),
+          0 0 25px -5px rgba(34, 197, 94, 0.2);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .logo-container {
+        margin-bottom: 6px;
+      }
+
+      .logo-img {
+        max-width: 110px;
+        height: auto;
+      }
+
+      .portal-badge {
+        font-size: 8.5px;
+        letter-spacing: 0.8px;
+        padding: 2.5px 8px;
+        margin-bottom: 8px;
+      }
+
+      .login-title {
+        font-size: 18px;
+        margin-bottom: 2px;
+      }
+
+      .subtitle-p {
+        font-size: 10.5px;
+        margin-bottom: 10px;
+      }
+
+      .pin-group {
+        gap: 5px;
+        margin: 8px 0 10px;
+        justify-content: center;
+      }
+
+      .pin-input {
+        width: 32px;
+        height: 38px;
+        font-size: 17px;
+        border-radius: 7px;
+      }
+
+      .btn-login {
+        height: 36px;
+        font-size: 13px;
+        border-radius: 18px;
+        margin-top: 2px;
+      }
+
+      /* KEEP COMPUTER STAND VISIBLE ON MOBILE */
+      .stand-neck {
+        display: block !important;
+        width: 65px;
+        height: 26px;
+        margin: -1px auto 0;
+      }
+
+      .stand-base {
+        display: block !important;
+        width: 140px;
+        height: 6px;
+        margin: 0 auto;
+        border-radius: 4px;
+      }
+
+      .desk-shadow {
+        display: block !important;
+        width: 200px;
+        height: 8px;
+        margin-top: -2px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .monitor-bezel {
+        aspect-ratio: 16 / 12;
+      }
+      .login-box-card {
+        width: 92%;
+        max-width: 260px;
+        padding: 10px 10px;
+      }
+      .pin-input {
+        width: 28px;
+        height: 34px;
+        font-size: 15px;
+      }
+      .pin-group {
+        gap: 3px;
+      }
+    }
+</style>
+</head>
+<body>
+
+  <!-- Tech Grid Overlay for Dark Theme -->
+  <div class="dark-grid-bg"></div>
+
+  <!-- Computer Workspace -->
+  <div class="computer-workspace">
+    <!-- Space Gray / Titanium Monitor Bezel -->
+    <div class="monitor-bezel">
+      <div class="camera-dot"></div>
+
+      <!-- Display Screen (Holds the Dark UI) -->
+      <div class="computer-screen">
+        <!-- Top-Left Neon Fluid Curve SVG with Multi-stop Gradients -->
+        <svg class="corner-decor top-left-decor" viewBox="0 0 290 290" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="neonTop1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#052e16" stop-opacity="0.7" />
+              <stop offset="100%" stop-color="#14532d" stop-opacity="0.3" />
+            </linearGradient>
+            <linearGradient id="neonTop2" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#15803d" stop-opacity="0.75" />
+              <stop offset="100%" stop-color="#16a34a" stop-opacity="0.35" />
+            </linearGradient>
+            <linearGradient id="neonTop3" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#4ade80" stop-opacity="0.85" />
+              <stop offset="60%" stop-color="#22c55e" stop-opacity="0.7" />
+              <stop offset="100%" stop-color="#10b981" stop-opacity="0.4" />
+            </linearGradient>
+          </defs>
+          <path d="M-60 190C30 190 90 135 125 45C150 -10 160 -60 160 -60L-60 -60V190Z" fill="url(#neonTop1)" />
+          <path d="M-60 140C10 140 65 90 95 25C120 -20 130 -60 130 -60L-60 -60V140Z" fill="url(#neonTop2)" />
+          <path d="M-60 85C-5 85 30 40 60 -10C80 -40 85 -60 85 -60L-60 -60V85Z" fill="url(#neonTop3)" />
+        </svg>
+
+        <!-- Bottom-Right Neon Fluid Curve SVG with Multi-stop Gradients -->
+        <svg class="corner-decor bottom-right-decor" viewBox="0 0 310 310" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="neonBot1" x1="100%" y1="100%" x2="0%" y2="0%">
+              <stop offset="0%" stop-color="#052e16" stop-opacity="0.7" />
+              <stop offset="100%" stop-color="#14532d" stop-opacity="0.3" />
+            </linearGradient>
+            <linearGradient id="neonBot2" x1="100%" y1="100%" x2="0%" y2="0%">
+              <stop offset="0%" stop-color="#15803d" stop-opacity="0.75" />
+              <stop offset="100%" stop-color="#16a34a" stop-opacity="0.35" />
+            </linearGradient>
+            <linearGradient id="neonBot3" x1="100%" y1="100%" x2="0%" y2="0%">
+              <stop offset="0%" stop-color="#4ade80" stop-opacity="0.85" />
+              <stop offset="60%" stop-color="#22c55e" stop-opacity="0.7" />
+              <stop offset="100%" stop-color="#10b981" stop-opacity="0.4" />
+            </linearGradient>
+          </defs>
+          <path d="M370 140C280 140 225 195 190 275C170 320 165 380 165 380L370 380V140Z" fill="url(#neonBot1)" />
+          <path d="M370 190C295 190 250 235 220 290C200 330 195 380 195 380L370 380V190Z" fill="url(#neonBot2)" />
+          <path d="M370 245C315 245 275 280 250 325C235 350 230 380 230 380L370 380V245Z" fill="url(#neonBot3)" />
+        </svg>
+
+        <!-- Main Card inside the Computer Screen (Dark Glassmorphic) -->
+        <div class="login-box-card">
+          <!-- Centered Transparent Logo (No White Box!) -->
+          <div class="logo-container">
+            <img src="logo_dark.png?v=2" alt="Smart Information Technology" class="logo-img" />
+          </div>
+
+          <!-- Portal Name -->
+          <div class="portal-badge">
+            <span class="pulse-indicator"></span>
+            SMART SERVICE PORTAL
+          </div>
+
+          <!-- Title and Subtitle -->
+          <h1 class="title-h1">Login</h1>
+          <p class="subtitle-p">Enter your PIN code to continue</p>
+
+          <!-- PIN Form -->
+          <form class="pin-form" id="pinForm" onsubmit="handleLogin(event)">
+            <div class="pin-group" id="pinGroup">
+              <input type="password" maxlength="1" class="pin-input" autofocus inputmode="numeric" autocomplete="off" />
+              <input type="password" maxlength="1" class="pin-input" inputmode="numeric" autocomplete="off" />
+              <input type="password" maxlength="1" class="pin-input" inputmode="numeric" autocomplete="off" />
+              <input type="password" maxlength="1" class="pin-input" inputmode="numeric" autocomplete="off" />
+              <input type="password" maxlength="1" class="pin-input" inputmode="numeric" autocomplete="off" />
+              <input type="password" maxlength="1" class="pin-input" inputmode="numeric" autocomplete="off" />
+            </div>
+
+            <div id="errorText" class="error-msg">Please enter your 6-digit PIN code</div>
+
+            <button type="submit" class="btn-login" id="loginBtn">
+              <span id="btnText">Login</span>
+              <div class="spinner" id="btnSpinner"></div>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Space Gray Stand & Realistic Shadow -->
+    <div class="stand-neck"></div>
+    <div class="stand-base"></div>
+    <div class="desk-shadow"></div>
+  </div>
+
+  <script>
+    // Clear theme storage overrides
+    localStorage.removeItem('portal_theme');
+
+    const inputs = document.querySelectorAll('.pin-input');
+    const errorText = document.getElementById('errorText');
+
+    inputs.forEach((input, index) => {
+      input.addEventListener('input', (e) => {
+        const val = e.target.value.replace(/[^0-9]/g, '');
+        e.target.value = val;
+
+        if (val) {
+          input.classList.add('filled');
+          if (index < inputs.length - 1) {
+            inputs[index + 1].focus();
+          } else {
+            // Auto submit when all 6 digits entered
+            setTimeout(() => {
+              document.getElementById('pinForm').requestSubmit();
+            }, 120);
+          }
+        } else {
+          input.classList.remove('filled');
+        }
+      });
+
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace' && !input.value && index > 0) {
+          inputs[index - 1].focus();
+        }
+      });
+
+      input.addEventListener('paste', (e) => {
+        e.preventDefault();
+        const pasted = (e.clipboardData || window.clipboardData).getData('text').trim().replace(/[^0-9]/g, '');
+        if (pasted) {
+          for (let i = 0; i < inputs.length; i++) {
+            if (i < pasted.length) {
+              inputs[i].value = pasted[i];
+              inputs[i].classList.add('filled');
+            }
+          }
+          if (pasted.length >= 6) {
+            inputs[5].focus();
+            setTimeout(() => {
+              document.getElementById('pinForm').requestSubmit();
+            }, 120);
+          } else {
+            inputs[Math.min(pasted.length, inputs.length - 1)].focus();
+          }
+        }
+      });
+    });
+
+    function getPin() {
+      let pin = '';
+      inputs.forEach(i => pin += i.value);
+      return pin;
+    }
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const pin = getPin();
+
+      if (pin.length < 4) {
+        errorText.style.display = 'block';
+        inputs[0].focus();
+        return;
+      }
+      errorText.style.display = 'none';
+
+      const btn = document.getElementById('loginBtn');
+      const btnText = document.getElementById('btnText');
+      const spinner = document.getElementById('btnSpinner');
+
+      btnText.style.display = 'none';
+      spinner.style.display = 'block';
+      btn.disabled = true;
+
+      setTimeout(() => {
+        window.location.href = 'dashboard.html';
+      }, 400);
+    }
+  </script>
+</body>
+</html>
