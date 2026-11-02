@@ -3,6 +3,150 @@ const PORTAL_DATA = {
   "merchants": [],
   "terminals": [],
   "replacements": [],
+  "issues": [
+    {
+      "code": "ISS-01",
+      "name": "PAPER ROLL REQUEST",
+      "category": "Stationery Supply",
+      "priority": "Normal",
+      "sla": "12 Hours",
+      "status": "Active"
+    },
+    {
+      "code": "ISS-02",
+      "name": "NETWORK TIMEOUT",
+      "category": "Connectivity & SIM",
+      "priority": "Urgent",
+      "sla": "4 Hours",
+      "status": "Active"
+    },
+    {
+      "code": "ISS-03",
+      "name": "PRINTER JAM",
+      "category": "Hardware / Printer",
+      "priority": "High",
+      "sla": "6 Hours",
+      "status": "Active"
+    },
+    {
+      "code": "ISS-04",
+      "name": "BATTERY NOT CHARGING",
+      "category": "Power & Battery",
+      "priority": "High",
+      "sla": "6 Hours",
+      "status": "Active"
+    },
+    {
+      "code": "ISS-05",
+      "name": "CHARGING PORT ISSUE",
+      "category": "Hardware / Port",
+      "priority": "High",
+      "sla": "8 Hours",
+      "status": "Active"
+    },
+    {
+      "code": "ISS-06",
+      "name": "DISPLAY FADE / SCREEN",
+      "category": "Hardware / Screen",
+      "priority": "High",
+      "sla": "8 Hours",
+      "status": "Active"
+    },
+    {
+      "code": "ISS-07",
+      "name": "NEW INSTALLATION",
+      "category": "Onboarding",
+      "priority": "High",
+      "sla": "24 Hours",
+      "status": "Active"
+    },
+    {
+      "code": "ISS-08",
+      "name": "SOFTWARE & DOWNLOAD UPDATE",
+      "category": "Firmware & Software",
+      "priority": "Medium",
+      "sla": "12 Hours",
+      "status": "Active"
+    },
+    {
+      "code": "ISS-09",
+      "name": "GENERAL CHECKUP & TRAINING",
+      "category": "Maintenance",
+      "priority": "Normal",
+      "sla": "24 Hours",
+      "status": "Active"
+    },
+    {
+      "code": "ISS-10",
+      "name": "ZERO SALES PICK TERMINAL",
+      "category": "Retrieval",
+      "priority": "Normal",
+      "sla": "48 Hours",
+      "status": "Active"
+    }
+  ],
+  "actions_taken": [
+    {
+      "code": "ACT-01",
+      "name": "ROLLS DELIVERED",
+      "type": "Stationery Delivery",
+      "status": "Active"
+    },
+    {
+      "code": "ACT-02",
+      "name": "SIM CARD REPLACED",
+      "type": "Hardware / Connectivity",
+      "status": "Active"
+    },
+    {
+      "code": "ACT-03",
+      "name": "INSPECTION DONE",
+      "type": "On-site Maintenance",
+      "status": "Active"
+    },
+    {
+      "code": "ACT-04",
+      "name": "ADAPTER REPLACED",
+      "type": "Power & Hardware",
+      "status": "Active"
+    },
+    {
+      "code": "ACT-05",
+      "name": "TERMINAL SWAPPED",
+      "type": "Asset Replacement",
+      "status": "Active"
+    },
+    {
+      "code": "ACT-06",
+      "name": "SOFTWARE RELOADED / UPDATED",
+      "type": "Firmware & App",
+      "status": "Active"
+    },
+    {
+      "code": "ACT-07",
+      "name": "PRINTER ROLLER CLEANED",
+      "type": "Hardware Repair",
+      "status": "Active"
+    },
+    {
+      "code": "ACT-08",
+      "name": "BATTERY REPLACED",
+      "type": "Hardware Swap",
+      "status": "Active"
+    },
+    {
+      "code": "ACT-09",
+      "name": "MERCHANT TRAINED",
+      "type": "Customer Support",
+      "status": "Active"
+    },
+    {
+      "code": "ACT-10",
+      "name": "TERMINAL COLLECTED",
+      "type": "Asset Recovery",
+      "status": "Active"
+    }
+  ],
   "categories": [
     {
       "code": "CAT-01",
@@ -105,5 +249,55 @@ const PORTAL_DATA = {
     }
   ],
   "users": [],
-  "locations": []
+  "locations": [
+    {
+      "code": "LOC-01",
+      "name": "SALALAH",
+      "region": "Dhofar Governorate",
+      "merchants_count": 48,
+      "status": "Active"
+    },
+    {
+      "code": "LOC-02",
+      "name": "SAADA",
+      "region": "Dhofar Governorate",
+      "merchants_count": 22,
+      "status": "Active"
+    },
+    {
+      "code": "LOC-03",
+      "name": "TAQAH",
+      "region": "Dhofar Governorate",
+      "merchants_count": 9,
+      "status": "Active"
+    },
+    {
+      "code": "LOC-04",
+      "name": "MIRBAT",
+      "region": "Dhofar Governorate",
+      "merchants_count": 6,
+      "status": "Active"
+    },
+    {
+      "code": "LOC-05",
+      "name": "MUSCAT HQ",
+      "region": "Muscat Capital Area",
+      "merchants_count": 64,
+      "status": "Active"
+    },
+    {
+      "code": "LOC-06",
+      "name": "SOHAR",
+      "region": "Al Batinah North",
+      "merchants_count": 31,
+      "status": "Active"
+    },
+    {
+      "code": "LOC-07",
+      "name": "NIZWA",
+      "region": "Al Dakhiliyah",
+      "merchants_count": 18,
+      "status": "Active"
+    }
+  ]
 };

@@ -58,6 +58,24 @@ public class LocationItem
     public string Status { get; set; } = "Active";
 }
 
+public class IssueItem
+{
+    public string Code { get; set; } = string.Empty;
+    public string Name { get; set; } = string.Empty;
+    public string Category { get; set; } = string.Empty;
+    public string Priority { get; set; } = "Normal";
+    public string Sla { get; set; } = "8 Hours";
+    public string Status { get; set; } = "Active";
+}
+
+public class ActionTakenItem
+{
+    public string Code { get; set; } = string.Empty;
+    public string Name { get; set; } = string.Empty;
+    public string Type { get; set; } = string.Empty;
+    public string Status { get; set; } = "Active";
+}
+
 public class DesignationItem
 {
     public string Code { get; set; } = string.Empty;

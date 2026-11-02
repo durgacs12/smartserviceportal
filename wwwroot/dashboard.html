@@ -1605,17 +1605,27 @@
 
       <div class="nav-label">Master Data</div>
 
-      <a class="nav-item" onclick="switchSection('complaints', this)">
+      <a class="nav-item" onclick="switchSection('issues', this)">
         <div class="nav-item-left">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-            <polyline points="14 2 14 8 20 8"></polyline>
-            <line x1="16" y1="13" x2="8" y2="13"></line>
-            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
           </svg>
-          <span>Complaint Master</span>
+          <span>Issue Master</span>
         </div>
-        <span class="nav-count" id="navCountComplaints">0</span>
+        <span class="nav-count" id="navCountIssues">0</span>
+      </a>
+
+      <a class="nav-item" onclick="switchSection('actions', this)">
+        <div class="nav-item-left">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+          <span>Action Taken Master</span>
+        </div>
+        <span class="nav-count" id="navCountActions">0</span>
       </a>
 
       <a class="nav-item" onclick="switchSection('location', this)">
@@ -1627,19 +1637,6 @@
           <span>Location Master</span>
         </div>
         <span class="nav-count" id="navCountLocations">0</span>
-      </a>
-
-      <div class="nav-label">User Management</div>
-
-      <a class="nav-item" onclick="switchSection('users', this)">
-        <div class="nav-item-left">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-            <circle cx="12" cy="7" r="4"></circle>
-          </svg>
-          <span>User Master</span>
-        </div>
-        <span class="nav-count" id="navCountUsers">0</span>
       </a>
     </nav>
 
@@ -1846,38 +1843,69 @@
         </div>
       </section>
 
-      <!-- 7. USER ENTRY MASTER VIEW -->
-      <section id="section-users" class="section-view">
+      <!-- ISSUE MASTER VIEW -->
+      <section id="section-issues" class="section-view">
         <div class="table-container">
           <div class="table-header">
             <div>
-              <h3>User Management & Master (<span id="userCountBadge">0</span> Users)</h3>
-              <p style="font-size: 13px; color: var(--slate-400); margin-top: 4px;">Add and manage portal users, engineer credentials, and access roles</p>
+              <h3>Issue Master (<span id="issueCountBadge">0</span> Issues / Fault Types)</h3>
+              <p style="font-size: 13px; color: var(--slate-400); margin-top: 4px;">Standard POS fault categories, service issues, and SLA definitions</p>
             </div>
-            <button class="btn-primary" onclick="openNewUserModal()">
+            <button class="btn-primary" onclick="openNewIssueModal()">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <line x1="12" y1="5" x2="12" y2="19"></line>
                 <line x1="5" y1="12" x2="19" y2="12"></line>
               </svg>
-              <span>+ Add New User</span>
+              <span>+ Add New Issue</span>
             </button>
           </div>
           <div class="table-responsive">
             <table class="data-table">
               <thead>
                 <tr>
-                  <th>User ID</th>
-                  <th>Full Name</th>
-                  <th>Username</th>
-                  <th>Role</th>
-                  <th>Zone / Branch</th>
-                  <th>Contact Info</th>
-                  <th>Login PIN</th>
+                  <th>Issue Code</th>
+                  <th>Issue / Fault Name</th>
+                  <th>Category</th>
+                  <th>Priority</th>
+                  <th>SLA Resolution</th>
                   <th>Status</th>
                   <th>Actions</th>
                 </tr>
               </thead>
-              <tbody id="userTableBody"></tbody>
+              <tbody id="issueTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ACTION TAKEN MASTER VIEW -->
+      <section id="section-actions" class="section-view">
+        <div class="table-container">
+          <div class="table-header">
+            <div>
+              <h3>Action Taken Master (<span id="actionCountBadge">0</span> Resolution Actions)</h3>
+              <p style="font-size: 13px; color: var(--slate-400); margin-top: 4px;">Standard field engineer resolution actions, parts swapped, and repair records</p>
+            </div>
+            <button class="btn-primary" onclick="openNewActionModal()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              <span>+ Add Action Taken</span>
+            </button>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Action Code</th>
+                  <th>Action Taken Description</th>
+                  <th>Resolution Type</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="actionTableBody"></tbody>
             </table>
           </div>
         </div>
@@ -2023,54 +2051,116 @@
     </div>
   </div>
 
-  <!-- User Entry / Edit Modal -->
-  <div id="userEntryModal" class="modal-overlay">
+  <!-- Issue Entry / Edit Modal -->
+  <div id="issueModal" class="modal-overlay">
     <div class="modal-card">
       <div class="modal-header">
-        <h3 id="userModalTitle">Add New System User</h3>
-        <button class="modal-close" onclick="closeUserModal()">&times;</button>
+        <h3 id="issueModalTitle">Add New Issue / Fault</h3>
+        <button class="modal-close" onclick="closeIssueModal()">&times;</button>
       </div>
-      <form onsubmit="handleSaveUser(event)">
-        <input type="hidden" id="userEditId" value="" />
+      <form onsubmit="handleSaveIssue(event)">
+        <input type="hidden" id="issueEditCode" value="" />
         <div class="modal-body">
           <div class="form-group">
-            <label>Full Name</label>
-            <input type="text" id="userFullName" placeholder="e.g. Anzar K. or Ahmed Salim" required />
+            <label>Issue / Fault Name</label>
+            <input type="text" id="issueNameInput" placeholder="e.g. PAPER ROLL REQUEST, PRINTER JAM" required />
           </div>
           <div class="form-group">
-            <label>Login Username</label>
-            <input type="text" id="userLoginName" placeholder="e.g. anzar_pos" required />
-          </div>
-          <div class="form-group">
-            <label>User Role</label>
-            <select id="userRole" required>
-              <option value="Admin">Admin (Full Access)</option>
-              <option value="Field Service Engineer">Field Service Engineer (Technician)</option>
-              <option value="Call Center Agent">Call Center / Support Agent</option>
-              <option value="Operations Manager">Operations Manager</option>
-              <option value="Terminal Delivery Staff">Terminal Delivery Staff</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Zone / Location</label>
-            <select id="userZone" required>
-              <option value="Salalah & Dhofar">Salalah & Dhofar</option>
-              <option value="Muscat HQ">Muscat HQ</option>
-              <option value="Al Batinah / Sohar">Al Batinah / Sohar</option>
-              <option value="Al Dakhiliyah / Nizwa">Al Dakhiliyah / Nizwa</option>
-              <option value="Ash Sharqiyah">Ash Sharqiyah</option>
+            <label>Fault Category</label>
+            <select id="issueCategoryInput" required>
+              <option value="Stationery Supply">Stationery Supply</option>
+              <option value="Hardware / Printer">Hardware / Printer</option>
+              <option value="Connectivity & SIM">Connectivity & SIM</option>
+              <option value="Power & Battery">Power & Battery</option>
+              <option value="Hardware / Port">Hardware / Port</option>
+              <option value="Hardware / Screen">Hardware / Screen</option>
+              <option value="Onboarding & Install">Onboarding & Install</option>
+              <option value="Firmware & Software">Firmware & Software</option>
+              <option value="Preventative Maintenance">Preventative Maintenance</option>
+              <option value="Asset Retrieval">Asset Retrieval</option>
             </select>
           </div>
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
             <div class="form-group">
-              <label>Mobile Number</label>
-              <input type="text" id="userMobile" placeholder="+968 9XXXXXXX" required />
+              <label>Priority</label>
+              <select id="issuePriorityInput">
+                <option value="Normal">Normal</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+                <option value="Urgent">Urgent</option>
+              </select>
             </div>
             <div class="form-group">
-              <label>Login PIN Code</label>
-              <input type="text" id="userPin" placeholder="6-digit PIN" maxlength="6" required />
+              <label>SLA Resolution Target</label>
+              <select id="issueSlaInput">
+                <option value="4 Hours">4 Hours</option>
+                <option value="6 Hours">6 Hours</option>
+                <option value="8 Hours">8 Hours</option>
+                <option value="12 Hours">12 Hours</option>
+                <option value="24 Hours">24 Hours</option>
+                <option value="48 Hours">48 Hours</option>
+              </select>
             </div>
           </div>
+          <div class="form-group">
+            <label>Status</label>
+            <select id="issueStatusInput">
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeIssueModal()">Cancel</button>
+          <button type="submit" class="btn-primary" id="btnSaveIssueText">Save Issue</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Action Taken Entry / Edit Modal -->
+  <div id="actionModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="actionModalTitle">Add Action Taken</h3>
+        <button class="modal-close" onclick="closeActionModal()">&times;</button>
+      </div>
+      <form onsubmit="handleSaveAction(event)">
+        <input type="hidden" id="actionEditCode" value="" />
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Action Taken Description</label>
+            <input type="text" id="actionNameInput" placeholder="e.g. ROLLS DELIVERED, SIM CARD REPLACED" required />
+          </div>
+          <div class="form-group">
+            <label>Resolution Type</label>
+            <select id="actionTypeInput" required>
+              <option value="Stationery Delivery">Stationery Delivery</option>
+              <option value="Hardware / Connectivity">Hardware / Connectivity</option>
+              <option value="On-site Maintenance">On-site Maintenance</option>
+              <option value="Power & Hardware">Power & Hardware</option>
+              <option value="Asset Replacement">Asset Replacement (Swap)</option>
+              <option value="Firmware & App">Firmware & App Reload</option>
+              <option value="Hardware Repair">Hardware Repair</option>
+              <option value="Customer Support">Customer Training & Support</option>
+              <option value="Asset Recovery">Asset Recovery</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Status</label>
+            <select id="actionStatusInput">
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeActionModal()">Cancel</button>
+          <button type="submit" class="btn-primary" id="btnSaveActionText">Save Action Taken</button>
+        </div>
+      </form>
+    </div>
+  </div>
           <div class="form-group">
             <label>Email Address</label>
             <input type="email" id="userEmail" placeholder="user@smartpos.om" />
@@ -2134,8 +2224,33 @@
     let replacements = PORTAL_DATA.replacements || [];
     let categories = PORTAL_DATA.categories || [];
     let technicians = PORTAL_DATA.technicians || [];
-    let users = PORTAL_DATA.users || [];
     let locations = PORTAL_DATA.locations || [];
+    let issues = PORTAL_DATA.issues || [];
+    let actionsTaken = PORTAL_DATA.actions_taken || [];
+
+    try {
+      const savedIssues = localStorage.getItem('smart_portal_issues');
+      if (savedIssues) {
+        const p = JSON.parse(savedIssues);
+        if (Array.isArray(p) && p.length > 0) issues = p;
+      }
+    } catch(e) {}
+
+    try {
+      const savedActions = localStorage.getItem('smart_portal_actions');
+      if (savedActions) {
+        const p = JSON.parse(savedActions);
+        if (Array.isArray(p) && p.length > 0) actionsTaken = p;
+      }
+    } catch(e) {}
+
+    try {
+      const savedLocs = localStorage.getItem('smart_portal_locations');
+      if (savedLocs) {
+        const p = JSON.parse(savedLocs);
+        if (Array.isArray(p) && p.length > 0) locations = p;
+      }
+    } catch(e) {}
     function populateUserDropdowns() {
       const zoneSelect = document.getElementById('userZone');
       if (zoneSelect) {
@@ -2286,49 +2401,59 @@
       }
     }
 
-    function renderUsersTable() {
-      const tbody = document.getElementById('userTableBody');
+    // ==========================================
+    // ISSUE MASTER FUNCTIONS
+    // ==========================================
+    function renderIssuesTable() {
+      const tbody = document.getElementById('issueTableBody');
       if (!tbody) return;
       tbody.innerHTML = '';
 
-      let list = users;
+      let list = issues;
       if (searchQuery) {
         const q = searchQuery.toLowerCase();
-        list = list.filter(u => u.name.toLowerCase().includes(q) || u.username.toLowerCase().includes(q) || u.role.toLowerCase().includes(q) || u.zone.toLowerCase().includes(q));
+        list = list.filter(i => 
+          (i.code && i.code.toLowerCase().includes(q)) ||
+          (i.name && i.name.toLowerCase().includes(q)) ||
+          (i.category && i.category.toLowerCase().includes(q)) ||
+          (i.priority && i.priority.toLowerCase().includes(q))
+        );
       }
 
-      document.getElementById('userCountBadge').textContent = list.length;
-      document.getElementById('navCountUsers').textContent = users.length;
+      document.getElementById('issueCountBadge').textContent = list.length;
+      const navBadge = document.getElementById('navCountIssues');
+      if (navBadge) navBadge.textContent = issues.length;
 
       if (list.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; padding: 28px; color: #94a3b8;">No users found.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 28px; color: #94a3b8;">No issues found.</td></tr>';
         return;
       }
 
-      list.forEach(u => {
+      list.forEach(item => {
         const tr = document.createElement('tr');
         
-        let roleBadge = 'status-progress';
-        if (u.role === 'Admin') roleBadge = 'status-pending';
-        else if (u.role.includes('Engineer')) roleBadge = 'status-solved';
-        
-        const statusBadge = u.status === 'Active' 
-          ? '<span class="status-badge status-active">Active</span>' 
+        let prioBadge = 'background: rgba(59, 130, 246, 0.15); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.3);';
+        if (item.priority === 'Urgent') {
+          prioBadge = 'background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3);';
+        } else if (item.priority === 'High') {
+          prioBadge = 'background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3);';
+        }
+
+        const statusBadge = item.status === 'Active'
+          ? '<span class="status-badge status-active">Active</span>'
           : '<span class="status-badge status-replaced">Inactive</span>';
 
         tr.innerHTML = `
-          <td><strong><span class="tag-tid">${u.id}</span></strong></td>
-          <td><strong>${u.name}</strong></td>
-          <td><code style="font-weight:700; color:#475569;">@${u.username}</code></td>
-          <td><span class="status-badge ${roleBadge}">${u.role}</span></td>
-          <td>${u.zone}</td>
-          <td><div>${u.mobile}</div><div style="font-size:12px; color:#94a3b8;">${u.email || '-'}</div></td>
-          <td><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-weight:700;">${u.pincode || '******'}</code></td>
+          <td><strong><span class="tag-tid">${item.code}</span></strong></td>
+          <td><strong style="color: #f8fafc;">${item.name}</strong></td>
+          <td>${item.category || 'General'}</td>
+          <td><span class="status-badge" style="${prioBadge}">${item.priority || 'Normal'}</span></td>
+          <td><strong style="color: #10b981;">${item.sla || '8 Hours'}</strong></td>
           <td>${statusBadge}</td>
           <td>
             <div style="display:flex; gap:6px;">
-              <button class="btn-secondary" style="padding:5px 10px; font-size:12px;" onclick="openEditUserModal('${u.id}')">Edit</button>
-              <button class="btn-secondary" style="padding:5px 10px; font-size:12px; color:#dc2626; border-color:#fee2e2;" onclick="deleteUser('${u.id}')">Delete</button>
+              <button class="btn-secondary" style="padding:5px 10px; font-size:12px;" onclick="openEditIssueModal('${item.code}')">Edit</button>
+              <button class="btn-secondary" style="padding:5px 10px; font-size:12px; color:#dc2626; border-color:#fee2e2;" onclick="deleteIssue('${item.code}')">Delete</button>
             </div>
           </td>
         `;
@@ -2336,103 +2461,206 @@
       });
     }
 
-    function openNewUserModal() {
-      document.getElementById('userModalTitle').textContent = 'Add New System User';
-      document.getElementById('btnSaveUserText').textContent = 'Save User';
-      document.getElementById('userEditId').value = '';
-      document.getElementById('userFullName').value = '';
-      document.getElementById('userLoginName').value = '';
-      document.getElementById('userRole').value = 'Field Service Engineer';
-      document.getElementById('userZone').value = 'Salalah & Dhofar';
-      document.getElementById('userMobile').value = '';
-      document.getElementById('userPin').value = '';
-      document.getElementById('userEmail').value = '';
-      document.getElementById('userStatus').value = 'Active';
-
-      populateUserDropdowns();
-      document.getElementById('userEntryModal').style.display = 'flex';
-      document.getElementById('userFullName').focus();
+    function openNewIssueModal() {
+      document.getElementById('issueModalTitle').textContent = 'Add New Issue / Fault';
+      document.getElementById('btnSaveIssueText').textContent = 'Save Issue';
+      document.getElementById('issueEditCode').value = '';
+      document.getElementById('issueNameInput').value = '';
+      document.getElementById('issueCategoryInput').value = 'Stationery Supply';
+      document.getElementById('issuePriorityInput').value = 'Normal';
+      document.getElementById('issueSlaInput').value = '8 Hours';
+      document.getElementById('issueStatusInput').value = 'Active';
+      document.getElementById('issueModal').style.display = 'flex';
+      document.getElementById('issueNameInput').focus();
     }
 
-    function openEditUserModal(id) {
-      const u = users.find(x => x.id === id);
-      if (!u) return;
+    function openEditIssueModal(code) {
+      const item = issues.find(i => i.code === code);
+      if (!item) return;
 
-      document.getElementById('userModalTitle').textContent = 'Edit System User (' + u.id + ')';
-      document.getElementById('btnSaveUserText').textContent = 'Update User';
-      document.getElementById('userEditId').value = u.id;
-      document.getElementById('userFullName').value = u.name;
-      document.getElementById('userLoginName').value = u.username;
-      document.getElementById('userRole').value = u.role;
-      document.getElementById('userZone').value = u.zone;
-      document.getElementById('userMobile').value = u.mobile;
-      document.getElementById('userPin').value = u.pincode || '';
-      document.getElementById('userEmail').value = u.email || '';
-      document.getElementById('userStatus').value = u.status || 'Active';
-
-      populateUserDropdowns();
-      document.getElementById('userEntryModal').style.display = 'flex';
+      document.getElementById('issueModalTitle').textContent = 'Edit Issue (' + item.code + ')';
+      document.getElementById('btnSaveIssueText').textContent = 'Update Issue';
+      document.getElementById('issueEditCode').value = item.code;
+      document.getElementById('issueNameInput').value = item.name;
+      document.getElementById('issueCategoryInput').value = item.category || 'Stationery Supply';
+      document.getElementById('issuePriorityInput').value = item.priority || 'Normal';
+      document.getElementById('issueSlaInput').value = item.sla || '8 Hours';
+      document.getElementById('issueStatusInput').value = item.status || 'Active';
+      document.getElementById('issueModal').style.display = 'flex';
     }
 
-    function closeUserModal() {
-      document.getElementById('userEntryModal').style.display = 'none';
+    function closeIssueModal() {
+      document.getElementById('issueModal').style.display = 'none';
     }
 
-    function handleSaveUser(e) {
+    function handleSaveIssue(e) {
       e.preventDefault();
-      const editId = document.getElementById('userEditId').value;
-      const name = document.getElementById('userFullName').value.trim();
-      const username = document.getElementById('userLoginName').value.trim();
-      const role = document.getElementById('userRole').value;
-      const zone = document.getElementById('userZone').value;
-      const mobile = document.getElementById('userMobile').value.trim();
-      const pin = document.getElementById('userPin').value.trim();
-      const email = document.getElementById('userEmail').value.trim();
-      const status = document.getElementById('userStatus').value;
+      const code = document.getElementById('issueEditCode').value;
+      const name = document.getElementById('issueNameInput').value.trim().toUpperCase();
+      const category = document.getElementById('issueCategoryInput').value;
+      const priority = document.getElementById('issuePriorityInput').value;
+      const sla = document.getElementById('issueSlaInput').value;
+      const status = document.getElementById('issueStatusInput').value;
 
-      if (editId) {
-        // Update existing user
-        const u = users.find(x => x.id === editId);
-        if (u) {
-          u.name = name;
-          u.username = username;
-          u.role = role;
-          u.zone = zone;
-          u.mobile = mobile;
-          u.pincode = pin;
-          u.email = email;
-          u.status = status;
+      if (code) {
+        const item = issues.find(i => i.code === code);
+        if (item) {
+          item.name = name;
+          item.category = category;
+          item.priority = priority;
+          item.sla = sla;
+          item.status = status;
         }
       } else {
-        // Create new user
-        const newId = `USR-${users.length + 101}`;
-        users.push({
-          id: newId,
+        const newCode = `ISS-${issues.length + 1 < 10 ? '0' : ''}${issues.length + 1}`;
+        issues.push({
+          code: newCode,
           name: name,
-          username: username,
-          role: role,
-          zone: zone,
-          mobile: mobile,
-          pincode: pin,
-          email: email,
+          category: category,
+          priority: priority,
+          sla: sla,
           status: status
         });
       }
 
-      closeUserModal();
-      renderUsersTable();
-    renderLocationsTable();
-    populateUserDropdowns();
-      document.getElementById('navCountUsers').textContent = users.length;
+      try {
+        localStorage.setItem('smart_portal_issues', JSON.stringify(issues));
+      } catch(err) {}
+
+      closeIssueModal();
+      renderIssuesTable();
+      showToast('Issue Master updated successfully!');
     }
 
-    function deleteUser(id) {
-      if (confirm('Are you sure you want to delete user ' + id + '?')) {
-        users = users.filter(x => x.id !== id);
-        renderUsersTable();
-    renderLocationsTable();
-    populateUserDropdowns();
-        document.getElementById('navCountUsers').textContent = users.length;
+    function deleteIssue(code) {
+      if (confirm('Delete issue ' + code + '?')) {
+        issues = issues.filter(i => i.code !== code);
+        try {
+          localStorage.setItem('smart_portal_issues', JSON.stringify(issues));
+        } catch(err) {}
+        renderIssuesTable();
+        showToast('Issue deleted.');
+      }
+    }
+
+    // ==========================================
+    // ACTION TAKEN MASTER FUNCTIONS
+    // ==========================================
+    function renderActionsTable() {
+      const tbody = document.getElementById('actionTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      let list = actionsTaken;
+      if (searchQuery) {
+        const q = searchQuery.toLowerCase();
+        list = list.filter(a => 
+          (a.code && a.code.toLowerCase().includes(q)) ||
+          (a.name && a.name.toLowerCase().includes(q)) ||
+          (a.type && a.type.toLowerCase().includes(q))
+        );
+      }
+
+      document.getElementById('actionCountBadge').textContent = list.length;
+      const navBadge = document.getElementById('navCountActions');
+      if (navBadge) navBadge.textContent = actionsTaken.length;
+
+      if (list.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding: 28px; color: #94a3b8;">No actions found.</td></tr>';
+        return;
+      }
+
+      list.forEach(item => {
+        const tr = document.createElement('tr');
+        const statusBadge = item.status === 'Active'
+          ? '<span class="status-badge status-active">Active</span>'
+          : '<span class="status-badge status-replaced">Inactive</span>';
+
+        tr.innerHTML = `
+          <td><strong><span class="tag-tid">${item.code}</span></strong></td>
+          <td><strong style="color: #f8fafc;">${item.name}</strong></td>
+          <td>${item.type || 'Field Resolution'}</td>
+          <td>${statusBadge}</td>
+          <td>
+            <div style="display:flex; gap:6px;">
+              <button class="btn-secondary" style="padding:5px 10px; font-size:12px;" onclick="openEditActionModal('${item.code}')">Edit</button>
+              <button class="btn-secondary" style="padding:5px 10px; font-size:12px; color:#dc2626; border-color:#fee2e2;" onclick="deleteAction('${item.code}')">Delete</button>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function openNewActionModal() {
+      document.getElementById('actionModalTitle').textContent = 'Add Action Taken';
+      document.getElementById('btnSaveActionText').textContent = 'Save Action Taken';
+      document.getElementById('actionEditCode').value = '';
+      document.getElementById('actionNameInput').value = '';
+      document.getElementById('actionTypeInput').value = 'Stationery Delivery';
+      document.getElementById('actionStatusInput').value = 'Active';
+      document.getElementById('actionModal').style.display = 'flex';
+      document.getElementById('actionNameInput').focus();
+    }
+
+    function openEditActionModal(code) {
+      const item = actionsTaken.find(a => a.code === code);
+      if (!item) return;
+
+      document.getElementById('actionModalTitle').textContent = 'Edit Action Taken (' + item.code + ')';
+      document.getElementById('btnSaveActionText').textContent = 'Update Action Taken';
+      document.getElementById('actionEditCode').value = item.code;
+      document.getElementById('actionNameInput').value = item.name;
+      document.getElementById('actionTypeInput').value = item.type || 'Stationery Delivery';
+      document.getElementById('actionStatusInput').value = item.status || 'Active';
+      document.getElementById('actionModal').style.display = 'flex';
+    }
+
+    function closeActionModal() {
+      document.getElementById('actionModal').style.display = 'none';
+    }
+
+    function handleSaveAction(e) {
+      e.preventDefault();
+      const code = document.getElementById('actionEditCode').value;
+      const name = document.getElementById('actionNameInput').value.trim().toUpperCase();
+      const type = document.getElementById('actionTypeInput').value;
+      const status = document.getElementById('actionStatusInput').value;
+
+      if (code) {
+        const item = actionsTaken.find(a => a.code === code);
+        if (item) {
+          item.name = name;
+          item.type = type;
+          item.status = status;
+        }
+      } else {
+        const newCode = `ACT-${actionsTaken.length + 1 < 10 ? '0' : ''}${actionsTaken.length + 1}`;
+        actionsTaken.push({
+          code: newCode,
+          name: name,
+          type: type,
+          status: status
+        });
+      }
+
+      try {
+        localStorage.setItem('smart_portal_actions', JSON.stringify(actionsTaken));
+      } catch(err) {}
+
+      closeActionModal();
+      renderActionsTable();
+      showToast('Action Taken Master updated successfully!');
+    }
+
+    function deleteAction(code) {
+      if (confirm('Delete action taken ' + code + '?')) {
+        actionsTaken = actionsTaken.filter(a => a.code !== code);
+        try {
+          localStorage.setItem('smart_portal_actions', JSON.stringify(actionsTaken));
+        } catch(err) {}
+        renderActionsTable();
+        showToast('Action deleted.');
       }
     }
 
@@ -2678,8 +2906,9 @@
     function handleSearch(val) {
       searchQuery = val.trim();
       renderComplaintsTable();
-      renderMerchantsTable();
-      renderTerminalsTable();
+      renderIssuesTable();
+      renderActionsTable();
+      renderLocationsTable();
     }
 
     function markAsSolved(id) {
@@ -2760,50 +2989,32 @@
       document.querySelectorAll('.section-view').forEach(sec => sec.classList.remove('active'));
 
       let target = document.getElementById(`section-${sectionId}`);
-      if (sectionId === 'complaints') {
-        target = document.getElementById('section-dashboard');
-      }
       if (target) {
         target.classList.add('active');
-      }
-      if (sectionId === 'complaints') {
-        setTimeout(() => {
-          const tableSec = document.querySelector('.table-container');
-          if (tableSec) tableSec.scrollIntoView({ behavior: 'smooth' });
-        }, 50);
       }
 
       const titles = {
         'dashboard': 'Dashboard Overview',
-        'complaints': 'All Complaints & Service Calls',
-        'merchants': 'Merchant Master (Customers)',
-        'terminals': 'Terminal Asset Master',
-        'replacements': 'Replacement Terminal Master',
-        'categories': 'Service Categories & SLA Master',
-        'technicians': 'Field Technicians Master',
-        'users': 'User Master & Access Control',
-        'locations': 'Location Master (Operational Zones)',
-        };
+        'issues': 'Issue Master (Fault Types & SLA)',
+        'actions': 'Action Taken Master (Resolutions)',
+        'location': 'Location Master (Operational Zones)'
+      };
 
       document.getElementById('topbarTitle').textContent = titles[sectionId] || 'Smart Service Portal';
 
       // Re-render target
-      if (sectionId === 'merchants') renderMerchantsTable();
-      if (sectionId === 'terminals') renderTerminalsTable();
-      if (sectionId === 'replacements') renderReplacementsTable();
-      if (sectionId === 'categories') renderCategoriesTable();
-      if (sectionId === 'technicians') renderTechniciansTable();
-      if (sectionId === 'users') renderUsersTable();
-      if (sectionId === 'locations') renderLocationsTable();
-      if (sectionId === 'dashboard' || sectionId === 'complaints') renderComplaintsTable();
+      if (sectionId === 'issues') renderIssuesTable();
+      if (sectionId === 'actions') renderActionsTable();
+      if (sectionId === 'location') renderLocationsTable();
+      if (sectionId === 'dashboard') renderComplaintsTable();
     }
 
     // Init
     updateStatsUI();
     renderComplaintsTable();
+    renderIssuesTable();
+    renderActionsTable();
     renderLocationsTable();
-    renderUsersTable();
-    populateUserDropdowns();
 
     // ==========================================
     // CSV & EXCEL IMPORT SYSTEM
@@ -3096,41 +3307,58 @@
         complaints = [...complaints, ...parsedImportData];
       }
 
-      // Also automatically synchronize merchants and terminals
+      // Also automatically synchronize issues, actions, and locations
       parsedImportData.forEach(c => {
-        if (!merchants.some(m => m.name.toLowerCase() === c.merchant.toLowerCase())) {
-          merchants.push({
-            mid: c.mid,
-            name: c.merchant,
-            location: c.location,
-            contact: c.mobile,
-            terminals_count: 1,
-            status: 'Active'
-          });
+        if (c.issue && c.issue.trim()) {
+          const issName = c.issue.trim().toUpperCase();
+          if (!issues.some(i => i.name.toUpperCase() === issName)) {
+            issues.push({
+              code: `ISS-${issues.length + 1 < 10 ? '0' : ''}${issues.length + 1}`,
+              name: issName,
+              category: 'Service Call',
+              priority: 'Normal',
+              sla: '8 Hours',
+              status: 'Active'
+            });
+          }
         }
-        if (!terminals.some(t => t.tid === c.tid)) {
-          terminals.push({
-            tid: c.tid,
-            merchant: c.merchant,
-            mid: c.mid,
-            serial: c.serial,
-            model: c.model,
-            location: c.location,
-            status: 'Active'
-          });
+        if (c.action && c.action.trim()) {
+          const actName = c.action.trim().toUpperCase();
+          if (!actionsTaken.some(a => a.name.toUpperCase() === actName)) {
+            actionsTaken.push({
+              code: `ACT-${actionsTaken.length + 1 < 10 ? '0' : ''}${actionsTaken.length + 1}`,
+              name: actName,
+              type: 'Field Resolution',
+              status: 'Active'
+            });
+          }
+        }
+        if (c.location && c.location.trim()) {
+          const locName = c.location.trim().toUpperCase();
+          if (!locations.some(l => l.name.toUpperCase() === locName)) {
+            locations.push({
+              code: `LOC-${locations.length + 1 < 10 ? '0' : ''}${locations.length + 1}`,
+              name: locName,
+              region: 'Oman Region',
+              merchants_count: 1,
+              status: 'Active'
+            });
+          }
         }
       });
 
-      // Persist in localStorage
       try {
-        localStorage.setItem('smart_portal_complaints', JSON.stringify(complaints));
-      } catch(e) {
-        console.warn('LocalStorage save failed:', e);
-      }
+        localStorage.setItem('smart_portal_issues', JSON.stringify(issues));
+        localStorage.setItem('smart_portal_actions', JSON.stringify(actionsTaken));
+        localStorage.setItem('smart_portal_locations', JSON.stringify(locations));
+      } catch(e) {}
 
       // Update all dashboard tables and counters
       updateStatsUI();
       renderComplaintsTable();
+      renderIssuesTable();
+      renderActionsTable();
+      renderLocationsTable();
       if (typeof renderMerchantsTable === 'function') renderMerchantsTable();
       if (typeof renderTerminalsTable === 'function') renderTerminalsTable();
 
