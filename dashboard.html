@@ -1650,8 +1650,6 @@
         <span class="nav-count" id="navCountLocations">0</span>
       </a>
 
-      <div class="nav-label">Access Control</div>
-
       <a class="nav-item" onclick="switchSection('users', this)">
         <div class="nav-item-left">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -2009,7 +2007,7 @@
         <div class="table-container">
           <div class="table-header">
             <div>
-              <h3>User Master & Access Control (<span id="userCountBadge">0</span> Users)</h3>
+              <h3>User Master (<span id="userCountBadge">0</span> Users)</h3>
               <p style="font-size: 13px; color: var(--slate-400); margin-top: 4px;">System credentials, field engineer accounts, roles, and PIN codes</p>
             </div>
             <button class="btn-primary" onclick="openNewUserModal()">
@@ -3511,7 +3509,7 @@
         'actions': 'Action Taken Master (Resolutions)',
         'merchants': 'Merchant Master (Customers & MIDs)',
         'location': 'Location Master (Operational Zones)',
-        'users': 'User Master & Access Control'
+        'users': 'User Master'
       };
 
       document.getElementById('topbarTitle').textContent = titles[sectionId] || 'Smart Service Portal';
