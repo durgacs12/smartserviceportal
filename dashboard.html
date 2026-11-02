@@ -1937,8 +1937,8 @@
         <div class="table-container">
           <div class="table-header">
             <div>
-              <h3>Merchant Master (<span id="merchantCountBadge">0</span> Merchants)</h3>
-              <p style="font-size: 13px; color: var(--slate-400); margin-top: 4px;">Merchant profiles, MIDs, operational zones, mobile contacts, and POS terminals from Excel</p>
+              <h3>Merchant Master (<span id="merchantCountBadge">0</span> Records)</h3>
+              <p style="font-size: 13px; color: var(--slate-400); margin-top: 4px;">MID, Merchant Name, Location, Mobile, Type, TID, Status, Action Taken, and Remarks from Excel</p>
             </div>
             <button class="btn-primary" onclick="openNewMerchantModal()">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -1955,10 +1955,12 @@
                   <th>MID</th>
                   <th>Merchant Name</th>
                   <th>Location</th>
-                  <th>Mobile Number</th>
-                  <th>Channel / Type</th>
-                  <th>Assigned TID(s)</th>
+                  <th>Mobile</th>
+                  <th>Type</th>
+                  <th>TID</th>
                   <th>Status</th>
+                  <th>Action Taken</th>
+                  <th>Remarks</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -2264,15 +2266,21 @@
         <button class="modal-close" onclick="closeMerchantModal()">&times;</button>
       </div>
       <form onsubmit="handleSaveMerchant(event)">
-        <input type="hidden" id="merchantEditMid" value="" />
+        <input type="hidden" id="merchantEditIndex" value="" />
         <div class="modal-body">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group">
+              <label>MID (Merchant ID)</label>
+              <input type="text" id="merchantMidInput" placeholder="e.g. 104951720186" required />
+            </div>
+            <div class="form-group">
+              <label>TID (Terminal ID)</label>
+              <input type="text" id="merchantTidInput" placeholder="e.g. POS10736" required />
+            </div>
+          </div>
           <div class="form-group">
             <label>Merchant Name</label>
             <input type="text" id="merchantNameInput" placeholder="e.g. AL MAHA 600" required />
-          </div>
-          <div class="form-group">
-            <label>Merchant ID (MID)</label>
-            <input type="text" id="merchantMidInput" placeholder="e.g. 104951720186" required />
           </div>
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
             <div class="form-group">
@@ -2286,7 +2294,7 @@
           </div>
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
             <div class="form-group">
-              <label>Channel / Type</label>
+              <label>Type / Channel</label>
               <select id="merchantTypeInput">
                 <option value="CALL CENTER">CALL CENTER</option>
                 <option value="E MAIL">E MAIL</option>
@@ -2303,8 +2311,12 @@
             </div>
           </div>
           <div class="form-group">
-            <label>Assigned TID(s)</label>
-            <input type="text" id="merchantTidsInput" placeholder="e.g. POS10736, POS23567" />
+            <label>Action Taken</label>
+            <input type="text" id="merchantActionTakenInput" placeholder="e.g. ROLLS DELIVERED, CHARGER REPLACED" />
+          </div>
+          <div class="form-group">
+            <label>Remarks</label>
+            <input type="text" id="merchantRemarksInput" placeholder="e.g. FOR SMART REPLACEMENT, TAMPERED" />
           </div>
         </div>
         <div class="modal-footer">
@@ -2893,7 +2905,7 @@
     }
 
     // ==========================================
-    // MERCHANT MASTER FUNCTIONS
+    // MERCHANT MASTER FUNCTIONS (Excel Fields: mid, merchantname, location, mobile, type, tid, status, actiontaken, remarks)
     // ==========================================
     function renderMerchantsTable() {
       const tbody = document.getElementById('merchantTableBody');
@@ -2904,11 +2916,15 @@
       if (searchQuery) {
         const q = searchQuery.toLowerCase();
         list = list.filter(m =>
+          (m.merchantname && m.merchantname.toLowerCase().includes(q)) ||
           (m.name && m.name.toLowerCase().includes(q)) ||
           (m.mid && m.mid.toLowerCase().includes(q)) ||
+          (m.tid && m.tid.toLowerCase().includes(q)) ||
           (m.location && m.location.toLowerCase().includes(q)) ||
           (m.mobile && m.mobile.toLowerCase().includes(q)) ||
-          (m.tids && m.tids.toLowerCase().includes(q))
+          (m.type && m.type.toLowerCase().includes(q)) ||
+          (m.actiontaken && m.actiontaken.toLowerCase().includes(q)) ||
+          (m.remarks && m.remarks.toLowerCase().includes(q))
         );
       }
 
@@ -2918,31 +2934,36 @@
       if (navBadge) navBadge.textContent = merchants.length;
 
       if (list.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding: 28px; color: #94a3b8;">No merchants found.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="10" style="text-align:center; padding: 28px; color: #94a3b8;">No merchants found.</td></tr>';
         return;
       }
 
-      list.forEach(m => {
+      list.forEach((m, idx) => {
         const tr = document.createElement('tr');
-        const statusBadge = m.status === 'Active'
+        const statusBadge = (m.status === 'Active' || !m.status)
           ? '<span class="status-badge status-active">Active</span>'
-          : '<span class="status-badge status-replaced">Inactive</span>';
+          : '<span class="status-badge status-replaced">' + m.status + '</span>';
 
-        const tidDisplay = m.tids ? m.tids : (m.tid ? m.tid : (m.terminals_count ? m.terminals_count + ' Terminal(s)' : '-'));
+        const nameDisplay = m.merchantname || m.name || '-';
+        const tidDisplay = m.tid || '-';
         const phoneDisplay = m.mobile && m.mobile !== '-' ? m.mobile : (m.contact ? m.contact : '-');
+        const actDisplay = m.actiontaken || m.action || '-';
+        const remDisplay = m.remarks && m.remarks !== '-' ? m.remarks : '-';
 
         tr.innerHTML = `
-          <td><strong><span class="tag-tid">${m.mid}</span></strong></td>
-          <td><strong style="color: #f8fafc;">${m.name}</strong></td>
+          <td><strong><span class="tag-tid">${m.mid || '-'}</span></strong></td>
+          <td><strong style="color: #f8fafc;">${nameDisplay}</strong></td>
           <td>${m.location || '-'}</td>
           <td><strong style="color: #94a3b8;">${phoneDisplay}</strong></td>
           <td><span class="status-badge status-progress">${m.type || 'CALL CENTER'}</span></td>
           <td><code style="font-weight:700; color:#38bdf8; font-size:12.5px;">${tidDisplay}</code></td>
           <td>${statusBadge}</td>
+          <td><span style="font-size:12px; font-weight:600; color:#a3e635;">${actDisplay}</span></td>
+          <td><span style="font-size:12px; color:#cbd5e1; font-style:italic;">${remDisplay}</span></td>
           <td>
             <div style="display:flex; gap:6px;">
-              <button class="btn-secondary" style="padding:5px 10px; font-size:12px;" onclick="openEditMerchantModal('${m.mid}')">Edit</button>
-              <button class="btn-secondary" style="padding:5px 10px; font-size:12px; color:#dc2626; border-color:#fee2e2;" onclick="deleteMerchant('${m.mid}')">Delete</button>
+              <button class="btn-secondary" style="padding:5px 10px; font-size:12px;" onclick="openEditMerchantModal(${idx})">Edit</button>
+              <button class="btn-secondary" style="padding:5px 10px; font-size:12px; color:#dc2626; border-color:#fee2e2;" onclick="deleteMerchant(${idx})">Delete</button>
             </div>
           </td>
         `;
@@ -2953,31 +2974,35 @@
     function openNewMerchantModal() {
       document.getElementById('merchantModalTitle').textContent = 'Add New Merchant';
       document.getElementById('btnSaveMerchantText').textContent = 'Save Merchant';
-      document.getElementById('merchantEditMid').value = '';
-      document.getElementById('merchantNameInput').value = '';
+      document.getElementById('merchantEditIndex').value = '';
       document.getElementById('merchantMidInput').value = '10' + Math.floor(1000000000 + Math.random()*9000000000);
+      document.getElementById('merchantTidInput').value = 'POS' + Math.floor(10000 + Math.random()*90000);
+      document.getElementById('merchantNameInput').value = '';
       document.getElementById('merchantLocationInput').value = 'SALALAH';
       document.getElementById('merchantMobileInput').value = '';
       document.getElementById('merchantTypeInput').value = 'CALL CENTER';
-      document.getElementById('merchantTidsInput').value = '';
       document.getElementById('merchantStatusInput').value = 'Active';
+      document.getElementById('merchantActionTakenInput').value = '';
+      document.getElementById('merchantRemarksInput').value = '';
       document.getElementById('merchantModal').style.display = 'flex';
       document.getElementById('merchantNameInput').focus();
     }
 
-    function openEditMerchantModal(mid) {
-      const m = merchants.find(x => x.mid === mid);
+    function openEditMerchantModal(idx) {
+      const m = merchants[idx];
       if (!m) return;
       document.getElementById('merchantModalTitle').textContent = 'Edit Merchant (' + m.mid + ')';
       document.getElementById('btnSaveMerchantText').textContent = 'Update Merchant';
-      document.getElementById('merchantEditMid').value = m.mid;
-      document.getElementById('merchantNameInput').value = m.name;
-      document.getElementById('merchantMidInput').value = m.mid;
+      document.getElementById('merchantEditIndex').value = idx;
+      document.getElementById('merchantMidInput').value = m.mid || '';
+      document.getElementById('merchantTidInput').value = m.tid || '';
+      document.getElementById('merchantNameInput').value = m.merchantname || m.name || '';
       document.getElementById('merchantLocationInput').value = m.location || '';
-      document.getElementById('merchantMobileInput').value = m.mobile && m.mobile !== '-' ? m.mobile : (m.contact || '');
+      document.getElementById('merchantMobileInput').value = m.mobile && m.mobile !== '-' ? m.mobile : '';
       document.getElementById('merchantTypeInput').value = m.type || 'CALL CENTER';
-      document.getElementById('merchantTidsInput').value = m.tids || (m.tid || '');
       document.getElementById('merchantStatusInput').value = m.status || 'Active';
+      document.getElementById('merchantActionTakenInput').value = m.actiontaken && m.actiontaken !== '-' ? m.actiontaken : '';
+      document.getElementById('merchantRemarksInput').value = m.remarks && m.remarks !== '-' ? m.remarks : '';
       document.getElementById('merchantModal').style.display = 'flex';
     }
 
@@ -2987,37 +3012,36 @@
 
     function handleSaveMerchant(e) {
       e.preventDefault();
-      const editMid = document.getElementById('merchantEditMid').value;
-      const name = document.getElementById('merchantNameInput').value.trim().toUpperCase();
+      const editIdx = document.getElementById('merchantEditIndex').value;
       const mid = document.getElementById('merchantMidInput').value.trim();
+      const tid = document.getElementById('merchantTidInput').value.trim().toUpperCase();
+      const name = document.getElementById('merchantNameInput').value.trim().toUpperCase();
       const location = document.getElementById('merchantLocationInput').value.trim().toUpperCase();
       const mobile = document.getElementById('merchantMobileInput').value.trim();
       const type = document.getElementById('merchantTypeInput').value;
-      const tids = document.getElementById('merchantTidsInput').value.trim();
       const status = document.getElementById('merchantStatusInput').value;
+      const actiontaken = document.getElementById('merchantActionTakenInput').value.trim().toUpperCase();
+      const remarks = document.getElementById('merchantRemarksInput').value.trim();
 
-      if (editMid) {
-        const m = merchants.find(x => x.mid === editMid);
-        if (m) {
-          m.name = name;
-          m.mid = mid;
-          m.location = location;
-          m.mobile = mobile;
-          m.type = type;
-          m.tids = tids;
-          m.status = status;
+      const item = {
+        mid: mid,
+        merchantname: name,
+        location: location,
+        mobile: mobile || '-',
+        type: type,
+        tid: tid,
+        status: status,
+        actiontaken: actiontaken || '-',
+        remarks: remarks || '-'
+      };
+
+      if (editIdx !== '') {
+        const idx = parseInt(editIdx);
+        if (idx >= 0 && idx < merchants.length) {
+          merchants[idx] = item;
         }
       } else {
-        merchants.unshift({
-          mid: mid,
-          name: name,
-          location: location,
-          mobile: mobile,
-          type: type,
-          tids: tids,
-          terminals_count: tids ? tids.split(',').length : 1,
-          status: status
-        });
+        merchants.unshift(item);
       }
 
       try {
@@ -3029,9 +3053,9 @@
       showToast('Merchant Master updated successfully!');
     }
 
-    function deleteMerchant(mid) {
-      if (confirm('Delete merchant ' + mid + '?')) {
-        merchants = merchants.filter(m => m.mid !== mid);
+    function deleteMerchant(idx) {
+      if (confirm('Delete merchant record #' + (idx + 1) + '?')) {
+        merchants.splice(idx, 1);
         try {
           localStorage.setItem('smart_portal_merchants', JSON.stringify(merchants));
         } catch(err) {}

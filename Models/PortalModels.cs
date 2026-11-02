@@ -20,11 +20,14 @@ public class Complaint
 public class Merchant
 {
     public string Mid { get; set; } = string.Empty;
-    public string Name { get; set; } = string.Empty;
+    public string MerchantName { get; set; } = string.Empty;
     public string Location { get; set; } = string.Empty;
-    public string Contact { get; set; } = string.Empty;
-    public int TerminalsCount { get; set; } = 1;
+    public string Mobile { get; set; } = string.Empty;
+    public string Type { get; set; } = "CALL CENTER";
+    public string Tid { get; set; } = string.Empty;
     public string Status { get; set; } = "Active";
+    public string ActionTaken { get; set; } = string.Empty;
+    public string Remarks { get; set; } = string.Empty;
 }
 
 public class Terminal
