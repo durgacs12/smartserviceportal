@@ -2108,18 +2108,18 @@
       <!-- USER MASTER VIEW (1. Entry Page, 2. View Table) -->
       <section id="section-users" class="section-view">
         <!-- Sub Header & Tabs -->
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; flex-wrap: wrap; gap: 14px;">
           <div>
             <h2 style="font-size: 22px; font-weight: 800; color: #f8fafc; margin-bottom: 4px;">User Master</h2>
-            <p style="font-size: 13px; color: var(--slate-400); margin: 0;">Create new system user accounts or view existing technician credentials</p>
+            <p style="font-size: 13px; color: var(--slate-400); margin: 0;">Create new technician credentials or view all registered system users</p>
           </div>
           <!-- User Sub-Tabs -->
           <div class="filter-tabs" style="padding: 4px; background: rgba(255,255,255,0.05); border-radius: 10px; border: 1px solid rgba(255,255,255,0.08);">
-            <button id="tabBtnUserEntry" class="filter-tab active" onclick="switchUserTab('entry')" style="padding: 8px 16px; font-size: 13px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px;">
+            <button id="tabBtnUserEntry" class="filter-tab active" onclick="switchUserTab('entry')" style="padding: 9px 18px; font-size: 13px; font-weight: 700; display: inline-flex; align-items: center; gap: 7px;">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
               <span>User Entry Page</span>
             </button>
-            <button id="tabBtnUserView" class="filter-tab" onclick="switchUserTab('view')" style="padding: 8px 16px; font-size: 13px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px;">
+            <button id="tabBtnUserView" class="filter-tab" onclick="switchUserTab('view')" style="padding: 9px 18px; font-size: 13px; font-weight: 700; display: inline-flex; align-items: center; gap: 7px;">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
               <span>User View (<span id="userCountBadge">0</span>)</span>
             </button>
@@ -2128,13 +2128,18 @@
 
         <!-- 1. FIRST: USER ENTRY PAGE (Form View) -->
         <div id="userEntryView" style="display: block;">
-          <div class="table-container" style="max-width: 720px; margin: 0 auto; padding: 28px 32px;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 22px; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.08);">
-              <div>
-                <h3 id="formTitleUser" style="font-size: 18px; font-weight: 800; color: #f8fafc; margin: 0;">Add New System User</h3>
-                <p style="font-size: 12.5px; color: var(--slate-400); margin: 3px 0 0;">Enter staff credentials, login PIN, and access role</p>
+          <div class="table-container" style="max-width: 860px; margin: 0 auto; padding: 32px 36px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); background: #131d31; border: 1px solid rgba(255, 255, 255, 0.08);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.08);">
+              <div style="display:flex; align-items:center; gap: 12px;">
+                <div style="width: 42px; height: 42px; border-radius: 12px; background: rgba(140, 198, 62, 0.15); display: flex; align-items: center; justify-content: center; color: #8cc63e; border: 1px solid rgba(140, 198, 62, 0.25);">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                </div>
+                <div>
+                  <h3 id="formTitleUser" style="font-size: 19px; font-weight: 800; color: #f8fafc; margin: 0;">Add New System User</h3>
+                  <p style="font-size: 13px; color: var(--slate-400); margin: 3px 0 0;">Enter staff credentials, location, and login PIN</p>
+                </div>
               </div>
-              <button class="btn-secondary" onclick="switchUserTab('view')" style="display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; padding: 6px 14px;">
+              <button class="btn-secondary" onclick="switchUserTab('view')" style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; padding: 8px 16px; border-radius: 8px;">
                 <span>View All Users (<span id="btnUserViewCount">0</span>) &rarr;</span>
               </button>
             </div>
@@ -2142,35 +2147,55 @@
             <form onsubmit="handleSaveUserForm(event)">
               <input type="hidden" id="pageUserEditId" value="" />
 
-              <div class="form-group" style="margin-bottom: 16px;">
-                <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block;">Full Name *</label>
-                <input type="text" id="pageUserFullName" placeholder="e.g. Anzar K. or Ahmed Salim" required />
+              <!-- Full Name (Row 1) -->
+              <div class="form-group" style="margin-bottom: 20px;">
+                <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                  <span>Full Name *</span>
+                </label>
+                <input type="text" id="pageUserFullName" placeholder="e.g. Anzar K. or Ahmed Salim" style="height: 44px; font-size: 14px; border-radius: 8px;" required />
               </div>
 
-              <div class="form-group" style="margin-bottom: 16px;">
-                <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block;">Login Username *</label>
-                <input type="text" id="pageUserLoginName" placeholder="e.g. anzar_pos" required />
-              </div>
-
-              <div class="form-group" style="margin-bottom: 16px;">
-                <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block;">Location *</label>
-                <input type="text" id="pageUserZone" placeholder="e.g. Salalah, Muscat" required />
-              </div>
-
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;">
+              <!-- Credentials (Row 2: Username & PIN) -->
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
                 <div class="form-group" style="margin: 0;">
-                  <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block;">Mobile Number *</label>
-                  <input type="text" id="pageUserMobile" placeholder="+968 9XXXXXXX" required />
+                  <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"><circle cx="12" cy="12" r="4"></circle><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path></svg>
+                    <span>Login Username *</span>
+                  </label>
+                  <input type="text" id="pageUserLoginName" placeholder="e.g. anzar_pos" style="height: 44px; font-size: 14px; border-radius: 8px;" required />
                 </div>
                 <div class="form-group" style="margin: 0;">
-                  <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block;">Login PIN *</label>
-                  <input type="text" id="pageUserPin" placeholder="6-digit PIN" maxlength="6" required />
+                  <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    <span>Login PIN *</span>
+                  </label>
+                  <input type="text" id="pageUserPin" placeholder="e.g. 123456 (6-digit PIN)" maxlength="6" style="height: 44px; font-size: 14px; border-radius: 8px; letter-spacing: 1px;" required />
                 </div>
               </div>
 
-              <div style="display: flex; gap: 12px; justify-content: flex-end; align-items: center; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.08);">
-                <button type="button" class="btn-secondary" onclick="resetUserForm()" style="padding: 10px 20px; font-weight: 700;">Reset Form</button>
-                <button type="submit" class="btn-primary" id="btnPageSaveUser" style="padding: 10px 26px; font-weight: 800; display: inline-flex; align-items: center; gap: 8px;">
+              <!-- Deployment (Row 3: Location & Mobile Number) -->
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 28px;">
+                <div class="form-group" style="margin: 0;">
+                  <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    <span>Location *</span>
+                  </label>
+                  <input type="text" id="pageUserZone" placeholder="e.g. Salalah, Muscat HQ" style="height: 44px; font-size: 14px; border-radius: 8px;" required />
+                </div>
+                <div class="form-group" style="margin: 0;">
+                  <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                    <span>Mobile Number *</span>
+                  </label>
+                  <input type="text" id="pageUserMobile" placeholder="e.g. +968 92751955" style="height: 44px; font-size: 14px; border-radius: 8px;" required />
+                </div>
+              </div>
+
+              <!-- Form Buttons -->
+              <div style="display: flex; gap: 14px; justify-content: flex-end; align-items: center; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.08);">
+                <button type="button" class="btn-secondary" onclick="resetUserForm()" style="padding: 11px 22px; font-size: 13.5px; font-weight: 700; border-radius: 8px;">Reset Form</button>
+                <button type="submit" class="btn-primary" id="btnPageSaveUser" style="padding: 11px 28px; font-size: 14px; font-weight: 800; border-radius: 8px; display: inline-flex; align-items: center; gap: 8px;">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
                   <span>Save User</span>
                 </button>
@@ -2185,7 +2210,7 @@
             <div class="table-header">
               <div>
                 <h3>System Users Directory (<span id="userCountBadge2">0</span> Users)</h3>
-                <p style="font-size: 13px; color: var(--slate-400); margin-top: 4px;">System credentials, field engineer accounts, roles, and PIN codes</p>
+                <p style="font-size: 13px; color: var(--slate-400); margin-top: 4px;">System credentials, field engineer accounts, and login PIN codes</p>
               </div>
               <button class="btn-primary" onclick="switchUserTab('entry')" style="display: inline-flex; align-items: center; gap: 6px;">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
