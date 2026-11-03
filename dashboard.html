@@ -6,8 +6,29 @@
   <title>Smart Service Portal - Dashboard & Masters</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script src="xlsx.full.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <script src="xlsx.full.min.js">
+    // Immediate and DOM Ready Dropdown Initialization
+    try {
+      populateMerchantDropdowns();
+      populateUserDropdowns();
+    } catch(e) {}
+
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        populateMerchantDropdowns();
+        populateUserDropdowns();
+      } catch(e) {}
+    });
+
+    window.addEventListener('load', () => {
+      try {
+        populateMerchantDropdowns();
+        populateUserDropdowns();
+      } catch(e) {}
+    });
+
+  </script>
   <script src="portal_data.js"></script>
   <style>
     html, :root {
@@ -1578,9 +1599,291 @@
       }
     }
     @media (min-width: 769px) {
-    .mobile-menu-btn { display: none !important; }
-  }
-</style>
+      .mobile-menu-btn { display: none !important; }
+    }
+
+    /* =========================================================
+       APPLICATION BLUE MASTER MANAGEMENT THEME
+       (Location Master, Action Taken Master, Issue Master)
+       ========================================================= */
+    .master-page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .master-page-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: #f8fafc;
+      letter-spacing: -0.3px;
+      margin: 0;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    .btn-back-dashboard {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 18px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #e2e8f0;
+      border-radius: 8px;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-back-dashboard:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.25);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    .master-grid-container {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 390px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    @media (max-width: 1024px) {
+      .master-grid-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .master-panel-card {
+      background: #131d31;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 24px 26px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .master-panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .master-panel-title {
+      font-size: 17.5px;
+      font-weight: 700;
+      color: #f8fafc;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .master-icon-box {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: rgba(56, 189, 248, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      flex-shrink: 0;
+    }
+
+    .blue-count-badge {
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      background: rgba(56, 189, 248, 0.12);
+      color: #38bdf8;
+      padding: 5px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+
+    .master-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    .master-table th {
+      padding: 13px 14px;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      color: #94a3b8;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .master-table td {
+      padding: 16px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      vertical-align: middle;
+      font-size: 13.5px;
+    }
+
+    .master-table tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .master-id-cell {
+      color: #38bdf8;
+      font-weight: 800;
+      font-size: 14px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      width: 100px;
+    }
+
+    .master-name-cell {
+      color: #f8fafc;
+      font-weight: 600;
+      font-size: 14.5px;
+    }
+
+    .btn-blue-edit {
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      background: rgba(56, 189, 248, 0.08);
+      color: #38bdf8;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-blue-edit:hover {
+      background: rgba(56, 189, 248, 0.22);
+      border-color: #38bdf8;
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    .btn-red-delete {
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      background: rgba(239, 68, 68, 0.08);
+      color: #f87171;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-red-delete:hover {
+      background: rgba(239, 68, 68, 0.22);
+      border-color: #ef4444;
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    .master-form-card {
+      position: sticky;
+      top: 90px;
+    }
+
+    .master-form-group {
+      margin-bottom: 18px;
+    }
+
+    .master-form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: #cbd5e1;
+      margin-bottom: 8px;
+    }
+
+    .master-form-input, .master-form-select {
+      width: 100%;
+      height: 44px;
+      background: #0a0f1d;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      color: #f8fafc;
+      font-size: 13.5px;
+      padding: 0 14px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .master-form-input:focus, .master-form-select:focus {
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+    }
+
+    .btn-blue-submit {
+      width: 100%;
+      background: #2563eb;
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 8px;
+      padding: 13px 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+      transition: all 0.2s ease;
+      margin-top: 20px;
+    }
+
+    .btn-blue-submit:hover {
+      background: #1d4ed8;
+      box-shadow: 0 6px 18px rgba(37, 99, 235, 0.5);
+      transform: translateY(-1px);
+    }
+
+    .btn-cancel-edit {
+      width: 100%;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #94a3b8;
+      border-radius: 8px;
+      padding: 10px;
+      margin-top: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-cancel-edit:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: #e2e8f0;
+      border-color: #64748b;
+    }
+  </style>
 
 </head>
 <body>
@@ -1866,70 +2169,168 @@
         </div>
       </section>
 
-      <!-- ISSUE MASTER VIEW -->
+      <!-- ISSUE MASTER VIEW (LUXURY GOLD SPLIT DESIGN) -->
       <section id="section-issues" class="section-view">
-        <div class="table-container">
-          <div class="table-header">
-            <div>
-              <h3>Issue Master (<span id="issueCountBadge">0</span> Issues / Fault Types)</h3>
-              <p style="font-size: 13px; color: var(--slate-400); margin-top: 4px;">Standard POS fault categories, service issues, and SLA definitions</p>
+        <div class="master-page-header">
+          <h2 class="master-page-title">Issue Master Management</h2>
+          <button type="button" class="btn-back-dashboard" onclick="switchSection('dashboard', document.querySelector('.nav-item'))">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            <span>BACK TO DASHBOARD</span>
+          </button>
+        </div>
+
+        <div class="master-grid-container">
+          <!-- Left Column: Configured Issues Table -->
+          <div class="master-panel-card">
+            <div class="master-panel-header">
+              <div class="master-panel-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="4" y1="21" x2="4" y2="14"></line>
+                  <line x1="4" y1="10" x2="4" y2="3"></line>
+                  <line x1="12" y1="21" x2="12" y2="12"></line>
+                  <line x1="12" y1="8" x2="12" y2="3"></line>
+                  <line x1="20" y1="21" x2="20" y2="16"></line>
+                  <line x1="20" y1="12" x2="20" y2="3"></line>
+                  <line x1="1" y1="14" x2="7" y2="14"></line>
+                  <line x1="9" y1="8" x2="15" y2="8"></line>
+                  <line x1="17" y1="16" x2="23" y2="16"></line>
+                </svg>
+                <span>Configured Issues</span>
+              </div>
+              <span class="blue-count-badge" id="issueCountBadge">0 Issues</span>
             </div>
-            <button class="btn-primary" onclick="openNewIssueModal()">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <line x1="12" y1="5" x2="12" y2="19"></line>
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-              </svg>
-              <span>+ Add New Issue</span>
-            </button>
+
+            <div class="table-responsive">
+              <table class="master-table">
+                <thead>
+                  <tr>
+                    <th style="width: 110px;">ISSUE ID</th>
+                    <th>ISSUE / FAULT NAME</th>
+                    <th style="text-align: right; width: 175px;">ACTION</th>
+                  </tr>
+                </thead>
+                <tbody id="issueTableBody"></tbody>
+              </table>
+            </div>
           </div>
-          <div class="table-responsive">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Issue Code</th>
-                  <th>Issue / Fault Name</th>
-                  <th>Category</th>
-                  <th>Priority</th>
-                  <th>SLA Resolution</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody id="issueTableBody"></tbody>
-            </table>
+
+          <!-- Right Column: Create New Issue Form (Simple: Name Only) -->
+          <div class="master-panel-card master-form-card">
+            <div class="master-panel-header" style="border-bottom: none; margin-bottom: 12px; padding-bottom: 0;">
+              <div class="master-panel-title">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.5">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="8" x2="12" y2="16"></line>
+                  <line x1="8" y1="12" x2="16" y2="12"></line>
+                </svg>
+                <span id="panelTitleIssue">Create New Issue</span>
+              </div>
+            </div>
+
+            <form onsubmit="handleSaveIssueInline(event)">
+              <input type="hidden" id="inlineIssueCode" value="" />
+
+              <div class="master-form-group">
+                <label class="master-form-label">Issue / Fault Name <span style="color: #ef4444;">*</span></label>
+                <input type="text" id="inlineIssueName" class="master-form-input" placeholder="e.g. STATIONARY DELIVERY" required />
+              </div>
+
+              <button type="submit" id="btnSubmitIssueInline" class="btn-blue-submit">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="8" x2="12" y2="16"></line>
+                  <line x1="8" y1="12" x2="16" y2="12"></line>
+                </svg>
+                <span id="btnSubmitIssueText">CREATE ISSUE</span>
+              </button>
+
+              <button type="button" id="btnCancelIssueInline" class="btn-cancel-edit" onclick="cancelIssueInlineEdit()" style="display: none;">
+                CANCEL EDIT
+              </button>
+            </form>
           </div>
         </div>
       </section>
 
-      <!-- ACTION TAKEN MASTER VIEW -->
+      <!-- ACTION TAKEN MASTER VIEW (LUXURY GOLD SPLIT DESIGN) -->
       <section id="section-actions" class="section-view">
-        <div class="table-container">
-          <div class="table-header">
-            <div>
-              <h3>Action Taken Master (<span id="actionCountBadge">0</span> Resolution Actions)</h3>
-              <p style="font-size: 13px; color: var(--slate-400); margin-top: 4px;">Standard field engineer resolution actions, parts swapped, and repair records</p>
+        <div class="master-page-header">
+          <h2 class="master-page-title">Action Taken Master Management</h2>
+          <button type="button" class="btn-back-dashboard" onclick="switchSection('dashboard', document.querySelector('.nav-item'))">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            <span>BACK TO DASHBOARD</span>
+          </button>
+        </div>
+
+        <div class="master-grid-container">
+          <!-- Left Column: Configured Actions Table -->
+          <div class="master-panel-card">
+            <div class="master-panel-header">
+              <div class="master-panel-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="4" y1="21" x2="4" y2="14"></line>
+                  <line x1="4" y1="10" x2="4" y2="3"></line>
+                  <line x1="12" y1="21" x2="12" y2="12"></line>
+                  <line x1="12" y1="8" x2="12" y2="3"></line>
+                  <line x1="20" y1="21" x2="20" y2="16"></line>
+                  <line x1="20" y1="12" x2="20" y2="3"></line>
+                  <line x1="1" y1="14" x2="7" y2="14"></line>
+                  <line x1="9" y1="8" x2="15" y2="8"></line>
+                  <line x1="17" y1="16" x2="23" y2="16"></line>
+                </svg>
+                <span>Configured Action Taken</span>
+              </div>
+              <span class="blue-count-badge" id="actionCountBadge">0 Actions</span>
             </div>
-            <button class="btn-primary" onclick="openNewActionModal()">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <line x1="12" y1="5" x2="12" y2="19"></line>
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-              </svg>
-              <span>+ Add Action Taken</span>
-            </button>
+
+            <div class="table-responsive">
+              <table class="master-table">
+                <thead>
+                  <tr>
+                    <th style="width: 110px;">ACTION ID</th>
+                    <th>ACTION TAKEN NAME</th>
+                    <th style="text-align: right; width: 175px;">ACTION</th>
+                  </tr>
+                </thead>
+                <tbody id="actionTableBody"></tbody>
+              </table>
+            </div>
           </div>
-          <div class="table-responsive">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Action Code</th>
-                  <th>Action Taken Description</th>
-                  <th>Resolution Type</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody id="actionTableBody"></tbody>
-            </table>
+
+          <!-- Right Column: Create New Action Taken Form (Simple: Name Only) -->
+          <div class="master-panel-card master-form-card">
+            <div class="master-panel-header" style="border-bottom: none; margin-bottom: 12px; padding-bottom: 0;">
+              <div class="master-panel-title">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.5">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="8" x2="12" y2="16"></line>
+                  <line x1="8" y1="12" x2="16" y2="12"></line>
+                </svg>
+                <span id="panelTitleAction">Create New Action Taken</span>
+              </div>
+            </div>
+
+            <form onsubmit="handleSaveActionInline(event)">
+              <input type="hidden" id="inlineActionCode" value="" />
+
+              <div class="master-form-group">
+                <label class="master-form-label">Action Taken Description <span style="color: #ef4444;">*</span></label>
+                <input type="text" id="inlineActionName" class="master-form-input" placeholder="e.g. ROLLS DELIVERED" required />
+              </div>
+
+              <button type="submit" id="btnSubmitActionInline" class="btn-blue-submit">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="8" x2="12" y2="16"></line>
+                  <line x1="8" y1="12" x2="16" y2="12"></line>
+                </svg>
+                <span id="btnSubmitActionText">CREATE ACTION TAKEN</span>
+              </button>
+
+              <button type="button" id="btnCancelActionInline" class="btn-cancel-edit" onclick="cancelActionInlineEdit()" style="display: none;">
+                CANCEL EDIT
+              </button>
+            </form>
           </div>
         </div>
       </section>
@@ -2022,7 +2423,17 @@
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 16px;">
                   <div class="form-group" style="margin: 0;">
                     <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block;">LOCATION *</label>
-                    <input type="text" id="pageMerchantLocation" placeholder="e.g. SAADA, SALALAH, TAQA, AWQATH" style="height: 44px; font-size: 14px; border-radius: 8px;" required />
+                    <select id="pageMerchantLocation" onfocus="populateMerchantDropdowns()" style="height: 44px; font-size: 14px; border-radius: 8px; background: #0a0f1d; color: #f8fafc; border: 1px solid rgba(255, 255, 255, 0.12);" required>
+                      <option value="">-- Select Location --</option>
+                      <option value="AWQATH">AWQATH</option>
+                      <option value="MIRBAT">MIRBAT</option>
+                      <option value="MUSCAT HQ">MUSCAT HQ</option>
+                      <option value="NIZWA">NIZWA</option>
+                      <option value="SAADA">SAADA</option>
+                      <option value="SALALAH" selected>SALALAH</option>
+                      <option value="SOHAR">SOHAR</option>
+                      <option value="TAQAH">TAQAH</option>
+                    </select>
                   </div>
                   <div class="form-group" style="margin: 0;">
                     <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block;">MOBILE NUMBER</label>
@@ -2068,11 +2479,40 @@
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 16px;">
                   <div class="form-group" style="margin: 0;">
                     <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block;">ISSUE / REQUEST</label>
-                    <input type="text" id="pageMerchantIssue" placeholder="e.g. STATIONARY DELIVERY, HARD WARE ISSUE, NEW INSTALLATION, PICK TERMINAL" style="height: 44px; font-size: 14px; border-radius: 8px;" />
+                    <select id="pageMerchantIssue" onfocus="populateMerchantDropdowns()" style="height: 44px; font-size: 14px; border-radius: 8px; background: #0a0f1d; color: #f8fafc; border: 1px solid rgba(255, 255, 255, 0.12);">
+                      <option value="">-- Select Issue / Request --</option>
+                      <option value="BATTERY NOT CHARGING">BATTERY NOT CHARGING</option>
+                      <option value="CHARGING PORT ISSUE">CHARGING PORT ISSUE</option>
+                      <option value="CONNECTION ISSUE">CONNECTION ISSUE</option>
+                      <option value="HARD WARE ISSUE">HARD WARE ISSUE</option>
+                      <option value="NETWORK TIMEOUT">NETWORK TIMEOUT</option>
+                      <option value="NEW INSTALLATION">NEW INSTALLATION</option>
+                      <option value="PAPER ROLL REQUEST">PAPER ROLL REQUEST</option>
+                      <option value="PICK TERMINAL FOR REPLACEMENT">PICK TERMINAL FOR REPLACEMENT</option>
+                      <option value="PRINTER JAM">PRINTER JAM</option>
+                      <option value="REPLACEMENT">REPLACEMENT</option>
+                      <option value="STATIONARY DELIVERY" selected>STATIONARY DELIVERY</option>
+                      <option value="ZERO SALES PICK TERMINAL">ZERO SALES PICK TERMINAL</option>
+                    </select>
                   </div>
                   <div class="form-group" style="margin: 0;">
                     <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block;">ACTION TAKEN</label>
-                    <input type="text" id="pageMerchantActionTaken" placeholder="e.g. ROLLS DELIVERED, CHARGER REPLACED, NEW INSTALLATION, REPLACED" style="height: 44px; font-size: 14px; border-radius: 8px;" />
+                    <select id="pageMerchantActionTaken" onfocus="populateMerchantDropdowns()" style="height: 44px; font-size: 14px; border-radius: 8px; background: #0a0f1d; color: #f8fafc; border: 1px solid rgba(255, 255, 255, 0.12);">
+                      <option value="">-- Select Action Taken --</option>
+                      <option value="ADAPTER REPLACED">ADAPTER REPLACED</option>
+                      <option value="BATTERY REPLACED">BATTERY REPLACED</option>
+                      <option value="CHARGER REPLACED">CHARGER REPLACED</option>
+                      <option value="GENERAL CHECKUP">GENERAL CHECKUP</option>
+                      <option value="INSPECTION DONE">INSPECTION DONE</option>
+                      <option value="NEW INSTALLATION">NEW INSTALLATION</option>
+                      <option value="PICK TERMINAL FOR REPLACEMENT">PICK TERMINAL FOR REPLACEMENT</option>
+                      <option value="REPLACED">REPLACED</option>
+                      <option value="ROLLS DELIVERED" selected>ROLLS DELIVERED</option>
+                      <option value="SIM CARD REPLACED">SIM CARD REPLACED</option>
+                      <option value="SOFTWARE RELOADED / UPDATED">SOFTWARE RELOADED / UPDATED</option>
+                      <option value="TERMINAL SWAPPED">TERMINAL SWAPPED</option>
+                      <option value="ZERO SALES REMOVAL">ZERO SALES REMOVAL</option>
+                    </select>
                   </div>
                 </div>
 
@@ -2105,7 +2545,7 @@
             <div class="table-header">
               <div>
                 <h3>Merchant Directory & View (<span id="merchantCountBadge2">0</span> Records)</h3>
-                <p style="font-size: 13px; color: var(--slate-400); margin-top: 4px;">Search, view, and manage all 17 fields of merchant POS records</p>
+                <p style="font-size: 13px; color: var(--slate-400); margin-top: 4px;">Search, view, and manage all merchant POS records</p>
               </div>
               <button class="btn-primary" onclick="switchMerchantTab('entry')" style="display: inline-flex; align-items: center; gap: 6px;">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
@@ -2142,36 +2582,85 @@
         </div>
       </section>
 
-      <!-- LOCATION MASTER VIEW -->
+      <!-- LOCATION MASTER VIEW (LUXURY GOLD SPLIT DESIGN) -->
       <section id="section-location" class="section-view">
-        <div class="table-container">
-          <div class="table-header">
-            <div>
-              <h3>Location Master (<span id="locationCountBadge">0</span> Cities & Zones)</h3>
-              <p style="font-size: 13px; color: var(--slate-400); margin-top: 4px;">Manage operational service regions, cities, and governorates</p>
+        <div class="master-page-header">
+          <h2 class="master-page-title">Location Master Management</h2>
+          <button type="button" class="btn-back-dashboard" onclick="switchSection('dashboard', document.querySelector('.nav-item'))">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            <span>BACK TO DASHBOARD</span>
+          </button>
+        </div>
+
+        <div class="master-grid-container">
+          <!-- Left Column: Configured Locations Table -->
+          <div class="master-panel-card">
+            <div class="master-panel-header">
+              <div class="master-panel-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="4" y1="21" x2="4" y2="14"></line>
+                  <line x1="4" y1="10" x2="4" y2="3"></line>
+                  <line x1="12" y1="21" x2="12" y2="12"></line>
+                  <line x1="12" y1="8" x2="12" y2="3"></line>
+                  <line x1="20" y1="21" x2="20" y2="16"></line>
+                  <line x1="20" y1="12" x2="20" y2="3"></line>
+                  <line x1="1" y1="14" x2="7" y2="14"></line>
+                  <line x1="9" y1="8" x2="15" y2="8"></line>
+                  <line x1="17" y1="16" x2="23" y2="16"></line>
+                </svg>
+                <span>Configured Locations</span>
+              </div>
+              <span class="blue-count-badge" id="locationCountBadge">0 Locations</span>
             </div>
-            <button class="btn-primary" onclick="openNewLocationModal()">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <line x1="12" y1="5" x2="12" y2="19"></line>
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-              </svg>
-              <span>+ Add Location</span>
-            </button>
+
+            <div class="table-responsive">
+              <table class="master-table">
+                <thead>
+                  <tr>
+                    <th style="width: 110px;">ZONE ID</th>
+                    <th>ZONE NAME</th>
+                    <th style="text-align: right; width: 175px;">ACTION</th>
+                  </tr>
+                </thead>
+                <tbody id="locationTableBody"></tbody>
+              </table>
+            </div>
           </div>
-          <div class="table-responsive">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Location Code</th>
-                  <th>Location / City Name</th>
-                  <th>Governorate / Region</th>
-                  <th>Active Merchants</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody id="locationTableBody"></tbody>
-            </table>
+
+          <!-- Right Column: Create New Location Form (Simple: Name Only) -->
+          <div class="master-panel-card master-form-card">
+            <div class="master-panel-header" style="border-bottom: none; margin-bottom: 12px; padding-bottom: 0;">
+              <div class="master-panel-title">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.5">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="8" x2="12" y2="16"></line>
+                  <line x1="8" y1="12" x2="16" y2="12"></line>
+                </svg>
+                <span id="panelTitleLocation">Create New Zone</span>
+              </div>
+            </div>
+
+            <form onsubmit="handleSaveLocationInline(event)">
+              <input type="hidden" id="inlineLocationCode" value="" />
+
+              <div class="master-form-group">
+                <label class="master-form-label">Zone Division Name <span style="color: #ef4444;">*</span></label>
+                <input type="text" id="inlineLocationName" class="master-form-input" placeholder="e.g. Ernakulam Central Division" required />
+              </div>
+
+              <button type="submit" id="btnSubmitLocationInline" class="btn-blue-submit">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="8" x2="12" y2="16"></line>
+                  <line x1="8" y1="12" x2="16" y2="12"></line>
+                </svg>
+                <span id="btnSubmitLocationText">CREATE ZONE</span>
+              </button>
+
+              <button type="button" id="btnCancelLocationInline" class="btn-cancel-edit" onclick="cancelLocationInlineEdit()" style="display: none;">
+                CANCEL EDIT
+              </button>
+            </form>
           </div>
         </div>
       </section>
@@ -2411,117 +2900,6 @@
     </div>
   </div>
 
-  <!-- Issue Entry / Edit Modal -->
-  <div id="issueModal" class="modal-overlay">
-    <div class="modal-card">
-      <div class="modal-header">
-        <h3 id="issueModalTitle">Add New Issue / Fault</h3>
-        <button class="modal-close" onclick="closeIssueModal()">&times;</button>
-      </div>
-      <form onsubmit="handleSaveIssue(event)">
-        <input type="hidden" id="issueEditCode" value="" />
-        <div class="modal-body">
-          <div class="form-group">
-            <label>Issue / Fault Name</label>
-            <input type="text" id="issueNameInput" placeholder="e.g. PAPER ROLL REQUEST, PRINTER JAM" required />
-          </div>
-          <div class="form-group">
-            <label>Fault Category</label>
-            <select id="issueCategoryInput" required>
-              <option value="Stationery Supply">Stationery Supply</option>
-              <option value="Hardware / Printer">Hardware / Printer</option>
-              <option value="Connectivity & SIM">Connectivity & SIM</option>
-              <option value="Power & Battery">Power & Battery</option>
-              <option value="Hardware / Port">Hardware / Port</option>
-              <option value="Hardware / Screen">Hardware / Screen</option>
-              <option value="Onboarding & Install">Onboarding & Install</option>
-              <option value="Firmware & Software">Firmware & Software</option>
-              <option value="Preventative Maintenance">Preventative Maintenance</option>
-              <option value="Asset Retrieval">Asset Retrieval</option>
-            </select>
-          </div>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
-            <div class="form-group">
-              <label>Priority</label>
-              <select id="issuePriorityInput">
-                <option value="Normal">Normal</option>
-                <option value="Medium">Medium</option>
-                <option value="High">High</option>
-                <option value="Urgent">Urgent</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>SLA Resolution Target</label>
-              <select id="issueSlaInput">
-                <option value="4 Hours">4 Hours</option>
-                <option value="6 Hours">6 Hours</option>
-                <option value="8 Hours">8 Hours</option>
-                <option value="12 Hours">12 Hours</option>
-                <option value="24 Hours">24 Hours</option>
-                <option value="48 Hours">48 Hours</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Status</label>
-            <select id="issueStatusInput">
-              <option value="Active">Active</option>
-              <option value="Inactive">Inactive</option>
-            </select>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn-secondary" onclick="closeIssueModal()">Cancel</button>
-          <button type="submit" class="btn-primary" id="btnSaveIssueText">Save Issue</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- Action Taken Entry / Edit Modal -->
-  <div id="actionModal" class="modal-overlay">
-    <div class="modal-card">
-      <div class="modal-header">
-        <h3 id="actionModalTitle">Add Action Taken</h3>
-        <button class="modal-close" onclick="closeActionModal()">&times;</button>
-      </div>
-      <form onsubmit="handleSaveAction(event)">
-        <input type="hidden" id="actionEditCode" value="" />
-        <div class="modal-body">
-          <div class="form-group">
-            <label>Action Taken Description</label>
-            <input type="text" id="actionNameInput" placeholder="e.g. ROLLS DELIVERED, SIM CARD REPLACED" required />
-          </div>
-          <div class="form-group">
-            <label>Resolution Type</label>
-            <select id="actionTypeInput" required>
-              <option value="Stationery Delivery">Stationery Delivery</option>
-              <option value="Hardware / Connectivity">Hardware / Connectivity</option>
-              <option value="On-site Maintenance">On-site Maintenance</option>
-              <option value="Power & Hardware">Power & Hardware</option>
-              <option value="Asset Replacement">Asset Replacement (Swap)</option>
-              <option value="Firmware & App">Firmware & App Reload</option>
-              <option value="Hardware Repair">Hardware Repair</option>
-              <option value="Customer Support">Customer Training & Support</option>
-              <option value="Asset Recovery">Asset Recovery</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Status</label>
-            <select id="actionStatusInput">
-              <option value="Active">Active</option>
-              <option value="Inactive">Inactive</option>
-            </select>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn-secondary" onclick="closeActionModal()">Cancel</button>
-          <button type="submit" class="btn-primary" id="btnSaveActionText">Save Action Taken</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
   <!-- Merchant Entry / Edit Modal -->
   <div id="merchantModal" class="modal-overlay">
     <div class="modal-card">
@@ -2591,43 +2969,7 @@
     </div>
   </div>
 
-  <!-- Location Entry / Edit Modal -->
-  <div id="locationModal" class="modal-overlay">
-    <div class="modal-card">
-      <div class="modal-header">
-        <h3 id="locationModalTitle">Add Operational Location</h3>
-        <button class="modal-close" onclick="closeLocationModal()">&times;</button>
-      </div>
-      <form onsubmit="handleSaveLocation(event)">
-        <input type="hidden" id="locationEditCode" value="" />
-        <div class="modal-body">
-          <div class="form-group">
-            <label>Location / City Name</label>
-            <input type="text" id="locationNameInput" placeholder="e.g. Salalah, Sohar, Nizwa" required />
-          </div>
-          <div class="form-group">
-            <label>Governorate / Region</label>
-            <input type="text" id="locationRegionInput" placeholder="e.g. Dhofar, Al Batinah, Muscat" required />
-          </div>
-          <div class="form-group">
-            <label>Status</label>
-            <select id="locationStatusInput">
-              <option value="Active">Active</option>
-              <option value="Inactive">Inactive</option>
-            </select>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn-secondary" onclick="closeLocationModal()">Cancel</button>
-          <button type="submit" class="btn-primary" id="btnSaveLocationText">Save Location</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
   
-
-
   <script>
     // Initialize Data from portal_data.js
     let complaints = PORTAL_DATA.complaints || [];
@@ -2681,7 +3023,6 @@
         }
       } else {
         localStorage.removeItem('smart_portal_merchants');
-          localStorage.removeItem('smart_portal_merchants_v5');
         merchants = PORTAL_DATA.merchants || [];
         localStorage.setItem(vKey, JSON.stringify(merchants));
       }
@@ -2712,6 +3053,99 @@
         if (Array.isArray(p) && p.length > 0) locations = p;
       }
     } catch(e) {}
+        function populateMerchantDropdowns() {
+      // 1. Populate Location Dropdown from Location Master
+      const locSelect = document.getElementById('pageMerchantLocation');
+      if (locSelect) {
+        const cur = locSelect.value;
+        const locSet = new Set(['SALALAH', 'SAADA', 'TAQAH', 'MIRBAT', 'MUSCAT HQ', 'SOHAR', 'NIZWA', 'AWQATH']);
+        if (typeof locations !== 'undefined' && Array.isArray(locations)) {
+          locations.forEach(l => {
+            if (l && l.name) locSet.add(l.name.trim().toUpperCase());
+          });
+        }
+        if (typeof merchants !== 'undefined' && Array.isArray(merchants)) {
+          merchants.forEach(m => {
+            if (m && m.location && m.location !== '-') locSet.add(m.location.trim().toUpperCase());
+          });
+        }
+        const sortedLocs = Array.from(locSet).filter(Boolean).sort();
+        locSelect.innerHTML = '<option value="">-- Select Location --</option>';
+        sortedLocs.forEach(locName => {
+          const opt = document.createElement('option');
+          opt.value = locName;
+          opt.textContent = locName;
+          locSelect.appendChild(opt);
+        });
+        if (cur && [...locSelect.options].some(o => o.value === cur)) {
+          locSelect.value = cur;
+        } else {
+          locSelect.value = 'SALALAH';
+        }
+      }
+
+      // 2. Populate Issue Dropdown from Issue Master
+      const issueSelect = document.getElementById('pageMerchantIssue');
+      if (issueSelect) {
+        const cur = issueSelect.value;
+        const issueSet = new Set(['STATIONARY DELIVERY', 'HARD WARE ISSUE', 'NEW INSTALLATION', 'PICK TERMINAL FOR REPLACEMENT', 'REPLACEMENT', 'CONNECTION ISSUE', 'ZERO SALES PICK TERMINAL', 'PAPER ROLL REQUEST', 'NETWORK TIMEOUT', 'PRINTER JAM', 'BATTERY NOT CHARGING', 'CHARGING PORT ISSUE']);
+        if (typeof issues !== 'undefined' && Array.isArray(issues)) {
+          issues.forEach(i => {
+            if (i && i.name) issueSet.add(i.name.trim().toUpperCase());
+          });
+        }
+        if (typeof merchants !== 'undefined' && Array.isArray(merchants)) {
+          merchants.forEach(m => {
+            if (m && m.issue && m.issue !== '-') issueSet.add(m.issue.trim().toUpperCase());
+          });
+        }
+        const sortedIssues = Array.from(issueSet).filter(Boolean).sort();
+        issueSelect.innerHTML = '<option value="">-- Select Issue / Request --</option>';
+        sortedIssues.forEach(issueName => {
+          const opt = document.createElement('option');
+          opt.value = issueName;
+          opt.textContent = issueName;
+          issueSelect.appendChild(opt);
+        });
+        if (cur && [...issueSelect.options].some(o => o.value === cur)) {
+          issueSelect.value = cur;
+        } else {
+          issueSelect.value = 'STATIONARY DELIVERY';
+        }
+      }
+
+      // 3. Populate Action Taken Dropdown from Action Taken Master
+      const actionSelect = document.getElementById('pageMerchantActionTaken');
+      if (actionSelect) {
+        const cur = actionSelect.value;
+        const actionSet = new Set(['ROLLS DELIVERED', 'NEW INSTALLATION', 'PICK TERMINAL FOR REPLACEMENT', 'REPLACED', 'SIM CARD REPLACED', 'CHARGER REPLACED', 'ZERO SALES REMOVAL', 'GENERAL CHECKUP', 'INSPECTION DONE', 'ADAPTER REPLACED', 'TERMINAL SWAPPED', 'SOFTWARE RELOADED / UPDATED']);
+        if (typeof actionsTaken !== 'undefined' && Array.isArray(actionsTaken)) {
+          actionsTaken.forEach(a => {
+            if (a && a.name) actionSet.add(a.name.trim().toUpperCase());
+          });
+        }
+        if (typeof merchants !== 'undefined' && Array.isArray(merchants)) {
+          merchants.forEach(m => {
+            const act = m ? (m.actionTaken || m.actiontaken || m.action) : null;
+            if (act && act !== '-') actionSet.add(act.trim().toUpperCase());
+          });
+        }
+        const sortedActions = Array.from(actionSet).filter(Boolean).sort();
+        actionSelect.innerHTML = '<option value="">-- Select Action Taken --</option>';
+        sortedActions.forEach(actName => {
+          const opt = document.createElement('option');
+          opt.value = actName;
+          opt.textContent = actName;
+          actionSelect.appendChild(opt);
+        });
+        if (cur && [...actionSelect.options].some(o => o.value === cur)) {
+          actionSelect.value = cur;
+        } else {
+          actionSelect.value = 'ROLLS DELIVERED';
+        }
+      }
+    }
+
     function populateUserDropdowns() {
       const zoneSelect = document.getElementById('userZone');
       if (zoneSelect) {
@@ -2743,7 +3177,10 @@
       }
     }
 
-    // LOCATION MASTER LOGIC
+    // ==========================================
+    // ==========================================
+    // LOCATION MASTER LOGIC (LUXURY GOLD SPLIT DESIGN)
+    // ==========================================
     function renderLocationsTable() {
       const tbody = document.getElementById('locationTableBody');
       if (!tbody) return;
@@ -2752,44 +3189,36 @@
       let list = locations;
       if (searchQuery) {
         const q = searchQuery.toLowerCase();
-        list = list.filter(l => l.name.toLowerCase().includes(q) || l.region.toLowerCase().includes(q) || l.code.toLowerCase().includes(q));
+        list = list.filter(l => (l.name && l.name.toLowerCase().includes(q)) || (l.code && l.code.toLowerCase().includes(q)));
       }
 
-      document.getElementById('locationCountBadge').textContent = list.length;
-      document.getElementById('navCountLocations').textContent = locations.length;
+      const countBadge = document.getElementById('locationCountBadge');
+      if (countBadge) countBadge.textContent = `${list.length} Locations`;
+      const navBadge = document.getElementById('navCountLocations');
+      if (navBadge) navBadge.textContent = locations.length;
 
       if (list.length === 0) {
-        if (locations.length === 0) {
-          tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding: 48px 20px; color: #64748b;">
-            <div style="font-size:36px; margin-bottom:10px;">📍</div>
-            <strong style="color:#0f172a; font-size:16px; display:block; margin-bottom:4px;">No Locations Registered</strong>
-            <p style="font-size:13px; color:#94a3b8; margin-bottom:14px;">Location Master is currently empty.</p>
-            <button class="btn-primary" style="display:inline-flex; align-items:center; gap:6px; margin:0 auto;" onclick="openNewLocationModal()">
-              + Add Location
-            </button>
-          </td></tr>`;
-        } else {
-          tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding: 28px; color: #94a3b8;">No matching locations found.</td></tr>';
-        }
+        tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; padding: 42px 14px; color: #94a3b8;">No locations found.</td></tr>';
         return;
       }
 
-      list.forEach(loc => {
+      list.forEach((loc, index) => {
         const tr = document.createElement('tr');
-        const statusBadge = loc.status === 'Active'
-          ? '<span class="status-badge status-active">Active</span>'
-          : '<span class="status-badge status-replaced">Inactive</span>';
+        const numId = parseInt(loc.code.replace(/\D/g, '')) || (index + 1);
 
         tr.innerHTML = `
-          <td><strong><span class="tag-tid">${loc.code}</span></strong></td>
-          <td><strong>${loc.name}</strong></td>
-          <td>${loc.region}</td>
-          <td><strong style="color: var(--blue);">${loc.merchants_count || 0} Merchants</strong></td>
-          <td>${statusBadge}</td>
-          <td>
-            <div style="display:flex; gap:6px;">
-              <button class="btn-secondary" style="padding:5px 10px; font-size:12px;" onclick="openEditLocationModal('${loc.code}')">Edit</button>
-              <button class="btn-secondary" style="padding:5px 10px; font-size:12px; color:#dc2626; border-color:#fee2e2;" onclick="deleteLocation('${loc.code}')">Delete</button>
+          <td class="master-id-cell">#${numId}</td>
+          <td class="master-name-cell">${loc.name}</td>
+          <td style="text-align: right;">
+            <div style="display: inline-flex; gap: 8px; justify-content: flex-end;">
+              <button type="button" class="btn-blue-edit" onclick="editLocationInline('${loc.code}')">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                <span>EDIT</span>
+              </button>
+              <button type="button" class="btn-red-delete" onclick="deleteLocationInline('${loc.code}')">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                <span>DELETE</span>
+              </button>
             </div>
           </td>
         `;
@@ -2797,73 +3226,116 @@
       });
     }
 
-    function openNewLocationModal() {
-      document.getElementById('locationModalTitle').textContent = 'Add Operational Location';
-      document.getElementById('btnSaveLocationText').textContent = 'Save Location';
-      document.getElementById('locationEditCode').value = '';
-      document.getElementById('locationNameInput').value = '';
-      document.getElementById('locationRegionInput').value = '';
-      document.getElementById('locationStatusInput').value = 'Active';
-      document.getElementById('locationModal').style.display = 'flex';
-      document.getElementById('locationNameInput').focus();
-    }
-
-    function openEditLocationModal(code) {
-      const loc = locations.find(l => l.code === code);
-      if (!loc) return;
-      document.getElementById('locationModalTitle').textContent = 'Edit Location (' + loc.code + ')';
-      document.getElementById('btnSaveLocationText').textContent = 'Update Location';
-      document.getElementById('locationEditCode').value = loc.code;
-      document.getElementById('locationNameInput').value = loc.name;
-      document.getElementById('locationRegionInput').value = loc.region;
-      document.getElementById('locationStatusInput').value = loc.status;
-      document.getElementById('locationModal').style.display = 'flex';
-    }
-
-    function closeLocationModal() {
-      document.getElementById('locationModal').style.display = 'none';
-    }
-
-    function handleSaveLocation(e) {
+    function handleSaveLocationInline(e) {
       e.preventDefault();
-      const editCode = document.getElementById('locationEditCode').value;
-      const name = document.getElementById('locationNameInput').value.trim();
-      const region = document.getElementById('locationRegionInput').value.trim();
-      const status = document.getElementById('locationStatusInput').value;
+      const code = document.getElementById('inlineLocationCode').value;
+      const name = document.getElementById('inlineLocationName').value.trim().toUpperCase();
 
-      if (editCode) {
-        const loc = locations.find(l => l.code === editCode);
+      if (!name) return;
+
+      if (code) {
+        const loc = locations.find(l => l.code === code);
         if (loc) {
           loc.name = name;
-          loc.region = region;
-          loc.status = status;
         }
+        showToast('Location updated successfully!');
       } else {
-        const newCode = `LOC-${locations.length + 1 < 10 ? '0' : ''}${locations.length + 1}`;
+        const nextNum = locations.length + 1;
+        const newCode = `LOC-${nextNum < 10 ? '0' : ''}${nextNum}`;
         locations.push({
           code: newCode,
           name: name,
-          region: region,
+          region: 'Operational Zone',
           merchants_count: 0,
-          status: status
+          status: 'Active'
         });
+        showToast('New location created successfully!');
       }
 
-      closeLocationModal();
+      try {
+        localStorage.setItem('smart_portal_locations', JSON.stringify(locations));
+      } catch(err) {}
+
+      cancelLocationInlineEdit();
       renderLocationsTable();
       populateUserDropdowns();
+    populateMerchantDropdowns();
+      populateMerchantDropdowns();
     }
 
-    function deleteLocation(code) {
-      if (confirm('Delete location ' + code + '?')) {
+    function editLocationInline(code) {
+      const loc = locations.find(l => l.code === code);
+      if (!loc) return;
+
+      document.getElementById('inlineLocationCode').value = loc.code;
+      document.getElementById('inlineLocationName').value = loc.name;
+
+      const title = document.getElementById('panelTitleLocation');
+      if (title) title.textContent = `Edit Zone (${loc.name})`;
+
+      const btnText = document.getElementById('btnSubmitLocationText');
+      if (btnText) btnText.textContent = 'UPDATE ZONE';
+
+      const cancelBtn = document.getElementById('btnCancelLocationInline');
+      if (cancelBtn) cancelBtn.style.display = 'block';
+
+      const input = document.getElementById('inlineLocationName');
+      if (input) {
+        input.focus();
+        input.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    function cancelLocationInlineEdit() {
+      document.getElementById('inlineLocationCode').value = '';
+      document.getElementById('inlineLocationName').value = '';
+
+      const title = document.getElementById('panelTitleLocation');
+      if (title) title.textContent = 'Create New Zone';
+
+      const btnText = document.getElementById('btnSubmitLocationText');
+      if (btnText) btnText.textContent = 'CREATE ZONE';
+
+      const cancelBtn = document.getElementById('btnCancelLocationInline');
+      if (cancelBtn) cancelBtn.style.display = 'none';
+    }
+
+    function deleteLocationInline(code) {
+      const loc = locations.find(l => l.code === code);
+      const name = loc ? loc.name : code;
+      if (confirm(`Delete zone "${name}"?`)) {
         locations = locations.filter(l => l.code !== code);
+        try {
+          localStorage.setItem('smart_portal_locations', JSON.stringify(locations));
+        } catch(err) {}
+        if (document.getElementById('inlineLocationCode').value === code) {
+          cancelLocationInlineEdit();
+        }
         renderLocationsTable();
         populateUserDropdowns();
+      populateMerchantDropdowns();
+        showToast('Zone deleted.');
       }
+    }
+
+    function openNewLocationModal() {
+      cancelLocationInlineEdit();
+      const el = document.getElementById('inlineLocationName');
+      if (el) el.focus();
+    }
+    function openEditLocationModal(code) {
+      editLocationInline(code);
+    }
+    function deleteLocation(code) {
+      deleteLocationInline(code);
+    }
+    function closeLocationModal() {}
+    function handleSaveLocation(e) {
+      handleSaveLocationInline(e);
     }
 
     // ==========================================
-    // ISSUE MASTER FUNCTIONS
+    // ISSUE MASTER LOGIC (LUXURY GOLD SPLIT DESIGN)
     // ==========================================
     function renderIssuesTable() {
       const tbody = document.getElementById('issueTableBody');
@@ -2875,46 +3347,37 @@
         const q = searchQuery.toLowerCase();
         list = list.filter(i => 
           (i.code && i.code.toLowerCase().includes(q)) ||
-          (i.name && i.name.toLowerCase().includes(q)) ||
-          (i.category && i.category.toLowerCase().includes(q)) ||
-          (i.priority && i.priority.toLowerCase().includes(q))
+          (i.name && i.name.toLowerCase().includes(q))
         );
       }
 
-      document.getElementById('issueCountBadge').textContent = list.length;
+      const countBadge = document.getElementById('issueCountBadge');
+      if (countBadge) countBadge.textContent = `${list.length} Issues`;
       const navBadge = document.getElementById('navCountIssues');
       if (navBadge) navBadge.textContent = issues.length;
 
       if (list.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 28px; color: #94a3b8;">No issues found.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; padding: 42px 14px; color: #94a3b8;">No issues found.</td></tr>';
         return;
       }
 
-      list.forEach(item => {
+      list.forEach((item, index) => {
         const tr = document.createElement('tr');
-        
-        let prioBadge = 'background: rgba(59, 130, 246, 0.15); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.3);';
-        if (item.priority === 'Urgent') {
-          prioBadge = 'background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3);';
-        } else if (item.priority === 'High') {
-          prioBadge = 'background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3);';
-        }
-
-        const statusBadge = item.status === 'Active'
-          ? '<span class="status-badge status-active">Active</span>'
-          : '<span class="status-badge status-replaced">Inactive</span>';
+        const numId = parseInt(item.code.replace(/\D/g, '')) || (index + 1);
 
         tr.innerHTML = `
-          <td><strong><span class="tag-tid">${item.code}</span></strong></td>
-          <td><strong style="color: #f8fafc;">${item.name}</strong></td>
-          <td>${item.category || 'General'}</td>
-          <td><span class="status-badge" style="${prioBadge}">${item.priority || 'Normal'}</span></td>
-          <td><strong style="color: #10b981;">${item.sla || '8 Hours'}</strong></td>
-          <td>${statusBadge}</td>
-          <td>
-            <div style="display:flex; gap:6px;">
-              <button class="btn-secondary" style="padding:5px 10px; font-size:12px;" onclick="openEditIssueModal('${item.code}')">Edit</button>
-              <button class="btn-secondary" style="padding:5px 10px; font-size:12px; color:#dc2626; border-color:#fee2e2;" onclick="deleteIssue('${item.code}')">Delete</button>
+          <td class="master-id-cell">#${numId}</td>
+          <td class="master-name-cell">${item.name}</td>
+          <td style="text-align: right;">
+            <div style="display: inline-flex; gap: 8px; justify-content: flex-end;">
+              <button type="button" class="btn-blue-edit" onclick="editIssueInline('${item.code}')">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                <span>EDIT</span>
+              </button>
+              <button type="button" class="btn-red-delete" onclick="deleteIssueInline('${item.code}')">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                <span>DELETE</span>
+              </button>
             </div>
           </td>
         `;
@@ -2922,90 +3385,112 @@
       });
     }
 
-    function openNewIssueModal() {
-      document.getElementById('issueModalTitle').textContent = 'Add New Issue / Fault';
-      document.getElementById('btnSaveIssueText').textContent = 'Save Issue';
-      document.getElementById('issueEditCode').value = '';
-      document.getElementById('issueNameInput').value = '';
-      document.getElementById('issueCategoryInput').value = 'Stationery Supply';
-      document.getElementById('issuePriorityInput').value = 'Normal';
-      document.getElementById('issueSlaInput').value = '8 Hours';
-      document.getElementById('issueStatusInput').value = 'Active';
-      document.getElementById('issueModal').style.display = 'flex';
-      document.getElementById('issueNameInput').focus();
-    }
-
-    function openEditIssueModal(code) {
-      const item = issues.find(i => i.code === code);
-      if (!item) return;
-
-      document.getElementById('issueModalTitle').textContent = 'Edit Issue (' + item.code + ')';
-      document.getElementById('btnSaveIssueText').textContent = 'Update Issue';
-      document.getElementById('issueEditCode').value = item.code;
-      document.getElementById('issueNameInput').value = item.name;
-      document.getElementById('issueCategoryInput').value = item.category || 'Stationery Supply';
-      document.getElementById('issuePriorityInput').value = item.priority || 'Normal';
-      document.getElementById('issueSlaInput').value = item.sla || '8 Hours';
-      document.getElementById('issueStatusInput').value = item.status || 'Active';
-      document.getElementById('issueModal').style.display = 'flex';
-    }
-
-    function closeIssueModal() {
-      document.getElementById('issueModal').style.display = 'none';
-    }
-
-    function handleSaveIssue(e) {
+    function handleSaveIssueInline(e) {
       e.preventDefault();
-      const code = document.getElementById('issueEditCode').value;
-      const name = document.getElementById('issueNameInput').value.trim().toUpperCase();
-      const category = document.getElementById('issueCategoryInput').value;
-      const priority = document.getElementById('issuePriorityInput').value;
-      const sla = document.getElementById('issueSlaInput').value;
-      const status = document.getElementById('issueStatusInput').value;
+      const code = document.getElementById('inlineIssueCode').value;
+      const name = document.getElementById('inlineIssueName').value.trim().toUpperCase();
+
+      if (!name) return;
 
       if (code) {
         const item = issues.find(i => i.code === code);
         if (item) {
           item.name = name;
-          item.category = category;
-          item.priority = priority;
-          item.sla = sla;
-          item.status = status;
         }
+        showToast('Issue updated successfully!');
       } else {
-        const newCode = `ISS-${issues.length + 1 < 10 ? '0' : ''}${issues.length + 1}`;
+        const nextNum = issues.length + 1;
+        const newCode = `ISS-${nextNum < 10 ? '0' : ''}${nextNum}`;
         issues.push({
           code: newCode,
           name: name,
-          category: category,
-          priority: priority,
-          sla: sla,
-          status: status
+          category: 'Service Call',
+          priority: 'Normal',
+          sla: '8 Hours',
+          status: 'Active'
         });
+        showToast('New issue created successfully!');
       }
 
       try {
         localStorage.setItem('smart_portal_issues', JSON.stringify(issues));
       } catch(err) {}
 
-      closeIssueModal();
+      cancelIssueInlineEdit();
       renderIssuesTable();
-      showToast('Issue Master updated successfully!');
     }
 
-    function deleteIssue(code) {
-      if (confirm('Delete issue ' + code + '?')) {
+    function editIssueInline(code) {
+      const item = issues.find(i => i.code === code);
+      if (!item) return;
+
+      document.getElementById('inlineIssueCode').value = item.code;
+      document.getElementById('inlineIssueName').value = item.name;
+
+      const title = document.getElementById('panelTitleIssue');
+      if (title) title.textContent = `Edit Issue (${item.name})`;
+
+      const btnText = document.getElementById('btnSubmitIssueText');
+      if (btnText) btnText.textContent = 'UPDATE ISSUE';
+
+      const cancelBtn = document.getElementById('btnCancelIssueInline');
+      if (cancelBtn) cancelBtn.style.display = 'block';
+
+      const input = document.getElementById('inlineIssueName');
+      if (input) {
+        input.focus();
+        input.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    function cancelIssueInlineEdit() {
+      document.getElementById('inlineIssueCode').value = '';
+      document.getElementById('inlineIssueName').value = '';
+
+      const title = document.getElementById('panelTitleIssue');
+      if (title) title.textContent = 'Create New Issue';
+
+      const btnText = document.getElementById('btnSubmitIssueText');
+      if (btnText) btnText.textContent = 'CREATE ISSUE';
+
+      const cancelBtn = document.getElementById('btnCancelIssueInline');
+      if (cancelBtn) cancelBtn.style.display = 'none';
+    }
+
+    function deleteIssueInline(code) {
+      const item = issues.find(i => i.code === code);
+      const name = item ? item.name : code;
+      if (confirm(`Delete issue "${name}"?`)) {
         issues = issues.filter(i => i.code !== code);
         try {
           localStorage.setItem('smart_portal_issues', JSON.stringify(issues));
         } catch(err) {}
+        if (document.getElementById('inlineIssueCode').value === code) {
+          cancelIssueInlineEdit();
+        }
         renderIssuesTable();
         showToast('Issue deleted.');
       }
     }
 
+    function openNewIssueModal() {
+      cancelIssueInlineEdit();
+      const el = document.getElementById('inlineIssueName');
+      if (el) el.focus();
+    }
+    function openEditIssueModal(code) {
+      editIssueInline(code);
+    }
+    function deleteIssue(code) {
+      deleteIssueInline(code);
+    }
+    function closeIssueModal() {}
+    function handleSaveIssue(e) {
+      handleSaveIssueInline(e);
+    }
+
     // ==========================================
-    // ACTION TAKEN MASTER FUNCTIONS
+    // ACTION TAKEN MASTER LOGIC (LUXURY GOLD SPLIT DESIGN)
     // ==========================================
     function renderActionsTable() {
       const tbody = document.getElementById('actionTableBody');
@@ -3017,35 +3502,37 @@
         const q = searchQuery.toLowerCase();
         list = list.filter(a => 
           (a.code && a.code.toLowerCase().includes(q)) ||
-          (a.name && a.name.toLowerCase().includes(q)) ||
-          (a.type && a.type.toLowerCase().includes(q))
+          (a.name && a.name.toLowerCase().includes(q))
         );
       }
 
-      document.getElementById('actionCountBadge').textContent = list.length;
+      const countBadge = document.getElementById('actionCountBadge');
+      if (countBadge) countBadge.textContent = `${list.length} Actions`;
       const navBadge = document.getElementById('navCountActions');
       if (navBadge) navBadge.textContent = actionsTaken.length;
 
       if (list.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding: 28px; color: #94a3b8;">No actions found.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; padding: 42px 14px; color: #94a3b8;">No actions found.</td></tr>';
         return;
       }
 
-      list.forEach(item => {
+      list.forEach((item, index) => {
         const tr = document.createElement('tr');
-        const statusBadge = item.status === 'Active'
-          ? '<span class="status-badge status-active">Active</span>'
-          : '<span class="status-badge status-replaced">Inactive</span>';
+        const numId = parseInt(item.code.replace(/\D/g, '')) || (index + 1);
 
         tr.innerHTML = `
-          <td><strong><span class="tag-tid">${item.code}</span></strong></td>
-          <td><strong style="color: #f8fafc;">${item.name}</strong></td>
-          <td>${item.type || 'Field Resolution'}</td>
-          <td>${statusBadge}</td>
-          <td>
-            <div style="display:flex; gap:6px;">
-              <button class="btn-secondary" style="padding:5px 10px; font-size:12px;" onclick="openEditActionModal('${item.code}')">Edit</button>
-              <button class="btn-secondary" style="padding:5px 10px; font-size:12px; color:#dc2626; border-color:#fee2e2;" onclick="deleteAction('${item.code}')">Delete</button>
+          <td class="master-id-cell">#${numId}</td>
+          <td class="master-name-cell">${item.name}</td>
+          <td style="text-align: right;">
+            <div style="display: inline-flex; gap: 8px; justify-content: flex-end;">
+              <button type="button" class="btn-blue-edit" onclick="editActionInline('${item.code}')">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                <span>EDIT</span>
+              </button>
+              <button type="button" class="btn-red-delete" onclick="deleteActionInline('${item.code}')">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                <span>DELETE</span>
+              </button>
             </div>
           </td>
         `;
@@ -3053,76 +3540,106 @@
       });
     }
 
-    function openNewActionModal() {
-      document.getElementById('actionModalTitle').textContent = 'Add Action Taken';
-      document.getElementById('btnSaveActionText').textContent = 'Save Action Taken';
-      document.getElementById('actionEditCode').value = '';
-      document.getElementById('actionNameInput').value = '';
-      document.getElementById('actionTypeInput').value = 'Stationery Delivery';
-      document.getElementById('actionStatusInput').value = 'Active';
-      document.getElementById('actionModal').style.display = 'flex';
-      document.getElementById('actionNameInput').focus();
-    }
-
-    function openEditActionModal(code) {
-      const item = actionsTaken.find(a => a.code === code);
-      if (!item) return;
-
-      document.getElementById('actionModalTitle').textContent = 'Edit Action Taken (' + item.code + ')';
-      document.getElementById('btnSaveActionText').textContent = 'Update Action Taken';
-      document.getElementById('actionEditCode').value = item.code;
-      document.getElementById('actionNameInput').value = item.name;
-      document.getElementById('actionTypeInput').value = item.type || 'Stationery Delivery';
-      document.getElementById('actionStatusInput').value = item.status || 'Active';
-      document.getElementById('actionModal').style.display = 'flex';
-    }
-
-    function closeActionModal() {
-      document.getElementById('actionModal').style.display = 'none';
-    }
-
-    function handleSaveAction(e) {
+    function handleSaveActionInline(e) {
       e.preventDefault();
-      const code = document.getElementById('actionEditCode').value;
-      const name = document.getElementById('actionNameInput').value.trim().toUpperCase();
-      const type = document.getElementById('actionTypeInput').value;
-      const status = document.getElementById('actionStatusInput').value;
+      const code = document.getElementById('inlineActionCode').value;
+      const name = document.getElementById('inlineActionName').value.trim().toUpperCase();
+
+      if (!name) return;
 
       if (code) {
         const item = actionsTaken.find(a => a.code === code);
         if (item) {
           item.name = name;
-          item.type = type;
-          item.status = status;
         }
+        showToast('Action Taken updated successfully!');
       } else {
-        const newCode = `ACT-${actionsTaken.length + 1 < 10 ? '0' : ''}${actionsTaken.length + 1}`;
+        const nextNum = actionsTaken.length + 1;
+        const newCode = `ACT-${nextNum < 10 ? '0' : ''}${nextNum}`;
         actionsTaken.push({
           code: newCode,
           name: name,
-          type: type,
-          status: status
+          type: 'Field Resolution',
+          status: 'Active'
         });
+        showToast('New Action Taken created successfully!');
       }
 
       try {
         localStorage.setItem('smart_portal_actions', JSON.stringify(actionsTaken));
       } catch(err) {}
 
-      closeActionModal();
+      cancelActionInlineEdit();
       renderActionsTable();
-      showToast('Action Taken Master updated successfully!');
     }
 
-    function deleteAction(code) {
-      if (confirm('Delete action taken ' + code + '?')) {
+    function editActionInline(code) {
+      const item = actionsTaken.find(a => a.code === code);
+      if (!item) return;
+
+      document.getElementById('inlineActionCode').value = item.code;
+      document.getElementById('inlineActionName').value = item.name;
+
+      const title = document.getElementById('panelTitleAction');
+      if (title) title.textContent = `Edit Action Taken (${item.name})`;
+
+      const btnText = document.getElementById('btnSubmitActionText');
+      if (btnText) btnText.textContent = 'UPDATE ACTION TAKEN';
+
+      const cancelBtn = document.getElementById('btnCancelActionInline');
+      if (cancelBtn) cancelBtn.style.display = 'block';
+
+      const input = document.getElementById('inlineActionName');
+      if (input) {
+        input.focus();
+        input.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    function cancelActionInlineEdit() {
+      document.getElementById('inlineActionCode').value = '';
+      document.getElementById('inlineActionName').value = '';
+
+      const title = document.getElementById('panelTitleAction');
+      if (title) title.textContent = 'Create New Action Taken';
+
+      const btnText = document.getElementById('btnSubmitActionText');
+      if (btnText) btnText.textContent = 'CREATE ACTION TAKEN';
+
+      const cancelBtn = document.getElementById('btnCancelActionInline');
+      if (cancelBtn) cancelBtn.style.display = 'none';
+    }
+
+    function deleteActionInline(code) {
+      const item = actionsTaken.find(a => a.code === code);
+      const name = item ? item.name : code;
+      if (confirm(`Delete Action Taken "${name}"?`)) {
         actionsTaken = actionsTaken.filter(a => a.code !== code);
         try {
           localStorage.setItem('smart_portal_actions', JSON.stringify(actionsTaken));
         } catch(err) {}
+        if (document.getElementById('inlineActionCode').value === code) {
+          cancelActionInlineEdit();
+        }
         renderActionsTable();
-        showToast('Action deleted.');
+        showToast('Action Taken deleted.');
       }
+    }
+
+    function openNewActionModal() {
+      cancelActionInlineEdit();
+      const el = document.getElementById('inlineActionName');
+      if (el) el.focus();
+    }
+    function openEditActionModal(code) {
+      editActionInline(code);
+    }
+    function deleteAction(code) {
+      deleteActionInline(code);
+    }
+    function closeActionModal() {}
+    function handleSaveAction(e) {
+      handleSaveActionInline(e);
     }
 
     // ==========================================
@@ -3168,8 +3685,9 @@
       if (serial) serial.value = '';
       const model = document.getElementById('pageMerchantModel');
       if (model) model.value = 'SMART POS';
+      populateMerchantDropdowns();
       const loc = document.getElementById('pageMerchantLocation');
-      if (loc) loc.value = 'SALALAH';
+      if (loc && loc.options.length > 1) { loc.selectedIndex = 1; } else if (loc) { loc.value = 'SALALAH'; }
       const mob = document.getElementById('pageMerchantMobile');
       if (mob) mob.value = '';
       const type = document.getElementById('pageMerchantType');
@@ -3354,14 +3872,27 @@
       document.getElementById('pageMerchantName').value = m.merchantName || m.merchantname || m.name || '';
       document.getElementById('pageMerchantSerial').value = m.serialNumber || m.serial || '';
       document.getElementById('pageMerchantModel').value = m.model || 'SMART POS';
-      document.getElementById('pageMerchantLocation').value = m.location || '';
+      populateMerchantDropdowns();
+      const setSelectVal = (id, val) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        val = (val || '').trim().toUpperCase();
+        if (val && ![...el.options].some(o => o.value === val)) {
+          const opt = document.createElement('option');
+          opt.value = val;
+          opt.textContent = val;
+          el.appendChild(opt);
+        }
+        el.value = val;
+      };
+      setSelectVal('pageMerchantLocation', m.location);
       document.getElementById('pageMerchantMobile').value = m.mobile && m.mobile !== '-' ? m.mobile : '';
       document.getElementById('pageMerchantType').value = m.type || 'CALL CENTER';
       document.getElementById('pageMerchantSla').value = m.sla || '';
       document.getElementById('pageMerchantRcvDate').value = m.receivingDate || '';
       document.getElementById('pageMerchantSrvDate').value = m.serviceDate || '';
-      document.getElementById('pageMerchantIssue').value = m.issue && m.issue !== '-' ? m.issue : '';
-      document.getElementById('pageMerchantActionTaken').value = m.actionTaken || m.actiontaken || m.action || '';
+      setSelectVal('pageMerchantIssue', m.issue && m.issue !== '-' ? m.issue : '');
+      setSelectVal('pageMerchantActionTaken', m.actionTaken || m.actiontaken || m.action || '');
       document.getElementById('pageMerchantDoneBy').value = m.doneBy || 'ANZAR';
       document.getElementById('pageMerchantRemarks').value = m.remarks && m.remarks !== '-' ? m.remarks : '';
 
@@ -3868,6 +4399,7 @@
       if (sectionId === 'issues') renderIssuesTable();
       if (sectionId === 'actions') renderActionsTable();
       if (sectionId === 'merchants') {
+        populateMerchantDropdowns();
         switchMerchantTab('entry');
         renderMerchantsTable();
       }
@@ -3887,6 +4419,8 @@
     renderMerchantsTable();
     renderLocationsTable();
     renderUsersTable();
+    populateUserDropdowns();
+    populateMerchantDropdowns();
 
     // ==========================================
     // CSV & EXCEL IMPORT SYSTEM
@@ -4398,7 +4932,6 @@
       if (localStorage.getItem('smart_portal_cleared_v1') !== 'true') {
         localStorage.removeItem('smart_portal_complaints');
         localStorage.removeItem('smart_portal_merchants');
-          localStorage.removeItem('smart_portal_merchants_v5');
         localStorage.removeItem('smart_portal_terminals');
         localStorage.removeItem('smart_portal_replacements');
         localStorage.removeItem('smart_portal_locations');
@@ -4418,7 +4951,6 @@
         try {
           localStorage.removeItem('smart_portal_complaints');
           localStorage.removeItem('smart_portal_merchants');
-          localStorage.removeItem('smart_portal_merchants_v5');
           localStorage.removeItem('smart_portal_terminals');
           localStorage.removeItem('smart_portal_replacements');
         localStorage.removeItem('smart_portal_locations');
