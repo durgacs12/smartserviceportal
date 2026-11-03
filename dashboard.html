@@ -42,14 +42,14 @@
     }
 
     :root {
-      --primary: #8cc63e;
+      --primary: #2563eb;
       --primary-hover: #7ab332;
       --primary-light: rgba(140, 198, 62, 0.12);
-      --orange: #8cc63e;
+      --orange: #38bdf8;
       --orange-light: rgba(140, 198, 62, 0.15);
       --blue: #2563eb;
       --blue-light: rgba(37, 99, 235, 0.1);
-      --green: #10b981;
+      --green: #38bdf8;
       --green-light: rgba(16, 185, 129, 0.12);
       --dark: #f8fafc;
       --slate-800: #e2e8f0;
@@ -156,9 +156,9 @@
     }
 
     .nav-item.active {
-      background: var(--primary-light);
-      color: #3b6310;
-      border-color: rgba(140, 198, 62, 0.3);
+      background: rgba(56, 189, 248, 0.12);
+      color: #38bdf8;
+      border-color: rgba(56, 189, 248, 0.4);
       font-weight: 700;
     }
 
@@ -178,8 +178,8 @@
     }
 
     .nav-item.active .nav-count {
-      background: rgba(140, 198, 62, 0.25);
-      color: #2e510a;
+      background: rgba(56, 189, 248, 0.2);
+      color: #38bdf8;
     }
 
     .sidebar-footer {
@@ -293,7 +293,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      background: linear-gradient(135deg, #8cc63e, #73a92b);
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
       color: #ffffff;
       border: none;
       padding: 10px 18px;
@@ -301,13 +301,13 @@
       font-size: 13.5px;
       font-weight: 700;
       cursor: pointer;
-      box-shadow: 0 4px 14px rgba(140, 198, 62, 0.35);
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
       transition: all 0.2s;
     }
 
     .btn-primary:hover {
-      background: linear-gradient(135deg, #7db633, #659723);
-      box-shadow: 0 6px 18px rgba(140, 198, 62, 0.45);
+      background: linear-gradient(135deg, #1d4ed8, #1e40af);
+      box-shadow: 0 6px 18px rgba(37, 99, 235, 0.45);
       transform: translateY(-1px);
     }
 
@@ -437,8 +437,8 @@
     }
 
     .card-total .stat-icon { background: rgba(15, 23, 42, 0.08); color: var(--dark); }
-    .card-solved .stat-icon { background: var(--green-light); color: var(--green); }
-    .card-pending .stat-icon { background: rgba(140, 198, 62, 0.15); color: #8cc63e; }
+    .card-solved .stat-icon { background: var(--green-light); color: #38bdf8; }
+    .card-pending .stat-icon { background: rgba(56, 189, 248, 0.15); color: #38bdf8; }
     .card-progress .stat-icon { background: var(--blue-light); color: var(--blue); }
 
     .badge-green { background: #ecfdf5; color: #047857; }
@@ -472,7 +472,7 @@
     .progress-rate {
       font-size: 16px;
       font-weight: 800;
-      color: var(--green);
+      color: #38bdf8;
     }
 
     .progress-bar-track {
@@ -484,9 +484,9 @@
       display: flex;
     }
 
-    .bar-solved { background: var(--green); height: 100%; transition: width 0.4s; }
+    .bar-solved { background: linear-gradient(90deg, #2563eb, #38bdf8); height: 100%; transition: width 0.4s; }
     .bar-progress { background: var(--blue); height: 100%; transition: width 0.4s; }
-    .bar-pending { background: #8cc63e; height: 100%; transition: width 0.4s; }
+    .bar-pending { background: #334155; height: 100%; transition: width 0.4s; }
 
     .progress-legend {
       display: flex;
@@ -618,9 +618,9 @@
     }
 
     .status-solved {
-      background: #ecfdf5;
-      color: #047857;
-      border: 1px solid #d1fae5;
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.35);
     }
 
     .status-pending {
@@ -649,9 +649,9 @@
 
     .btn-action-solve {
       padding: 6px 12px;
-      background: #ecfdf5;
-      color: #059669;
-      border: 1px solid #a7f3d0;
+      background: rgba(37, 99, 235, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.35);
       border-radius: 6px;
       font-size: 12px;
       font-weight: 700;
@@ -660,7 +660,7 @@
     }
 
     .btn-action-solve:hover {
-      background: #059669;
+      background: #2563eb;
       color: #ffffff;
     }
 
@@ -918,9 +918,9 @@
     }
 
     [data-theme="dark"] .nav-item.active {
-      background: rgba(140, 198, 62, 0.14) !important;
-      color: #a3e635 !important;
-      border-color: rgba(163, 230, 53, 0.35) !important;
+      background: rgba(56, 189, 248, 0.12) !important;
+      color: #38bdf8 !important;
+      border-color: rgba(56, 189, 248, 0.4) !important;
     }
 
     [data-theme="dark"] .nav-count {
@@ -929,8 +929,8 @@
     }
 
     [data-theme="dark"] .nav-item.active .nav-count {
-      background: rgba(140, 198, 62, 0.25) !important;
-      color: #bef264 !important;
+      background: rgba(56, 189, 248, 0.2) !important;
+      color: #38bdf8 !important;
     }
 
     [data-theme="dark"] .sidebar-footer {
@@ -1140,7 +1140,7 @@
     }
 
     [data-theme="dark"] table.data-table td {
-      color: #e2e8f0 !important;
+      color: #f8fafc !important;
       border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
     }
 
@@ -1149,31 +1149,31 @@
     }
 
     [data-theme="dark"] .status-solved {
-      background: rgba(16, 185, 129, 0.15) !important;
-      color: #34d399 !important;
-      border: 1px solid rgba(52, 211, 153, 0.3) !important;
+      background: rgba(56, 189, 248, 0.15) !important;
+      color: #38bdf8 !important;
+      border: 1px solid rgba(56, 189, 248, 0.35) !important;
     }
 
     [data-theme="dark"] .status-pending {
-      background: rgba(140, 198, 62, 0.15) !important;
-      color: #a3e635 !important;
-      border: 1px solid rgba(163, 230, 53, 0.3) !important;
+      background: rgba(148, 163, 184, 0.12) !important;
+      color: #cbd5e1 !important;
+      border: 1px solid rgba(148, 163, 184, 0.25) !important;
     }
 
     [data-theme="dark"] .status-active {
-      background: rgba(16, 185, 129, 0.15) !important;
-      color: #34d399 !important;
-      border: 1px solid rgba(52, 211, 153, 0.3) !important;
+      background: rgba(56, 189, 248, 0.15) !important;
+      color: #38bdf8 !important;
+      border: 1px solid rgba(56, 189, 248, 0.35) !important;
     }
 
     [data-theme="dark"] .btn-action-solve {
-      background: rgba(16, 185, 129, 0.15) !important;
-      color: #34d399 !important;
-      border-color: rgba(52, 211, 153, 0.3) !important;
+      background: rgba(37, 99, 235, 0.15) !important;
+      color: #38bdf8 !important;
+      border: 1px solid rgba(56, 189, 248, 0.35) !important;
     }
 
     [data-theme="dark"] .btn-action-solve:hover {
-      background: #10b981 !important;
+      background: #2563eb !important;
       color: #ffffff !important;
     }
 
@@ -2219,7 +2219,7 @@
                 </svg>
               </div>
             </div>
-            <div class="stat-value" id="statSolved" style="color: var(--green);">0</div>
+            <div class="stat-value" id="statSolved" style="color: #38bdf8;">0</div>
             <div>
               <span class="stat-badge badge-green" id="statSolvedPercent">0.0% Completed</span>
             </div>
@@ -2236,7 +2236,7 @@
                 </svg>
               </div>
             </div>
-            <div class="stat-value" id="statPending" style="color: #8cc63e;">0</div>
+            <div class="stat-value" id="statPending" style="color: #94a3b8;">0</div>
             <div>
               <span class="stat-badge badge-orange">Action Required</span>
             </div>
@@ -2256,11 +2256,11 @@
           </div>
           <div class="progress-legend">
             <div class="legend-item">
-              <span class="legend-dot" style="background: var(--green);"></span>
+              <span class="legend-dot" style="background: #38bdf8;"></span>
               <span>Solved: <strong id="legendSolved">0</strong></span>
             </div>
             <div class="legend-item">
-              <span class="legend-dot" style="background: #8cc63e;"></span>
+              <span class="legend-dot" style="background: #64748b;"></span>
               <span>Pending: <strong id="legendPending">0</strong></span>
             </div>
           </div>
@@ -2561,7 +2561,7 @@
 
               <!-- Section 2: Contact, Location & Communication -->
               <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 20px 22px; margin-bottom: 22px;">
-                <div style="font-size: 13.5px; font-weight: 800; color: #a3e635; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+                <div style="font-size: 13.5px; font-weight: 800; color: #38bdf8; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                   <span>2. Location, Contact & Channel</span>
                 </div>
@@ -2837,7 +2837,7 @@
           <div class="table-container" style="max-width: 860px; margin: 0 auto; padding: 32px 36px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); background: #131d31; border: 1px solid rgba(255, 255, 255, 0.08);">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.08);">
               <div style="display:flex; align-items:center; gap: 12px;">
-                <div style="width: 42px; height: 42px; border-radius: 12px; background: rgba(140, 198, 62, 0.15); display: flex; align-items: center; justify-content: center; color: #8cc63e; border: 1px solid rgba(140, 198, 62, 0.25);">
+                <div style="width: 42px; height: 42px; border-radius: 12px; background: rgba(56, 189, 248, 0.15); display: flex; align-items: center; justify-content: center; color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.25);">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                 </div>
                 <div>
@@ -4088,22 +4088,22 @@
         const remDisplay = m.remarks && m.remarks !== '-' ? m.remarks : '-';
 
         tr.innerHTML = `
-          <td><strong>#${slDisplay}</strong></td>
-          <td><strong><span class="tag-tid">${m.mid || '-'}</span></strong></td>
-          <td><strong style="color: #f8fafc; font-size:13.5px;">${nameDisplay}</strong></td>
-          <td><code style="font-weight:700; color:#38bdf8; font-size:12.5px;">${tidDisplay}</code></td>
-          <td><code style="font-weight:600; color:#94a3b8; font-size:12px;">${serialDisplay}</code></td>
-          <td><span class="status-badge status-progress">${m.type || 'CALL CENTER'}</span></td>
-          <td>${m.location || '-'}</td>
-          <td><strong style="color: #cbd5e1;">${phoneDisplay}</strong></td>
-          <td><span class="tag-model" style="font-size:11.5px; padding:2px 8px; border-radius:4px; background:rgba(255,255,255,0.06); font-weight:700;">${modelDisplay}</span></td>
-          <td><span style="font-size:12px; font-weight:600; color:#f59e0b;">${issueDisplay}</span></td>
-          <td><span style="font-size:12px; font-weight:600; color:#a3e635;">${actDisplay}</span></td>
-          <td><code style="color:#e2e8f0; font-weight:700;">${doneByDisplay}</code></td>
-          <td><span style="font-size:12px; color:#94a3b8;">${rcvDateDisplay}</span></td>
-          <td><span style="font-size:12px; color:#94a3b8;">${srvDateDisplay}</span></td>
-          <td>${slaDisplay}</td>
-          <td><span style="font-size:12px; color:#cbd5e1; font-style:italic;">${remDisplay}</span></td>
+          <td style="color:#f8fafc; font-weight:700;">#${slDisplay}</td>
+          <td style="color:#f8fafc; font-weight:600;">${m.mid || '-'}</td>
+          <td style="color:#f8fafc; font-weight:700; font-size:13.5px;">${nameDisplay}</td>
+          <td style="color:#f8fafc; font-weight:600;">${tidDisplay}</td>
+          <td style="color:#f8fafc;">${serialDisplay}</td>
+          <td style="color:#f8fafc;">${m.type || 'CALL CENTER'}</td>
+          <td style="color:#f8fafc;">${m.location || '-'}</td>
+          <td style="color:#f8fafc;">${phoneDisplay}</td>
+          <td style="color:#f8fafc;">${modelDisplay}</td>
+          <td style="color:#f8fafc; font-weight:600;">${issueDisplay}</td>
+          <td style="color:#f8fafc;">${actDisplay}</td>
+          <td style="color:#f8fafc;">${doneByDisplay}</td>
+          <td style="color:#f8fafc;">${rcvDateDisplay}</td>
+          <td style="color:#f8fafc;">${srvDateDisplay}</td>
+          <td style="color:#f8fafc;">${slaDisplay}</td>
+          <td style="color:#f8fafc;">${remDisplay}</td>
           <td>
             <div style="display:inline-flex; gap:6px; align-items:center; white-space:nowrap;">
               <button type="button" class="btn-blue-edit" onclick="openEditMerchantModal(${idx})">
@@ -4378,12 +4378,12 @@
       list.forEach((u, idx) => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-          <td><strong><span class="tag-tid">${u.id}</span></strong></td>
-          <td><strong style="color: #f8fafc;">${u.name}</strong></td>
-          <td><code style="font-weight:700; color:#38bdf8;">@${u.username}</code></td>
-          <td>${u.zone || '-'}</td>
-          <td>${u.mobile || '-'}</td>
-          <td><code style="background:rgba(255,255,255,0.06); padding:2px 6px; border-radius:4px; font-weight:700; color:#a3e635;">${u.pincode || '******'}</code></td>
+          <td style="color:#f8fafc; font-weight:700;">${u.id}</td>
+          <td style="color:#f8fafc; font-weight:700;">${u.name}</td>
+          <td style="color:#f8fafc; font-weight:600;">@${u.username}</td>
+          <td style="color:#f8fafc;">${u.zone || '-'}</td>
+          <td style="color:#f8fafc;">${u.mobile || '-'}</td>
+          <td style="color:#f8fafc; font-weight:600;">${u.pincode || '******'}</td>
           <td>
             <div style="display:inline-flex; gap:6px; align-items:center; white-space:nowrap;">
               <button type="button" class="btn-blue-edit" onclick="openEditUserModal('${u.id}')">
@@ -4510,31 +4510,26 @@
         return;
       }
 
-      // Display up to 100 rows for high performance
+      // Display up to 100 rows for high performance (Clean white text, no boxes/badges)
       list.slice(0, 100).forEach(c => {
         const tr = document.createElement('tr');
         
-        let statusBadge = '';
-        let actionBtn = '';
-
-        if (c.status === 'solved') {
-          statusBadge = '<span class="status-badge status-solved">Solved</span>';
-          actionBtn = '<span style="color:#059669; font-weight:700; font-size:12px;">Completed</span>';
-        } else {
-          statusBadge = '<span class="status-badge status-pending">Pending</span>';
-          actionBtn = `<button class="btn-action-solve" onclick="markAsSolved('${c.id}')">Mark Solved</button>`;
-        }
+        const isSolved = (c.status || '').toLowerCase() === 'solved';
+        const statusText = isSolved ? 'Solved' : 'Pending';
+        const actionHtml = isSolved 
+          ? '<span style="color:#f8fafc; font-weight:600;">Completed</span>' 
+          : `<button type="button" onclick="markAsSolved('${c.id}')" style="background:none; border:none; color:#f8fafc; font-weight:600; font-size:13px; text-decoration:underline; cursor:pointer; padding:0;">Mark Solved</button>`;
 
         tr.innerHTML = `
-          <td><strong>${c.id}</strong></td>
-          <td><strong>${c.merchant}</strong></td>
-          <td><span class="tag-tid">${c.tid || 'N/A'}</span></td>
-          <td>${c.location}</td>
-          <td><strong>${c.issue}</strong></td>
-          <td><span style="color: #475569; font-size: 13px;">${c.action || '-'}</span></td>
-          <td>${c.technician}</td>
-          <td>${statusBadge}</td>
-          <td>${actionBtn}</td>
+          <td style="color:#f8fafc; font-weight:700;">${c.id}</td>
+          <td style="color:#f8fafc; font-weight:700;">${c.merchant}</td>
+          <td style="color:#f8fafc; font-weight:600;">${c.tid || '-'}</td>
+          <td style="color:#f8fafc;">${c.location || '-'}</td>
+          <td style="color:#f8fafc; font-weight:700;">${c.issue || '-'}</td>
+          <td style="color:#f8fafc;">${c.action || '-'}</td>
+          <td style="color:#f8fafc;">${c.technician || '-'}</td>
+          <td style="color:#f8fafc; font-weight:600;">${statusText}</td>
+          <td style="color:#f8fafc;">${actionHtml}</td>
         `;
         tbody.appendChild(tr);
       });
@@ -5040,7 +5035,7 @@
       tbody.innerHTML = '';
       parsedImportData.slice(0, 5).forEach(c => {
         const tr = document.createElement('tr');
-        const stClass = c.status === 'solved' ? 'color:#16a34a' : (c.status === 'pending' ? 'color:#8cc63e' : 'color:#2563eb');
+        const stClass = c.status === 'solved' ? 'color:#38bdf8' : 'color:#94a3b8';
         tr.innerHTML = `
           <td><strong>${c.merchant}</strong></td>
           <td><span class="tag-tid">${c.tid}</span></td>
