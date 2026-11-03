@@ -5064,55 +5064,58 @@
 
       const mode = document.getElementById('importMode').value;
       const target = document.getElementById('importTargetSection').value;
+      const count = parsedImportData.length;
+
+      // 1. Always populate complaints so Dashboard Overview displays the service records & stats!
+      if (mode === 'replace' && target === 'complaints') {
+        complaints = parsedImportData;
+      } else {
+        complaints = [...complaints, ...parsedImportData];
+      }
+      try {
+        localStorage.setItem('smart_portal_complaints', JSON.stringify(complaints));
+      } catch(e) {}
+
+      // 2. Map to Merchant Directory
+      const newMerchants = parsedImportData.map((c, idx) => ({
+        slNo: (mode === 'replace' && target === 'merchants' ? 0 : merchants.length) + idx + 1,
+        receivingDate: c.date || '',
+        serviceDate: c.date || '',
+        sla: '',
+        merchantName: (c.merchant || 'UNKNOWN').toUpperCase(),
+        mid: c.mid || '',
+        tid: c.tid || '',
+        serialNumber: c.serial || '',
+        type: 'CALL CENTER',
+        location: (c.location || 'SALALAH').toUpperCase(),
+        mobile: c.mobile || '-',
+        model: c.model || 'SMART POS',
+        issue: (c.issue || '-').toUpperCase(),
+        actionTaken: (c.action || '-').toUpperCase(),
+        doneBy: (c.technician || 'ANZAR').toUpperCase(),
+        remarks: '',
+        status: 'Active'
+      }));
 
       if (target === 'merchants') {
-        const newMerchants = parsedImportData.map((c, idx) => ({
-          slNo: (mode === 'replace' ? 0 : merchants.length) + idx + 1,
-          receivingDate: c.date || '',
-          serviceDate: c.date || '',
-          sla: '',
-          merchantName: (c.merchant || 'UNKNOWN').toUpperCase(),
-          mid: c.mid || '',
-          tid: c.tid || '',
-          serialNumber: c.serial || '',
-          type: 'CALL CENTER',
-          location: (c.location || 'SALALAH').toUpperCase(),
-          mobile: c.mobile || '-',
-          model: c.model || 'SMART POS',
-          issue: (c.issue || '-').toUpperCase(),
-          actionTaken: (c.action || '-').toUpperCase(),
-          doneBy: (c.technician || 'ANZAR').toUpperCase(),
-          remarks: '',
-          status: 'Active'
-        }));
-
         if (mode === 'replace') {
           merchants = newMerchants;
         } else {
           merchants = [...merchants, ...newMerchants];
         }
-
-        try {
-          localStorage.setItem('smart_portal_merchants_v5', JSON.stringify(merchants));
-        } catch(e) {}
-
-        renderMerchantsTable();
       } else {
-        // Target: complaints
-        if (mode === 'replace') {
-          complaints = parsedImportData;
-        } else {
-          complaints = [...complaints, ...parsedImportData];
-        }
-
-        try {
-          localStorage.setItem('smart_portal_complaints', JSON.stringify(complaints));
-        } catch(e) {}
-
-        renderComplaintsTable();
+        newMerchants.forEach(nm => {
+          if (!merchants.some(m => (m.merchantName || m.name || '').toUpperCase() === nm.merchantName)) {
+            merchants.push(nm);
+          }
+        });
       }
 
-      // Also automatically synchronize lookup masters (issues, actions, locations, merchants) safely
+      try {
+        localStorage.setItem('smart_portal_merchants_v5', JSON.stringify(merchants));
+      } catch(e) {}
+
+      // 3. Synchronize lookup masters (issues, actions, locations)
       parsedImportData.forEach(c => {
         if (c.issue && c.issue.trim()) {
           const issName = c.issue.trim().toUpperCase();
@@ -5150,53 +5153,37 @@
             });
           }
         }
-        if (target !== 'merchants' && c.merchant && c.merchant.trim()) {
-          const mName = c.merchant.trim().toUpperCase();
-          if (!merchants.some(m => (m.merchantName || m.name || '').toUpperCase() === mName)) {
-            merchants.push({
-              slNo: merchants.length + 1,
-              receivingDate: c.date || '',
-              serviceDate: c.date || '',
-              sla: '',
-              merchantName: mName,
-              mid: c.mid || ('10495172' + Math.floor(1000 + Math.random()*9000)),
-              tid: c.tid || '',
-              serialNumber: c.serial || '',
-              type: 'CALL CENTER',
-              location: (c.location || 'SALALAH').toUpperCase(),
-              mobile: c.mobile || '-',
-              model: c.model || 'SMART POS',
-              issue: (c.issue || '-').toUpperCase(),
-              actionTaken: (c.action || '-').toUpperCase(),
-              doneBy: (c.technician || 'ANZAR').toUpperCase(),
-              remarks: '',
-              status: 'Active'
-            });
-          }
-        }
       });
 
       try {
         localStorage.setItem('smart_portal_issues', JSON.stringify(issues));
         localStorage.setItem('smart_portal_actions', JSON.stringify(actionsTaken));
         localStorage.setItem('smart_portal_locations', JSON.stringify(locations));
-        localStorage.setItem('smart_portal_merchants_v5', JSON.stringify(merchants));
-        localStorage.setItem('smart_portal_complaints', JSON.stringify(complaints));
       } catch(e) {}
 
-      // Update all dashboard tables and counters
+      // 4. Close the Import Modal
+      closeImportModal();
+
+      // 5. Navigate directly to Dashboard Overview as requested!
+      const dashNav = document.querySelector('.nav-item') || document.querySelector('[onclick*="switchSection(\'dashboard\'"]');
+      switchSection('dashboard', dashNav);
+
+      // 6. Update and render all Dashboard stats & tables with imported details!
       updateStatsUI();
+      renderComplaintsTable();
       renderIssuesTable();
       renderActionsTable();
       renderLocationsTable();
       renderUsersTable();
       if (typeof renderMerchantsTable === 'function') renderMerchantsTable();
-      if (typeof renderTerminalsTable === 'function') renderTerminalsTable();
+      if (typeof populateMerchantDropdowns === 'function') populateMerchantDropdowns();
+      if (typeof populateUserLocationCheckboxes === 'function') populateUserLocationCheckboxes();
 
-      const count = parsedImportData.length;
-      closeImportModal();
-      const targetLabel = target === 'merchants' ? 'Merchant Master' : 'Complaint Master';
-      showToast('Successfully imported ' + count + ' records into ' + targetLabel + '! Masters & Dashboard updated.');
+      // 7. Show prominent imported success message!
+      showToast(`🎉 Successfully imported ${count} records! Dashboard details updated.`, 'success');
+
+      // 8. Smooth scroll to top of Dashboard
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function showImportStatus(msg, type) {
