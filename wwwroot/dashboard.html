@@ -11,12 +11,14 @@
     // Immediate and DOM Ready Dropdown Initialization
     try {
       populateMerchantDropdowns();
+      populateMerchantLocationCheckboxes('SALALAH');
       populateUserDropdowns();
     } catch(e) {}
 
     window.addEventListener('DOMContentLoaded', () => {
       try {
         populateMerchantDropdowns();
+      populateMerchantLocationCheckboxes('SALALAH');
         populateUserDropdowns();
       } catch(e) {}
     });
@@ -24,6 +26,7 @@
     window.addEventListener('load', () => {
       try {
         populateMerchantDropdowns();
+      populateMerchantLocationCheckboxes('SALALAH');
         populateUserDropdowns();
       } catch(e) {}
     });
@@ -2420,28 +2423,12 @@
                   <span>2. Location, Contact & Channel</span>
                 </div>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 16px;">
-                  <div class="form-group" style="margin: 0;">
-                    <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block;">LOCATION *</label>
-                    <select id="pageMerchantLocation" onfocus="populateMerchantDropdowns()" style="height: 44px; font-size: 14px; border-radius: 8px; background: #0a0f1d; color: #f8fafc; border: 1px solid rgba(255, 255, 255, 0.12);" required>
-                      <option value="">-- Select Location --</option>
-                      <option value="AWQATH">AWQATH</option>
-                      <option value="MIRBAT">MIRBAT</option>
-                      <option value="MUSCAT HQ">MUSCAT HQ</option>
-                      <option value="NIZWA">NIZWA</option>
-                      <option value="SAADA">SAADA</option>
-                      <option value="SALALAH" selected>SALALAH</option>
-                      <option value="SOHAR">SOHAR</option>
-                      <option value="TAQAH">TAQAH</option>
-                    </select>
-                  </div>
+                <!-- Row 1: Mobile Number, Channel & SLA -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; margin-bottom: 18px;">
                   <div class="form-group" style="margin: 0;">
                     <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block;">MOBILE NUMBER</label>
                     <input type="text" id="pageMerchantMobile" placeholder="e.g. 92751955" style="height: 44px; font-size: 14px; border-radius: 8px;" />
                   </div>
-                </div>
-
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px;">
                   <div class="form-group" style="margin: 0;">
                     <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block;">TYPE / CHANNEL</label>
                     <select id="pageMerchantType" style="height: 44px; font-size: 14px; border-radius: 8px;">
@@ -2454,6 +2441,26 @@
                   <div class="form-group" style="margin: 0;">
                     <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; display: block;">SLA</label>
                     <input type="text" id="pageMerchantSla" placeholder="e.g. 24 Hours, Within SLA" style="height: 44px; font-size: 14px; border-radius: 8px;" />
+                  </div>
+                </div>
+
+                <!-- Row 2: Location Checkboxes (From Location Master) -->
+                <div class="form-group" style="margin: 0;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; display: flex; align-items: center; gap: 8px; margin: 0;">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                      <span>LOCATION (FROM LOCATION MASTER) *</span>
+                      <span id="merchantLocationSelectedCountBadge" style="font-size: 11px; padding: 2px 8px; border-radius: 12px; background: rgba(56, 189, 248, 0.15); color: #38bdf8; font-weight: 700; border: 1px solid rgba(56, 189, 248, 0.3);">0 Selected</span>
+                    </label>
+                    <div style="display: flex; gap: 10px;">
+                      <button type="button" onclick="selectAllMerchantLocations(true)" style="background: none; border: none; color: #38bdf8; font-size: 12px; font-weight: 700; cursor: pointer; text-decoration: underline; padding: 0;">Select All</button>
+                      <span style="color: rgba(255,255,255,0.2);">|</span>
+                      <button type="button" onclick="selectAllMerchantLocations(false)" style="background: none; border: none; color: #94a3b8; font-size: 12px; font-weight: 700; cursor: pointer; text-decoration: underline; padding: 0;">Clear All</button>
+                    </div>
+                  </div>
+                  <input type="hidden" id="pageMerchantLocation" value="SALALAH" />
+                  <div id="merchantLocationCheckboxesContainer" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 10px; max-height: 190px; overflow-y: auto; padding: 14px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px;">
+                    <!-- Location Checkboxes dynamically loaded from Location Master -->
                   </div>
                 </div>
               </div>
@@ -2712,8 +2719,8 @@
                 <input type="text" id="pageUserFullName" placeholder="e.g. Anzar K. or Ahmed Salim" style="height: 44px; font-size: 14px; border-radius: 8px;" required />
               </div>
 
-              <!-- Credentials (Row 2: Username & PIN) -->
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+              <!-- Credentials & Contact (Row 2: Username, PIN & Mobile) -->
+              <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 24px;">
                 <div class="form-group" style="margin: 0;">
                   <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"><circle cx="12" cy="12" r="4"></circle><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path></svg>
@@ -2728,23 +2735,32 @@
                   </label>
                   <input type="text" id="pageUserPin" placeholder="e.g. 123456 (6-digit PIN)" maxlength="6" style="height: 44px; font-size: 14px; border-radius: 8px; letter-spacing: 1px;" required />
                 </div>
-              </div>
-
-              <!-- Deployment (Row 3: Location & Mobile Number) -->
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 28px;">
                 <div class="form-group" style="margin: 0;">
                   <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                    <span>Location *</span>
-                  </label>
-                  <input type="text" id="pageUserZone" placeholder="e.g. Salalah, Muscat HQ" style="height: 44px; font-size: 14px; border-radius: 8px;" required />
-                </div>
-                <div class="form-group" style="margin: 0;">
-                  <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                     <span>Mobile Number *</span>
                   </label>
                   <input type="text" id="pageUserMobile" placeholder="e.g. +968 92751955" style="height: 44px; font-size: 14px; border-radius: 8px;" required />
+                </div>
+              </div>
+
+              <!-- Location Checkboxes (Row 3: Loaded from Location Master) -->
+              <div class="form-group" style="margin-bottom: 28px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                  <label style="font-weight: 700; font-size: 13px; color: #cbd5e1; display: flex; align-items: center; gap: 8px; margin: 0;">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    <span>Location (From Location Master) *</span>
+                    <span id="userLocationSelectedCountBadge" style="font-size: 11px; padding: 2px 8px; border-radius: 12px; background: rgba(56, 189, 248, 0.15); color: #38bdf8; font-weight: 700; border: 1px solid rgba(56, 189, 248, 0.3);">0 Selected</span>
+                  </label>
+                  <div style="display: flex; gap: 10px;">
+                    <button type="button" onclick="selectAllUserLocations(true)" style="background: none; border: none; color: #38bdf8; font-size: 12px; font-weight: 700; cursor: pointer; text-decoration: underline; padding: 0;">Select All</button>
+                    <span style="color: rgba(255,255,255,0.2);">|</span>
+                    <button type="button" onclick="selectAllUserLocations(false)" style="background: none; border: none; color: #94a3b8; font-size: 12px; font-weight: 700; cursor: pointer; text-decoration: underline; padding: 0;">Clear All</button>
+                  </div>
+                </div>
+                <input type="hidden" id="pageUserZone" value="" />
+                <div id="userLocationCheckboxesContainer" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 10px; max-height: 220px; overflow-y: auto; padding: 14px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px;">
+                  <!-- Checkboxes dynamically loaded from Location Master -->
                 </div>
               </div>
 
@@ -3054,7 +3070,102 @@
         if (Array.isArray(p) && p.length > 0) locations = p;
       }
     } catch(e) {}
-        function populateMerchantDropdowns() {
+            // MERCHANT MASTER LOCATION CHECKBOX LOGIC
+    function populateMerchantLocationCheckboxes(selectedLocs) {
+      const container = document.getElementById('merchantLocationCheckboxesContainer');
+      if (!container) return;
+      container.innerHTML = '';
+
+      let selectedList = [];
+      if (typeof selectedLocs === 'string' && selectedLocs.trim()) {
+        selectedList = selectedLocs.split(',').map(s => s.trim().toUpperCase());
+      } else {
+        const curVal = document.getElementById('pageMerchantLocation')?.value || '';
+        if (curVal.trim()) {
+          selectedList = curVal.split(',').map(s => s.trim().toUpperCase());
+        }
+      }
+
+      if (selectedList.length === 0) {
+        selectedList = ['SALALAH'];
+      }
+
+      const locSet = new Set(['SALALAH', 'SAADA', 'TAQA', 'AWQATH', 'MIRBAT', 'MIRSAT', 'DHAHARIZ', 'AL HAFFA', 'RAYSUT', 'NEW SALALAH', 'AL WADI', 'THUMRAIT', 'MUGHSAIL', 'SADAH']);
+      if (typeof locations !== 'undefined' && Array.isArray(locations)) {
+        locations.forEach(l => {
+          if (l && l.name) locSet.add(l.name.trim().toUpperCase());
+        });
+      }
+      if (typeof merchants !== 'undefined' && Array.isArray(merchants)) {
+        merchants.forEach(m => {
+          if (m && m.location && m.location !== '-') {
+            m.location.split(',').forEach(sub => {
+              if (sub.trim()) locSet.add(sub.trim().toUpperCase());
+            });
+          }
+        });
+      }
+
+      const sortedLocs = Array.from(locSet).filter(Boolean).sort();
+      sortedLocs.forEach(locName => {
+        const isChecked = selectedList.includes(locName.toUpperCase());
+        const label = document.createElement('label');
+        label.className = 'merchant-loc-item';
+        label.style.cssText = `display: flex; align-items: center; gap: 10px; padding: 9px 12px; background: ${isChecked ? 'rgba(37, 99, 235, 0.18)' : 'rgba(30, 41, 59, 0.75)'}; border: 1px solid ${isChecked ? '#2563eb' : 'rgba(255,255,255,0.08)'}; border-radius: 8px; cursor: pointer; transition: all 0.2s; user-select: none;`;
+        
+        label.innerHTML = `
+          <input type="checkbox" class="merchant-loc-cb" value="${locName}" ${isChecked ? 'checked' : ''} onchange="updateMerchantLocationFromCheckboxes(this)" style="width: 17px; height: 17px; accent-color: #2563eb; cursor: pointer;" />
+          <span style="font-size: 13px; font-weight: 700; color: #f8fafc;">${locName}</span>
+        `;
+        container.appendChild(label);
+      });
+
+      updateMerchantLocationSelectedBadge();
+      const hiddenLoc = document.getElementById('pageMerchantLocation');
+      if (hiddenLoc) {
+        const checkedBoxes = Array.from(document.querySelectorAll('.merchant-loc-cb:checked')).map(cb => cb.value);
+        hiddenLoc.value = checkedBoxes.join(', ') || 'SALALAH';
+      }
+    }
+
+    function updateMerchantLocationFromCheckboxes(checkbox) {
+      if (checkbox && checkbox.parentElement) {
+        if (checkbox.checked) {
+          checkbox.parentElement.style.background = 'rgba(37, 99, 235, 0.18)';
+          checkbox.parentElement.style.borderColor = '#2563eb';
+        } else {
+          checkbox.parentElement.style.background = 'rgba(30, 41, 59, 0.75)';
+          checkbox.parentElement.style.borderColor = 'rgba(255,255,255,0.08)';
+        }
+      }
+      const checkedBoxes = Array.from(document.querySelectorAll('.merchant-loc-cb:checked')).map(cb => cb.value);
+      const hiddenLoc = document.getElementById('pageMerchantLocation');
+      if (hiddenLoc) hiddenLoc.value = checkedBoxes.join(', ');
+      updateMerchantLocationSelectedBadge();
+    }
+
+    function updateMerchantLocationSelectedBadge() {
+      const checkedCount = document.querySelectorAll('.merchant-loc-cb:checked').length;
+      const badge = document.getElementById('merchantLocationSelectedCountBadge');
+      if (badge) badge.textContent = `${checkedCount} Selected`;
+    }
+
+    function selectAllMerchantLocations(select) {
+      document.querySelectorAll('.merchant-loc-cb').forEach(cb => {
+        cb.checked = select;
+        if (cb.parentElement) {
+          cb.parentElement.style.background = select ? 'rgba(37, 99, 235, 0.18)' : 'rgba(30, 41, 59, 0.75)';
+          cb.parentElement.style.borderColor = select ? '#2563eb' : 'rgba(255,255,255,0.08)';
+        }
+      });
+      const checkedBoxes = Array.from(document.querySelectorAll('.merchant-loc-cb:checked')).map(cb => cb.value);
+      const hiddenLoc = document.getElementById('pageMerchantLocation');
+      if (hiddenLoc) hiddenLoc.value = checkedBoxes.join(', ');
+      updateMerchantLocationSelectedBadge();
+    }
+
+    function populateMerchantDropdowns() {
+      populateMerchantLocationCheckboxes();
       // 1. Populate Location Dropdown from Location Master
       const locSelect = document.getElementById('pageMerchantLocation');
       if (locSelect) {
@@ -3260,8 +3371,11 @@
       cancelLocationInlineEdit();
       renderLocationsTable();
       populateUserDropdowns();
+    populateUserLocationCheckboxes();
     populateMerchantDropdowns();
+      populateMerchantLocationCheckboxes('SALALAH');
       populateMerchantDropdowns();
+      populateMerchantLocationCheckboxes('SALALAH');
     }
 
     function editLocationInline(code) {
@@ -3315,6 +3429,7 @@
         renderLocationsTable();
         populateUserDropdowns();
       populateMerchantDropdowns();
+      populateMerchantLocationCheckboxes('SALALAH');
         showToast('Zone deleted.');
       }
     }
@@ -3687,6 +3802,7 @@
       const model = document.getElementById('pageMerchantModel');
       if (model) model.value = 'SMART POS';
       populateMerchantDropdowns();
+      populateMerchantLocationCheckboxes('SALALAH');
       const loc = document.getElementById('pageMerchantLocation');
       if (loc && loc.options.length > 1) { loc.selectedIndex = 1; } else if (loc) { loc.value = 'SALALAH'; }
       const mob = document.getElementById('pageMerchantMobile');
@@ -3874,6 +3990,7 @@
       document.getElementById('pageMerchantSerial').value = m.serialNumber || m.serial || '';
       document.getElementById('pageMerchantModel').value = m.model || 'SMART POS';
       populateMerchantDropdowns();
+      populateMerchantLocationCheckboxes('SALALAH');
       const setSelectVal = (id, val) => {
         const el = document.getElementById(id);
         if (!el) return;
@@ -3887,6 +4004,7 @@
         el.value = val;
       };
       setSelectVal('pageMerchantLocation', m.location);
+      populateMerchantLocationCheckboxes(m.location || 'SALALAH');
       document.getElementById('pageMerchantMobile').value = m.mobile && m.mobile !== '-' ? m.mobile : '';
       document.getElementById('pageMerchantType').value = m.type || 'CALL CENTER';
       document.getElementById('pageMerchantSla').value = m.sla || '';
@@ -3914,7 +4032,81 @@
     }
 
     // ==========================================
-    // USER MASTER FUNCTIONS (1. Entry Page, 2. View Table)
+        // USER MASTER FUNCTIONS (1. Entry Page, 2. View Table)
+    function populateUserLocationCheckboxes(selectedZones) {
+      const container = document.getElementById('userLocationCheckboxesContainer');
+      if (!container) return;
+      container.innerHTML = '';
+
+      let selectedList = [];
+      if (typeof selectedZones === 'string' && selectedZones.trim()) {
+        selectedList = selectedZones.split(',').map(s => s.trim().toUpperCase());
+      } else {
+        const currentZoneVal = document.getElementById('pageUserZone')?.value || '';
+        if (currentZoneVal.trim()) {
+          selectedList = currentZoneVal.split(',').map(s => s.trim().toUpperCase());
+        }
+      }
+
+      const locList = (locations && locations.length > 0) ? locations : (PORTAL_DATA.locations || []);
+      if (!locList || locList.length === 0) {
+        container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #94a3b8; padding: 14px; font-size: 13px;">No locations configured in Location Master yet.</div>';
+        return;
+      }
+
+      locList.forEach(loc => {
+        const locName = loc.name || loc.code;
+        const isChecked = selectedList.includes(locName.toUpperCase());
+        const label = document.createElement('label');
+        label.className = 'user-loc-item';
+        label.style.cssText = `display: flex; align-items: center; gap: 10px; padding: 9px 12px; background: ${isChecked ? 'rgba(37, 99, 235, 0.18)' : 'rgba(30, 41, 59, 0.75)'}; border: 1px solid ${isChecked ? '#2563eb' : 'rgba(255,255,255,0.08)'}; border-radius: 8px; cursor: pointer; transition: all 0.2s; user-select: none;`;
+        
+        label.innerHTML = `
+          <input type="checkbox" class="user-loc-cb" value="${locName}" ${isChecked ? 'checked' : ''} onchange="updateUserZoneFromCheckboxes(this)" style="width: 17px; height: 17px; accent-color: #2563eb; cursor: pointer;" />
+          <span style="font-size: 13px; font-weight: 700; color: #f8fafc;">${locName}</span>
+        `;
+        container.appendChild(label);
+      });
+
+      updateUserZoneSelectedBadge();
+    }
+
+    function updateUserZoneFromCheckboxes(checkbox) {
+      if (checkbox && checkbox.parentElement) {
+        if (checkbox.checked) {
+          checkbox.parentElement.style.background = 'rgba(37, 99, 235, 0.18)';
+          checkbox.parentElement.style.borderColor = '#2563eb';
+        } else {
+          checkbox.parentElement.style.background = 'rgba(30, 41, 59, 0.75)';
+          checkbox.parentElement.style.borderColor = 'rgba(255,255,255,0.08)';
+        }
+      }
+      const checkedBoxes = Array.from(document.querySelectorAll('.user-loc-cb:checked')).map(cb => cb.value);
+      const hiddenZone = document.getElementById('pageUserZone');
+      if (hiddenZone) hiddenZone.value = checkedBoxes.join(', ');
+      updateUserZoneSelectedBadge();
+    }
+
+    function updateUserZoneSelectedBadge() {
+      const checkedCount = document.querySelectorAll('.user-loc-cb:checked').length;
+      const badge = document.getElementById('userLocationSelectedCountBadge');
+      if (badge) badge.textContent = `${checkedCount} Selected`;
+    }
+
+    function selectAllUserLocations(select) {
+      document.querySelectorAll('.user-loc-cb').forEach(cb => {
+        cb.checked = select;
+        if (cb.parentElement) {
+          cb.parentElement.style.background = select ? 'rgba(37, 99, 235, 0.18)' : 'rgba(30, 41, 59, 0.75)';
+          cb.parentElement.style.borderColor = select ? '#2563eb' : 'rgba(255,255,255,0.08)';
+        }
+      });
+      const checkedBoxes = Array.from(document.querySelectorAll('.user-loc-cb:checked')).map(cb => cb.value);
+      const hiddenZone = document.getElementById('pageUserZone');
+      if (hiddenZone) hiddenZone.value = checkedBoxes.join(', ');
+      updateUserZoneSelectedBadge();
+    }
+
     function switchUserTab(tab) {
       const entryView = document.getElementById('userEntryView');
       const tableView = document.getElementById('userTableView');
@@ -3926,12 +4118,12 @@
         if (tableView) tableView.style.display = 'none';
         if (tabEntry) tabEntry.classList.add('active');
         if (tabView) tabView.classList.remove('active');
+        populateUserLocationCheckboxes();
       } else {
         if (entryView) entryView.style.display = 'none';
         if (tableView) tableView.style.display = 'block';
         if (tabEntry) tabEntry.classList.remove('active');
         if (tabView) tabView.classList.add('active');
-        renderUsersTable();
       }
     }
 
@@ -3953,6 +4145,7 @@
       if (mob) mob.value = '';
       const pin = document.getElementById('pageUserPin');
       if (pin) pin.value = '';
+      selectAllUserLocations(false);
     }
 
     function handleSaveUserForm(e) {
@@ -3960,9 +4153,16 @@
       const editId = document.getElementById('pageUserEditId').value;
       const name = document.getElementById('pageUserFullName').value.trim();
       const username = document.getElementById('pageUserLoginName').value.trim();
-      const zone = document.getElementById('pageUserZone').value.trim();
       const mobile = document.getElementById('pageUserMobile').value.trim();
       const pin = document.getElementById('pageUserPin').value.trim();
+      
+      const checkedBoxes = Array.from(document.querySelectorAll('.user-loc-cb:checked')).map(cb => cb.value);
+      const zone = checkedBoxes.join(', ');
+      
+      if (!zone) {
+        showToast('Please select at least one Location for the user!', 'error');
+        return;
+      }
 
       if (editId) {
         const u = users.find(x => x.id === editId);
@@ -4062,6 +4262,7 @@
       document.getElementById('pageUserZone').value = u.zone || '';
       document.getElementById('pageUserMobile').value = u.mobile || '';
       document.getElementById('pageUserPin').value = u.pincode || '';
+      populateUserLocationCheckboxes(u.zone || '');
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -4401,6 +4602,7 @@
       if (sectionId === 'actions') renderActionsTable();
       if (sectionId === 'merchants') {
         populateMerchantDropdowns();
+      populateMerchantLocationCheckboxes('SALALAH');
         switchMerchantTab('entry');
         renderMerchantsTable();
       }
@@ -4421,7 +4623,9 @@
     renderLocationsTable();
     renderUsersTable();
     populateUserDropdowns();
+    populateUserLocationCheckboxes();
     populateMerchantDropdowns();
+      populateMerchantLocationCheckboxes('SALALAH');
 
     // ==========================================
     // CSV & EXCEL IMPORT SYSTEM
