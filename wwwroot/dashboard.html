@@ -2041,6 +2041,92 @@
       border-color: #64748b;
     }
 
+      /* LOCATION MASTER - MOBILE WIDTH FIX */
+      @media (max-width: 768px) {
+
+          /* Keep the Location Master inside the screen */
+          .location-grid-container {
+              display: grid !important;
+              grid-template-columns: minmax(0, 1fr) !important;
+              width: 100% !important;
+              max-width: 100% !important;
+              min-width: 0 !important;
+              gap: 14px !important;
+          }
+
+              .location-grid-container > .master-panel-card {
+                  width: 100% !important;
+                  max-width: 100% !important;
+                  min-width: 0 !important;
+                  box-sizing: border-box !important;
+                  padding: 16px 12px !important;
+              }
+
+              /* Prevent the form from extending beyond the panel */
+              .location-grid-container .master-form-card form {
+                  width: 100%;
+                  min-width: 0;
+              }
+
+              .location-grid-container .master-form-input,
+              .location-grid-container .btn-blue-submit {
+                  width: 100% !important;
+                  max-width: 100% !important;
+                  min-width: 0 !important;
+                  box-sizing: border-box !important;
+              }
+
+              /* Make the locations table fit the mobile screen */
+              .location-grid-container .table-responsive {
+                  width: 100%;
+                  max-width: 100%;
+                  min-width: 0;
+                  overflow-x: auto;
+                  -webkit-overflow-scrolling: touch;
+              }
+
+              .location-grid-container .master-table {
+                  width: 100% !important;
+                  min-width: 0 !important;
+                  table-layout: fixed;
+              }
+
+                  .location-grid-container .master-table th,
+                  .location-grid-container .master-table td {
+                      padding: 9px 4px !important;
+                      font-size: 11px !important;
+                      overflow-wrap: break-word;
+                  }
+
+                      .location-grid-container .master-table th:first-child,
+                      .location-grid-container .master-table td:first-child {
+                          width: 42px !important;
+                      }
+
+                      .location-grid-container .master-table th:nth-child(2),
+                      .location-grid-container .master-table td:nth-child(2) {
+                          width: 75px !important;
+                      }
+
+                      .location-grid-container .master-table th:last-child,
+                      .location-grid-container .master-table td:last-child {
+                          width: 125px !important;
+                      }
+
+              /* Compact Edit and Delete buttons */
+              .location-grid-container .btn-blue-edit,
+              .location-grid-container .btn-red-delete {
+                  padding: 5px 5px !important;
+                  font-size: 9px !important;
+                  gap: 3px !important;
+              }
+
+              .location-grid-container .master-panel-header {
+                  gap: 6px;
+                  flex-wrap: wrap;
+              }
+      }
+
   </style>
 
 </head>
