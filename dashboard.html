@@ -7,30 +7,23 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
-  <script src="xlsx.full.min.js">
-    // Immediate and DOM Ready Dropdown Initialization
-    try {
-      populateMerchantDropdowns();
-      populateMerchantLocationCheckboxes('SALALAH');
-      populateUserDropdowns();
-    } catch(e) {}
-
+  <script src="xlsx.full.min.js"></script>
+  <script>
     window.addEventListener('DOMContentLoaded', () => {
       try {
-        populateMerchantDropdowns();
-      populateMerchantLocationCheckboxes('SALALAH');
-        populateUserDropdowns();
+        if (typeof populateMerchantDropdowns === 'function') populateMerchantDropdowns();
+        if (typeof populateMerchantLocationCheckboxes === 'function') populateMerchantLocationCheckboxes('SALALAH');
+        if (typeof populateUserDropdowns === 'function') populateUserDropdowns();
       } catch(e) {}
     });
 
     window.addEventListener('load', () => {
       try {
-        populateMerchantDropdowns();
-      populateMerchantLocationCheckboxes('SALALAH');
-        populateUserDropdowns();
+        if (typeof populateMerchantDropdowns === 'function') populateMerchantDropdowns();
+        if (typeof populateMerchantLocationCheckboxes === 'function') populateMerchantLocationCheckboxes('SALALAH');
+        if (typeof populateUserDropdowns === 'function') populateUserDropdowns();
       } catch(e) {}
     });
-
   </script>
   <script src="portal_data.js"></script>
   <style>
@@ -2162,24 +2155,6 @@
           <span>Load CSV / Excel</span>
         </button>
 
-                <!-- Theme Toggle Button -->
-        <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark / Light Mode">
-          <svg id="themeIconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-            <circle cx="12" cy="12" r="5"></circle>
-            <line x1="12" y1="1" x2="12" y2="3"></line>
-            <line x1="12" y1="21" x2="12" y2="23"></line>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-            <line x1="1" y1="12" x2="3" y2="12"></line>
-            <line x1="21" y1="12" x2="23" y2="12"></line>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-          </svg>
-          <svg id="themeIconMoon" style="display:none;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-          </svg>
-        </button>
-
         <div class="user-pill">
           <div class="user-avatar">A</div>
           <span class="user-name">Admin</span>
@@ -2767,7 +2742,7 @@
               <table class="master-table">
                 <thead>
                   <tr>
-                    <th style="width: 110px;">LOCATION ID</th>
+                    <th style="width: 110px;">LOCATION</th>
                     <th>LOCATION NAME</th>
                     <th style="text-align: right; width: 175px;">ACTION</th>
                   </tr>
@@ -3131,7 +3106,57 @@
   
   <script>
     // Initialize Data from portal_data.js
-    let complaints = PORTAL_DATA.complaints || [];
+        // Helper function to build a complaint record from merchant data
+    function buildComplaintFromMerchant(m, idx) {
+      const act = (m.actionTaken || m.actiontaken || m.action || '').trim();
+      const act_u = act.toUpperCase();
+      const iss = (m.issue || '').trim();
+      const iss_u = iss.toUpperCase();
+      const st = (m.status || '').trim().toUpperCase();
+
+      const isPending = !act || act === '-' || act_u.includes('PENDING') || act_u.includes('NOT DONE') || act_u.includes('PICK TERMINAL') || iss_u.includes('PICK TERMINAL') || st === 'PENDING';
+
+      const sl = m.slNo || (idx + 1);
+
+      return {
+        id: 'SRV-' + String(sl).padStart(4, '0'),
+        date: m.serviceDate || m.receivingDate || '2026-09-01',
+        merchant: m.merchantName || m.merchantname || m.name || 'UNKNOWN MERCHANT',
+        mid: m.mid || '',
+        tid: m.tid || '',
+        serial: m.serialNumber || m.serial || '',
+        location: m.location || 'SALALAH',
+        mobile: m.mobile && m.mobile !== '-' ? m.mobile : '-',
+        model: m.model || 'SMART POS',
+        issue: iss && iss !== '-' ? iss : 'SERVICE CALL',
+        action: act && act !== '-' ? act : (iss_u.includes('PICK') ? 'Pending Replacement' : 'Pending Action'),
+        technician: m.doneBy || 'ANZAR',
+        status: isPending ? 'pending' : 'solved'
+      };
+    }
+
+    // Complaints initialization with cache and automatic merchant fallback
+    let complaints = [];
+    try {
+      const savedComplaints = localStorage.getItem('smart_portal_complaints');
+      if (savedComplaints) {
+        const p = JSON.parse(savedComplaints);
+        if (Array.isArray(p) && p.length > 0) {
+          complaints = p;
+        }
+      }
+    } catch(e) {}
+
+    if (!complaints || complaints.length === 0) {
+      if (Array.isArray(PORTAL_DATA.complaints) && PORTAL_DATA.complaints.length > 0) {
+        complaints = PORTAL_DATA.complaints;
+      } else if (Array.isArray(merchants) && merchants.length > 0) {
+        complaints = merchants.map(buildComplaintFromMerchant);
+      }
+      try {
+        localStorage.setItem('smart_portal_complaints', JSON.stringify(complaints));
+      } catch(e) {}
+    }
         let terminals = PORTAL_DATA.terminals || [];
     let replacements = PORTAL_DATA.replacements || [];
     let categories = PORTAL_DATA.categories || [];
@@ -4023,6 +4048,20 @@
         localStorage.setItem('smart_portal_merchants_v5', JSON.stringify(merchants));
       } catch(err) {}
 
+      // Keep complaints synchronized with merchant changes
+      const mName = (item.merchantName || '').toUpperCase();
+      const compIdx = complaints.findIndex(c => (item.mid && c.mid === item.mid) || (item.tid && c.tid === item.tid) || (c.merchant && c.merchant.toUpperCase() === mName));
+      const updatedComp = buildComplaintFromMerchant(item, compIdx >= 0 ? compIdx : complaints.length);
+      if (compIdx >= 0) {
+        complaints[compIdx] = updatedComp;
+      } else {
+        complaints.unshift(updatedComp);
+      }
+      try {
+        localStorage.setItem('smart_portal_complaints', JSON.stringify(complaints));
+      } catch(err) {}
+      updateStatsUI();
+
       showToast(editIdx !== '' ? 'Merchant updated successfully!' : 'Merchant saved successfully!');
       resetMerchantForm();
       renderMerchantsTable();
@@ -4657,8 +4696,12 @@
       if (item && item.status !== 'solved') {
         item.status = 'solved';
         item.action = 'Issue Resolved & Verified by Engineer';
+        try {
+          localStorage.setItem('smart_portal_complaints', JSON.stringify(complaints));
+        } catch(e) {}
         updateStatsUI();
         renderComplaintsTable();
+        showToast('Complaint ' + id + ' marked as Solved!', 'success');
       }
     }
 
@@ -4782,18 +4825,7 @@
     var currentLoadedWorkbook = null;
     var parsedImportData = [];
 
-    // Check localStorage for saved complaints
-    try {
-      const savedComplaints = localStorage.getItem('smart_portal_complaints');
-      if (savedComplaints) {
-        const parsed = JSON.parse(savedComplaints);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          complaints = parsed;
-        }
-      }
-    } catch(e) {
-      console.warn('Could not read from localStorage:', e);
-    }
+// Complaints initialized and synced above
 
     function openImportModal() {
       document.getElementById('importModal').style.display = 'flex';
