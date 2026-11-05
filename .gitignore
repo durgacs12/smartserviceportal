@@ -11,6 +11,8 @@
 *.userosscache
 *.sln.docstates
 
-## OS generated files
+## OS and App temporary files
 .DS_Store
 Thumbs.db
+~$*
+
