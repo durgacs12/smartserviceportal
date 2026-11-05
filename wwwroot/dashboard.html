@@ -2948,7 +2948,7 @@
         </div>
       </section>
 
-            <!-- LOCATION MASTER VIEW (LUXURY GOLD SPLIT DESIGN) -->
+                  <!-- LOCATION MASTER VIEW (LUXURY GOLD SPLIT DESIGN) -->
       <section id="section-location" class="section-view">
         <div class="master-page-header">
           <h2 class="master-page-title">Location Master Management</h2>
@@ -2959,9 +2959,43 @@
         </div>
 
         <div class="master-grid-container location-grid-container">
-           
-        <div class="master-grid-container">
-          <!-- Left Column: Configured Locations Table -->
+          <!-- Left Column: Create New Location Form (Simple: Name Only) -->
+          <div class="master-panel-card master-form-card">
+            <div class="master-panel-header" style="border-bottom: none; margin-bottom: 12px; padding-bottom: 0;">
+              <div class="master-panel-title">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.5">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="8" x2="12" y2="16"></line>
+                  <line x1="8" y1="12" x2="16" y2="12"></line>
+                </svg>
+                <span id="panelTitleLocation">Create New Location</span>
+              </div>
+            </div>
+
+            <form onsubmit="handleSaveLocationInline(event)">
+              <input type="hidden" id="inlineLocationCode" value="" />
+
+              <div class="master-form-group">
+                <label class="master-form-label">Location Name <span style="color: #ef4444;">*</span></label>
+                <input type="text" id="inlineLocationName" class="master-form-input" placeholder="e.g. SALALAH or SAADA" required />
+              </div>
+
+              <button type="submit" id="btnSubmitLocationInline" class="btn-blue-submit">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="8" x2="12" y2="16"></line>
+                  <line x1="8" y1="12" x2="16" y2="12"></line>
+                </svg>
+                <span id="btnSubmitLocationText">CREATE LOCATION</span>
+              </button>
+
+              <button type="button" id="btnCancelLocationInline" class="btn-cancel-edit" onclick="cancelLocationInlineEdit()" style="display: none;">
+                CANCEL EDIT
+              </button>
+            </form>
+          </div>
+
+          <!-- Right Column: Configured Locations Table -->
           <div class="master-panel-card">
             <div class="master-panel-header">
               <div class="master-panel-title">
@@ -2985,7 +3019,7 @@
               <table class="master-table">
                 <thead>
                   <tr>
-                    <th style="width: 110px;">LOCATION</th>
+                    <th style="width: 110px;">LOCATION ID</th>
                     <th>LOCATION NAME</th>
                     <th style="text-align: right; width: 175px;">ACTION</th>
                   </tr>
@@ -2994,77 +3028,6 @@
               </table>
             </div>
           </div>
-
-            <!-- Left Column: Create New Location Form (Simple: Name Only) -->
-            <div class="master-panel-card master-form-card">
-                <div class="master-panel-header" style="border-bottom: none; margin-bottom: 12px; padding-bottom: 0;">
-                    <div class="master-panel-title">
-                        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.5">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <line x1="12" y1="8" x2="12" y2="16"></line>
-                            <line x1="8" y1="12" x2="16" y2="12"></line>
-                        </svg>
-                        <span id="panelTitleLocation">Create New Location</span>
-                    </div>
-                </div>
-
-                <form onsubmit="handleSaveLocationInline(event)">
-                    <input type="hidden" id="inlineLocationCode" value="" />
-
-                    <div class="master-form-group">
-                        <label class="master-form-label">Location Name <span style="color: #ef4444;">*</span></label>
-                        <input type="text" id="inlineLocationName" class="master-form-input" placeholder="" required />
-                    </div>
-
-                    <button type="submit" id="btnSubmitLocationInline" class="btn-blue-submit">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <line x1="12" y1="8" x2="12" y2="16"></line>
-                            <line x1="8" y1="12" x2="16" y2="12"></line>
-                        </svg>
-                        <span id="btnSubmitLocationText">CREATE LOCATION</span>
-                    </button>
-
-                    <button type="button" id="btnCancelLocationInline" class="btn-cancel-edit" onclick="cancelLocationInlineEdit()" style="display: none;">
-                        CANCEL EDIT
-                    </button>
-                </form>
-            </div>
-
-            <!-- Right Column: Configured Locations Table -->
-            <div class="master-panel-card">
-                <div class="master-panel-header">
-                    <div class="master-panel-title">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="4" y1="21" x2="4" y2="14"></line>
-                            <line x1="4" y1="10" x2="4" y2="3"></line>
-                            <line x1="12" y1="21" x2="12" y2="12"></line>
-                            <line x1="12" y1="8" x2="12" y2="3"></line>
-                            <line x1="20" y1="21" x2="20" y2="16"></line>
-                            <line x1="20" y1="12" x2="20" y2="3"></line>
-                            <line x1="1" y1="14" x2="7" y2="14"></line>
-                            <line x1="9" y1="8" x2="15" y2="8"></line>
-                            <line x1="17" y1="16" x2="23" y2="16"></line>
-                        </svg>
-                        <span>Configured Locations</span>
-                    </div>
-                    <span class="blue-count-badge" id="locationCountBadge">0 Locations</span>
-                </div>
-
-                <div class="table-responsive">
-                    <table class="master-table">
-                        <thead>
-                            <tr>
-                                <th style="width: 110px;">LOCATION ID</th>
-                                <th>LOCATION NAME</th>
-                                <th style="text-align: right; width: 175px;">ACTION</th>
-                            </tr>
-                        </thead>
-                        <tbody id="locationTableBody"></tbody>
-                    </table>
-                </div>
-            </div>
-
         </div>
       </section>
 
